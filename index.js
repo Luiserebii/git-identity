@@ -4,24 +4,34 @@ const program = require('commander');
 const chalk = require('chalk');
 const figlet = require('figlet');
 
-const info = require('./data');
+const meta = require('./data');
 
 const run = () => {
 
   setupCLI();
-  program.parse(process.argv);
-  console.log(program.ass)
- 
+  main();
 
 }
 
 function setupCLI() {
 
-  program.version(info.version, '-v, --version')
+  program.version(meta.version, '-v, --version')
+  if(meta.description) program.description(meta.description)
 
   program
-    .option('-a, --ass <number>', 'integer argument')
+    .option('-a, --about', 'about this tool')
     .option('-m, --meme', 'uguu')
+
+}
+
+function main() {
+
+  program.parse(process.argv);
+
+  //If the about flag has been passed, and only that flag, show the about
+  if(program.about && argNum() === 1) { 
+    aboutCLI();
+  }
 
 }
 
@@ -29,11 +39,14 @@ function aboutCLI() {
 
   //Title of tool
   console.log(chalk.green(figlet.textSync('Identity Shift', { font: 'Ghost' })))
-
-
+  console.log("Version: " + meta.version);
+  console.log("Author: Luiserebii");
+  console.log("Check me out on GitHub at: https://github.com/Luiserebii!")
 
 }
 
+function argNum() {
+  return process.argv.slice(2).length;
+}
 
-aboutCLI();
 run();
