@@ -1,12 +1,39 @@
+#!/usr/bin/env node
+
+const program = require('commander');
 const chalk = require('chalk');
 const figlet = require('figlet');
 
+const info = require('./data');
+
 const run = () => {
 
-console.log(chalk.green('uguu'));
-const fug = figlet.textSync("Anal Lube", {font: 'Ghost'});
-console.log(chalk.white.inverse(fug));
+  setupCLI();
+  program.parse(process.argv);
+  console.log(program.ass)
+ 
 
 }
 
+function setupCLI() {
+
+  program.version(info.version, '-v, --version')
+
+  program
+    .option('-a, --ass <number>', 'integer argument')
+    .option('-m, --meme', 'uguu')
+
+}
+
+function aboutCLI() {
+
+  //Title of tool
+  console.log(chalk.green(figlet.textSync('Identity Shift', { font: 'Ghost' })))
+
+
+
+}
+
+
+aboutCLI();
 run();
