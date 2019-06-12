@@ -27,6 +27,10 @@ function setupCLI() {
 function main() {
 
   program.parse(process.argv);
+  if(argNum() === 0) {
+    aboutCLI();
+    program.help();
+  }
 
   //If the about flag has been passed, and only that flag, show the about
   if(program.about && argNum() === 1) { 
