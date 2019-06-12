@@ -5,8 +5,8 @@
 
 const data = {
 
-  version: '0.0.1'
- 
+  version: '0.0.1',
+  description: 'Insert description here, lolol' 
 };
 
 module.exports = data;
