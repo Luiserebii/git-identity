@@ -82,7 +82,7 @@ class IdentityShift {
     //let identity = !this.objectIsEmpty(identities) ? identities.name : null;
     let identity = identityStore[name];
     if(identity) {
-      this.setIdentityGlobal(username, email, gpgKey); 
+      this.setIdentityGlobal(identity.username, identity.email, identity.gpgKey); 
       return true;
     } else {
       console.log("Identity not found!");
@@ -95,7 +95,7 @@ class IdentityShift {
     //let identity = !this.objectIsEmpty(identities) ? identities.name : null;
     let identity = identityStore[name];
     if(identity) {
-      this.setIdentityLocal(username, email, gpgKey);
+      this.setIdentityLocal(identity.username, identity.email, identity.gpgKey);
       return true;
     } else {
       console.log("Identity not found!");
@@ -113,7 +113,7 @@ class IdentityShift {
 
   //Set identity globally, run git commands to do so
   setIdentityGlobal(username, email, gpgKey = null) {
-    const cmd = `git config --global user.name ${username} && ` +
+    let cmd = `git config --global user.name ${username} && ` +
                 `git config --global user.email ${email}`;
     if(gpgKey) cmd += ` && git config --global user.signingkey ${gpgKey}`;
     child_process.execSync(cmd);
@@ -121,7 +121,7 @@ class IdentityShift {
 
   //Set identity locally
   setIdentityLocal(username, email, gpgKey = null) {
-    const cmd = `git config --local user.name ${username} && ` +
+    let cmd = `git config --local user.name ${username} && ` +
                 `git config --local user.email ${email}`;
     if(gpgKey) cmd += ` && git config --local user.signingkey ${gpgKey}`;
     child_process.execSync(cmd);
