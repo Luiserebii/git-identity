@@ -23,7 +23,7 @@ class IdentityShift {
 
   listIdentities() {
     let identityStore = this.getIdentities();
-    return identityStore && !this.objectIsEmpty(identityStore) ? this.identitiesToString(this.getIdentities()) : null;
+    return identityStore && !ObjUtil.objectIsEmpty(identityStore) ? this.identitiesToString(this.getIdentities()) : null;
   }
 
   newIdentity(identity, file = this.file) {
@@ -119,7 +119,24 @@ class IdentityShift {
     child_process.execSync(cmd);
   }
 
-  objectIsEmpty(obj) {
+  identitiesToString(identities) {
+    let str = '';
+    let keys = Object.keys(identities);
+
+    str += new Identity(keys[0], identities[keys[0]].username, identities[keys[0]].email, identities[keys[0]].gpgKey).toString();
+
+    for(var i = 1; i < keys.length; i++){
+      str += "\n\n" + new Identity(keys[i], identities[keys[i]].username, identities[keys[i]].email, identities[keys[i]].gpgKey).toString();
+    }
+    return str;
+  }
+  
+
+}
+
+class ObjUtil {
+
+  static objectIsEmpty(obj) {
     for(var key in obj) {
       if(obj.hasOwnProperty(key))
       return false;
@@ -127,14 +144,6 @@ class IdentityShift {
     return true;
   }
 
-  identitiesToString(identities) {
-    let str = '';
-    for(var i in identities){
-      str += new Identity(i, identities[i].username, identities[i].email, identities[i].gpgKey).toString() + "\n\n";
-    }
-    return str;
-  }
-  
 
 }
 
