@@ -55,8 +55,7 @@ function main() {
     let ids = identityShift.listIdentities(); 
     ids ? console.log(identityShift.listIdentities()) : console.log("No identities found!");
   } else if(program.new) {
-    console.log(program.new)
-    console.log(program.user)
+    identityShift.newIdentity(program.new, program.user, program.email, program['gpg-key']);
   }
   
 
