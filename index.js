@@ -5,6 +5,7 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 
 const meta = require('./meta');
+const identityShift = require('./identity-shift');
 
 const run = () => {
 
