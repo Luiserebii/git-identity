@@ -29,7 +29,7 @@ class IdentityShift {
 
   listIdentities() {
     let identityStore = this.getIdentities();
-    return identityStore && !this.objectIsEmpty(identityStore) ? this.identityToString(this.getIdentities()) : null;
+    return identityStore && !this.objectIsEmpty(identityStore) ? this.identitiesToString(this.getIdentities()) : null;
   }
 
   newIdentity(name, username, email, gpgKey = null, file = this.file) {
@@ -135,8 +135,20 @@ class IdentityShift {
     return true;
   }
 
+  identitiesToString(identities) {
+    let str;
+    for(var i in identities){
+      console.log(identities[i])
+      str += this.identityToString(identities[i]) + "\n";
+    }
+    return str;
+  }
+
   identityToString(identity){
-    return JSON.stringify(identity);
+    let str = identity.username + " | " + identity.email;
+    if(identity.gpgKey) str += " | " + identity.gpgKey; 
+
+    return str;
   }
   
 
