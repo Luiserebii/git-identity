@@ -5,7 +5,8 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 
 const meta = require('./meta');
-const identityShift = require('./identity-shift');
+const identityshift = require('./identity-shift');
+const identityShift = new identityshift();
 
 const run = () => {
 
@@ -22,7 +23,8 @@ function setupCLI() {
   program
     .option('-a, --about', 'about this tool')
     .option('-l, --list', 'list all registered identities')
-    .option('-n, --new <name> <username> <email> <gpg-key>', 'add new identity')
+    //.option('-n, --new <name> <username> <email> <gpg-key>...', 'add new identity')
+.option('-n, --new [uguu...]', 'add new identity')
     .option('-u, --update <name> <username> <email> <gpg-key>', 'update registered identity')
     .option('-d, --delete <name>', 'delete registered identity')
     .option('-s, --shift <name>', 'shift global identity to registered identity')
@@ -41,8 +43,12 @@ function main() {
   //If the about flag has been passed, and only that flag, show the about
   if(program.about && argNum() === 1) { 
     aboutCLI();
+  } else if(program.list) {
+    let ids = identityShift.listIdentities(); 
+    ids ? console.log(identityShift.listIdentities()) : console.log("No identities found!");
+  } else if(program.new) {
+    console.log(program.new)
   }
-
   
 
 }
