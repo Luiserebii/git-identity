@@ -5,7 +5,7 @@
 
 const meta = {
 
-  version: '0.1.0',
+  version: '0.1.1',
   description: 'A command line tool allowing for easy shifting between git identities (username, email, and GPG).' 
 };
 

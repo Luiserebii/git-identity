@@ -14,7 +14,7 @@
 
 A command line tool allowing for easy shifting between git identities (username, email, and GPG).
 
-<b>Version:</b> 0.1.0<br/>
+<b>Version:</b> 0.1.1<br/>
 <b>Author:</b> Luiserebii
 
 ## Usage
@@ -40,6 +40,19 @@ Options:
 * uses additional flags below: 
 --user, --email, --gpg-key
 ```
+
+## Installation
+### Linux
+To install, simply extract the tool into a preferred directory, and create a soft link. For example, if you are looking to place the tool in your home directory:
+```
+unzip git-identity-0.1.1.zip -d ~/
+cd ~/git-identity-0.1.1
+npm install
+sudo chmod u+x ~/git-identity-0.1.1/index.js
+sudo ln -s ~/git-identity-0.1.1/index.js /usr/local/bin/git-identity
+```
+
+Doing this should make it globally accessible via `git-identity`. 
 
 ## Mirror
 A mirror of this repository is available at: <https://serebii.io:2501/Luiserebii/git-identity>
