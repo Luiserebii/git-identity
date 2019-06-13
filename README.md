@@ -1,8 +1,5 @@
 # git-identity
-A command line tool allowing for easy shifting between git identities (username, email, and GPG).
-
-## Usage
-
+```
                      .-') _                  _ .-') _     ('-.       .-') _  .-') _           .-') _                       .-')    ('-. .-.                     .-') _    
                     (  OO) )                ( (  OO) )  _(  OO)     ( OO ) )(  OO) )         (  OO) )                     ( OO ). ( OO )  /                    (  OO) )   
   ,----.     ,-.-') /     '._         ,-.-') \     .'_ (,------.,--./ ,--,' /     '._ ,-.-') /     '._  ,--.   ,--.      (_)---\_),--. ,--.  ,-.-')    ,------./     '._  
@@ -12,12 +9,16 @@ A command line tool allowing for easy shifting between git identities (username,
 (|  | '. (_/,|  |_.'   |  |          ,|  |_.'|  |   / : |  .--' |  |\    |     |  |  ,|  |_.'   |  |   |   /  /\_        .-._)   \|  .-.  | ,|  |_.'\_)|  .--'    |  |    
  |  '--'  |(_|  |      |  |         (_|  |   |  '--'  / |  `---.|  | \   |     |  | (_|  |      |  |   `-./  /.__)       \       /|  | |  |(_|  |     \|  |_)     |  |    
   `------'   `--'      `--'           `--'   `-------'  `------'`--'  `--'     `--'   `--'      `--'     `--'             `-----' `--' `--'  `--'      `--'       `--'    
-Version: 0.0.1
-Author: Luiserebii
-Check me out on GitHub at: https://github.com/Luiserebii!
-Usage: index [options]
+```
 
 A command line tool allowing for easy shifting between git identities (username, email, and GPG).
+
+Version: 0.0.1
+Author: Luiserebii
+
+# Usage
+```
+Usage: index [options]
 
 Options:
   -v, --version          output the version number
@@ -37,26 +38,4 @@ Options:
 
 * uses additional flags below: 
 --user, --email, --gpg-key
-
-
-identityshift -n --new (add an identity)
-  -u --username (username)
-  -e --email (email)
-  --ssh (ssh hash)
-
-identityshift -u --update (update an identity)
-  -u --username (username)
-  (if exists...)
-    -e --email (email)
-    --ssh (ssh hash)
-
-identityshift -d --delete [username]
-
-identityshift -s --shift <username> (shift to username)
-
-identityshift -l --list (list all identities)
-
-identityshift --local <username> (set local git identity to username)
-
-[ADD REGEX DOWN THE LINE]
-[IF NO OPTIONS SPECIFIED, PROMPT USER]
+```
