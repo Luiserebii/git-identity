@@ -28,9 +28,9 @@ function setupCLI() {
     .option('-u, --update <name> *', 'update registered identity')
     .option('-d, --delete <name>', 'delete registered identity')
     .option('-s, --shift <name>', 'shift git identity to registered identity (global by default)')
-    .option('--global', 'shift globally (option for -s)')
-    .option('--local', 'shift locally (option for -s)')
     .option('-c, --current', 'current global git identity')
+    .option('--global', 'global (option for -s and -c)')
+    .option('--local', 'local (option for -s and -c)')
 
     .option('--user <username>', 'specify username')
     .option('--email <email>', 'specify email')
@@ -67,7 +67,7 @@ function main() {
   } else if(program.update && argNum() >= 6) {
     identityShift.updateIdentity(new Identity(program.update, program.user, program.email, program.gpgKey));
 
-  } else if(program.delete && argNum() === 1) {
+  } else if(program.delete && argNum() === 2) {
     identityShift.deleteIdentity(program.delete);
 
   } else if(program.shift && (argNum() === 2 || argNum() === 3)) {
