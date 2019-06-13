@@ -13,10 +13,10 @@
 
 A command line tool allowing for easy shifting between git identities (username, email, and GPG).
 
-Version: 0.0.1
-Author: Luiserebii
+<b>Version: 0.0.1</b><br/>
+<b>Author: Luiserebii</b>
 
-# Usage
+## Usage
 ```
 Usage: index [options]
 
@@ -39,3 +39,6 @@ Options:
 * uses additional flags below: 
 --user, --email, --gpg-key
 ```
+
+## Contact me
+Questions? Comments? Suggestions? Open an issue, make a pull request! Or, you can email me at: luis@serebii.io
