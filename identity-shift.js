@@ -9,14 +9,21 @@ const path = require('path');
 
 class IdentityShift {
 
+  constructor(file = path.resolve(__dirname, 'data', 'identities')){
+    this.file = file;
+  }
 
 
-  newIdentity(name, username, email, gpgKey = null, filepath = path.resolve(__dirname, 'data')) {
-    let file = path.resolve(filepath, 'identities');
+  getIdentities(file = this.file) {
+    let identityStore = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file)) : null);
+    return identityStore;
+  }
+
+  newIdentity(name, username, email, gpgKey = null, file = this.file) {
     let identityStore;
 
     //If file exists, let's load it in before writing
-    if(fs.existsSync(file)) identityStore = JSON.parse(fs.readFileSync(file));
+    identityStore = this.getIdentities();
 
     //Add identity to store
     identityStore.name = { 'username': username, 'email': email };
@@ -27,5 +34,9 @@ class IdentityShift {
 
   }
 
+  updateIdentity(name, username, email, gpgKey = null, file = this.file) {
+    
+
+  }
 
 }
