@@ -40,6 +40,9 @@ Options:
 --user, --email, --gpg-key
 ```
 
+## Mirror
+A mirror of this repository is available at: <https://serebii.io:2501/Luiserebii/git-identity>
+
 ## Contact
 Questions? Comments? Suggestions? <br/>
 Open an issue, make a pull request!
