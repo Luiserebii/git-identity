@@ -27,7 +27,6 @@ function setupCLI() {
     .option('-d, --delete <name>', 'delete registered identity')
     .option('-s, --shift <name>', 'shift global identity to registered identity')
     .option('--local <name>', 'set local git identity to registered identity')
-    .option('-new, --meme', 'uguu')
 
 }
 
