@@ -22,3 +22,5 @@ class Identity {
   }
 
 }
+
+module.exports = Identity;

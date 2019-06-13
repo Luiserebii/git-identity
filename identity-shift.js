@@ -7,6 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const child_process = require('child_process');
+const Identity = require('identity');
 
 class IdentityShift {
 
@@ -20,19 +21,21 @@ class IdentityShift {
     return identityStore;
   }
 
-  createIdentity(name, username, email, gpgKey = null) {
+/*  createIdentityLow(name, username, email, gpgKey = null) {
     let identityStore = { [name]: {'username': username, 'email': email} };
     if(gpgKey) identityStore[name].gpgKey = gpgKey;
     return identityStore;
-
   }
+*/
 
   listIdentities() {
     let identityStore = this.getIdentities();
     return identityStore && !this.objectIsEmpty(identityStore) ? this.identitiesToString(this.getIdentities()) : null;
   }
 
-  newIdentity(name, username, email, gpgKey = null, file = this.file) {
+
+
+  newIdentity(identity, file = this.file) {
     let identityStore;
 
     //If file exists, let's load it in before writing
@@ -40,7 +43,7 @@ class IdentityShift {
     //Add identity to store
     if(!identityStore[name]){
 
-      identityStore = Object.assign(identityStore, this.createIdentity(name, username, email, gpgKey));
+      identityStore = Object.assign(identityStore, identity.toJSON());
       //If we're using our default folder path, and the folder doesn't exist, make it!
       if(file === this.file && !fs.existsSync(path.resolve(file, '../'))) fs.mkdirSync(path.resolve(file, '../'));
 
@@ -52,14 +55,14 @@ class IdentityShift {
 
   }
 
-  updateIdentity(name, username, email, gpgKey = null, file = this.file) {
+  updateIdentity(identity, file = this.file) {
     let identityStore; 
 
     //If file exists, let's load it in before writing
     identityStore = this.getIdentities();
 
     //Update identity
-    identityStore = Object.assign(identityStore, this.createIdentity(name, username, email, gpgKey));
+    identityStore = Object.assign(identityStore, identity.toJSON());
 
     //Finally, write identityStore to file
     fs.writeFileSync(file, JSON.stringify(identityStore), 'utf8')
@@ -79,10 +82,9 @@ class IdentityShift {
   //shift identity function implementation for application flag
   shiftIdentity(name, file = this.file) {
     let identityStore = this.getIdentities();
-    //let identity = !this.objectIsEmpty(identities) ? identities.name : null;
-    let identity = identityStore[name];
-    if(identity) {
-      this.setIdentityGlobal(identity.username, identity.email, identity.gpgKey); 
+    let id = identityStore[name];
+    if(id) {
+      this.setIdentityGlobal(new Identity(name, id.username, id.email, id.gpgKey)); 
       return true;
     } else {
       console.log("Identity not found!");
@@ -92,10 +94,9 @@ class IdentityShift {
 
   shiftIdentityLocal(name, file = this.file) {
     let identityStore = this.getIdentities();
-    //let identity = !this.objectIsEmpty(identities) ? identities.name : null;
-    let identity = identityStore[name];
+    let id = identityStore[name];
     if(identity) {
-      this.setIdentityLocal(identity.username, identity.email, identity.gpgKey);
+      this.setIdentityLocal(new Identity(name, id.username, id.email, id.gpgKey));
       return true;
     } else {
       console.log("Identity not found!");
@@ -112,25 +113,25 @@ class IdentityShift {
   }
 
   //Set identity globally, run git commands to do so
-  setIdentityGlobal(username, email, gpgKey = null) {
-    let cmd = `git config --global user.name ${username} && ` +
-                `git config --global user.email ${email}`;
-    if(gpgKey) cmd += ` && git config --global user.signingkey ${gpgKey}`;
+  setIdentityGlobal(identity) {
+    let cmd = `git config --global user.name ${identity.username} && ` +
+                `git config --global user.email ${identity.email}`;
+    if(identity.gpgKey) cmd += ` && git config --global user.signingkey ${identity.gpgKey}`;
     child_process.execSync(cmd);
   }
 
   //Set identity locally
-  setIdentityLocal(username, email, gpgKey = null) {
-    let cmd = `git config --local user.name ${username} && ` +
-                `git config --local user.email ${email}`;
-    if(gpgKey) cmd += ` && git config --local user.signingkey ${gpgKey}`;
+  setIdentityLocal(identity) {
+    let cmd = `git config --local user.name ${identity.username} && ` +
+                `git config --local user.email ${identity.email}`;
+    if(gpgKey) cmd += ` && git config --local user.signingkey ${identity.gpgKey}`;
     child_process.execSync(cmd);
   }
 
   objectIsEmpty(obj) {
     for(var key in obj) {
-        if(obj.hasOwnProperty(key))
-            return false;
+      if(obj.hasOwnProperty(key))
+      return false;
     }
     return true;
   }
@@ -141,13 +142,6 @@ class IdentityShift {
       console.log(identities[i])
       str += this.identityToString(identities[i]) + "\n";
     }
-    return str;
-  }
-
-  identityToString(identity){
-    let str = identity.username + " | " + identity.email;
-    if(identity.gpgKey) str += " | " + identity.gpgKey; 
-
     return str;
   }
   
