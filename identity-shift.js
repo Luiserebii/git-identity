@@ -66,7 +66,13 @@ class IdentityShift {
 
   deleteIdentity(name, file = this.file) {
     let identityStore = this.getIdentities();
-    identityStore[name] ? delete identityStore[name] : console.log("Identity not found!");
+    if(identityStore[name]) {
+      delete identityStore[name]
+      fs.writeFileSync(file, JSON.stringify(identityStore), 'utf8')
+      console.log("Deleted identity \"" + name + "\"")
+    } else { 
+      console.log("Identity not found!");
+    }
   }
 
   //shift identity function implementation for application flag

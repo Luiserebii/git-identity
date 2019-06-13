@@ -56,6 +56,10 @@ function main() {
     ids ? console.log(identityShift.listIdentities()) : console.log("No identities found!");
   } else if(program.new) {
     identityShift.newIdentity(program.new, program.user, program.email, program['gpg-key']);
+  } else if(program.update) {
+    identityShift.updateIdentity(program.update, program.user, program.email, program['gpg-key']);
+  } else if(program.delete) {
+    identityShift.deleteIdentity(program.delete);
   }
   
 
