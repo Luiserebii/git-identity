@@ -11,7 +11,7 @@ const Identity = require('./identity');
 
 class IdentityShift {
 
-  constructor(file = path.resolve(__dirname, 'data', 'identities')){
+  constructor(file = path.resolve(__dirname, '../', 'data', 'identities')){
     this.file = file;
   }
 
