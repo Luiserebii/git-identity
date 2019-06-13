@@ -5,8 +5,9 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 
 const meta = require('./meta');
-const identityshift = require('./identity-shift');
-const identityShift = new identityshift();
+const IdentityShift = require('./identity-shift');
+const identityShift = new IdentityShift();
+const Identity = require('./identity')
 
 const run = () => {
 
@@ -52,17 +53,25 @@ function main() {
 
   //If the about flag has been passed, and only that flag, show the about
   if(program.about && argNum() === 1) { 
+
     aboutCLI();
+
   } else if(program.list && argNum() === 1) {
+
     let ids = identityShift.listIdentities(); 
     ids ? console.log(identityShift.listIdentities()) : console.log("No identities found!");
+
   } else if(program.new && argNum() >= 6) {
-    identityShift.newIdentity(program.new, program.user, program.email, program.gpgKey);
+    identityShift.newIdentity(new Identity(program.new, program.user, program.email, program.gpgKey));
+
   } else if(program.update && argNum() >= 6) {
-    identityShift.updateIdentity(program.update, program.user, program.email, program.gpgKey);
+    identityShift.updateIdentity(new Identity(program.update, program.user, program.email, program.gpgKey));
+
   } else if(program.delete && argNum() === 1) {
     identityShift.deleteIdentity(program.delete);
+
   } else if(program.shift && (argNum() == 2 || argNum() == 3)) {
+
     let name = program.shift;
     if(!program.local) {
       let success = identityShift.shiftIdentity(name);
@@ -71,13 +80,15 @@ function main() {
       let success = identityShift.shiftIdentityLocal(name);
       if(success) console.log("Shifted local git identity to: " + name);
     }
+
   } else if(program.current && argNum() === 1) {
+
     let [ username, email, gpgKey ] = identityShift.getIdentityGlobal();
     console.log("Current global Git identity:\n");
-    //console.log("============================\n");
     console.log(username);
     console.log(email);
     if(gpgKey) console.log(gpgKey);
+
   } else {
     console.log("Invalid combination of flags and/or arguments");
   }
