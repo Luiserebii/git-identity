@@ -20,7 +20,7 @@ class IdentityShift {
   }
 
   createIdentity(name, username, email, gpgKey = null) {
-    let identityStore = { name: {'username': username, 'email': email} };
+    let identityStore = { [name]: {'username': username, 'email': email} };
     if(gpgKey) identityStore[name].gpgKey = gpgKey;
     return identityStore;
 
@@ -36,11 +36,12 @@ class IdentityShift {
 
     //If file exists, let's load it in before writing
     identityStore = this.getIdentities();
-
     //Add identity to store
-    if(identityStore[name]){
+    if(!identityStore[name]){
 
       identityStore = Object.assign(identityStore, this.createIdentity(name, username, email, gpgKey));
+      //If we're using our default folder path, and the folder doesn't exist, make it!
+      if(file === this.file && !fs.existsSync(path.resolve(file, '../'))) fs.mkdirSync(path.resolve(file, '../'));
 
       //Finally, write identityStore to file
       fs.writeFileSync(file, JSON.stringify(identityStore), 'utf8')
