@@ -32,7 +32,7 @@ class IdentityShift {
     //If file exists, let's load it in before writing
     identityStore = this.getIdentities();
     //Add identity to store
-    if(!identityStore[name]){
+    if(!identityStore[identity.name]){
 
       identityStore = Object.assign(identityStore, identity.toJSON());
       //If we're using our default folder path, and the folder doesn't exist, make it!

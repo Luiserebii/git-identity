@@ -8,8 +8,8 @@ class Identity {
   }
 
   toJSON() {
-    let JSON = { [this.name]: {'username': username, 'email': email} };
-    if(gpgKey) JSON[name].gpgKey = gpgKey;
+    let JSON = { [this.name]: {'username': this.username, 'email': this.email} };
+    if(this.gpgKey) JSON[this.name].gpgKey = this.gpgKey;
     return JSON;
   }
 
