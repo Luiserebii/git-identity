@@ -5,9 +5,9 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 
 const meta = require('./meta');
-const IdentityShift = require('./identity-shift');
+const IdentityShift = require('./git-identity/identity-shift');
 const identityShift = new IdentityShift();
-const Identity = require('./identity')
+const Identity = require('./git-identity/identity')
 
 const run = () => {
 
@@ -104,7 +104,7 @@ function main() {
 function aboutCLI() {
 
   //Title of tool
-  console.log(chalk.green(figlet.textSync('Identity Shift', { font: 'Ghost' })))
+  console.log(chalk.green(figlet.textSync('Git Identity Shift', { font: 'Ghost' })))
   console.log("Version: " + meta.version);
   console.log("Author: Luiserebii");
   console.log("Check me out on GitHub at: https://github.com/Luiserebii!")
