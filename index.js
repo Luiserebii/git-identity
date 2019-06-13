@@ -17,19 +17,27 @@ const run = () => {
 
 function setupCLI() {
 
-  program.version(meta.version, '-v, --version')
-  if(meta.description) program.description(meta.description)
+  program.version(meta.version, '-v, --version');
+  if(meta.description) program.description(meta.description);
 
   program
     .option('-a, --about', 'about this tool')
     .option('-l, --list', 'list all registered identities')
-    //.option('-n, --new <name> <username> <email> <gpg-key>...', 'add new identity')
-.option('-n, --new [uguu...]', 'add new identity')
-    .option('-u, --update <name> <username> <email> <gpg-key>', 'update registered identity')
+    .option('-n, --new <name> *', 'add new identity')
+    .option('-u, --update <name> *', 'update registered identity')
     .option('-d, --delete <name>', 'delete registered identity')
     .option('-s, --shift <name>', 'shift global identity to registered identity')
     .option('--local <name>', 'set local git identity to registered identity')
 
+    .option('--user <username>', 'specify username')
+    .option('--email <email>', 'specify email')
+    .option('--gpg-key <gpg-key>', 'specify GPG key (key-id format: LONG)')
+ 
+    .on('--help', () => {
+      console.log('');
+      console.log('* uses additional flags below: ');
+      console.log('--user, --email, --gpg-key');
+    })
 }
 
 function main() {
@@ -48,6 +56,7 @@ function main() {
     ids ? console.log(identityShift.listIdentities()) : console.log("No identities found!");
   } else if(program.new) {
     console.log(program.new)
+    console.log(program.user)
   }
   
 
