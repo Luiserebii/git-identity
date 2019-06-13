@@ -26,8 +26,9 @@ class IdentityShift {
 
   }
 
-  listIdentites() {
-    return this.identityToString(this.getIdentities);
+  listIdentities() {
+    let identityStore = this.getIdentities();
+    return identityStore && !this.objectIsEmpty(identityStore) ? this.identityToString(this.getIdentities()) : null;
   }
 
   newIdentity(name, username, email, gpgKey = null, file = this.file) {
@@ -91,7 +92,7 @@ class IdentityShift {
     child_process.execSync(cmd);
   }
 
-/*
+
   objectIsEmpty(obj) {
     for(var key in obj) {
         if(obj.hasOwnProperty(key))
@@ -99,10 +100,12 @@ class IdentityShift {
     }
     return true;
   }
-*/
+
   identityToString(identity){
     return JSON.stringify(identity);
   }
   
 
 }
+
+module.exports = IdentityShift;
