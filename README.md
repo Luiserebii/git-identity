@@ -1,4 +1,5 @@
 # git-identity
+[![npm version](https://badge.fury.io/js/git-identity-shift.svg)](https://badge.fury.io/js/git-identity-shift)
 ```
                      .-') _                  _ .-') _     ('-.       .-') _  .-') _           .-') _                       .-')    ('-. .-.                     .-') _    
                     (  OO) )                ( (  OO) )  _(  OO)     ( OO ) )(  OO) )         (  OO) )                     ( OO ). ( OO )  /                    (  OO) )   

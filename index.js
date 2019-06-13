@@ -116,3 +116,8 @@ function argNum() {
 }
 
 run();
+
+module.exports = {
+  "IdentityShift": IdentityShift,
+  "Identity": Identity
+}

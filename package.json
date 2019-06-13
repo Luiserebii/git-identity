@@ -1,5 +1,5 @@
 {
-  "name": "git-identity",
+  "name": "git-identity-shift",
   "version": "0.1.0",
   "description": "A command line tool allowing for easy shifting between git identities (username, email, and GPG).",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Luiserebii/identity-shift.git"
+    "url": "git+https://github.com/Luiserebii/git-identity.git"
   },
   "author": "Luiserebii",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Luiserebii/identity-shift/issues"
+    "url": "https://github.com/Luiserebii/git-identity/issues"
   },
-  "homepage": "https://github.com/Luiserebii/identity-shift#readme",
+  "homepage": "https://github.com/Luiserebii/git-identity#readme",
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^6.1.4"
