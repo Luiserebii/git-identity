@@ -4,7 +4,7 @@ const program = require('commander');
 const chalk = require('chalk');
 const figlet = require('figlet');
 
-const meta = require('./data');
+const meta = require('./meta');
 
 const run = () => {
 

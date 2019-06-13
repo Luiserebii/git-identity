@@ -3,10 +3,10 @@
  *
  */
 
-const data = {
+const meta = {
 
   version: '0.0.1',
   description: 'Insert description here, lolol' 
 };
 
-module.exports = data;
+module.exports = meta;
