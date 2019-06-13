@@ -59,7 +59,7 @@ function main() {
   } else if(program.list && argNum() === 1) {
 
     let ids = identityShift.listIdentities(); 
-    ids ? console.log(identityShift.listIdentities()) : console.log("No identities found!");
+    ids ? console.log("List of identities: \n\n" + identityShift.listIdentities()) : console.log("No identities found!");
 
   } else if(program.new && argNum() >= 6) {
     identityShift.newIdentity(new Identity(program.new, program.user, program.email, program.gpgKey));
@@ -83,11 +83,9 @@ function main() {
 
   } else if(program.current && argNum() === 1) {
 
-    let [ username, email, gpgKey ] = identityShift.getIdentityGlobal();
+    let identity = identityShift.getIdentityGlobal();
     console.log("Current global Git identity:\n");
-    console.log(username);
-    console.log(email);
-    if(gpgKey) console.log(gpgKey);
+    console.log(identity.toString());
 
   } else {
     console.log("Invalid combination of flags and/or arguments");
