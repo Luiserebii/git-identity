@@ -67,8 +67,27 @@ class IdentityShift {
     identityStore[name] ? delete identityStore[name] : console.log("Identity not found!");
   }
 
+  shiftIdentity(name, file = this.file) {
+    let identityStore = this.getIdentities();
+    //let identity = !this.objectIsEmpty(identities) ? identities.name : null;
+    let identity = identityStore[name];
+    identity ? this.setIdentityGlobal(name, username, email, gpgKey) : console.log("Identity not found!")
+  }
 
+  setIdentityGlobal(name, username, email, gpgKey = null) {
+    const cmd = `' '`
+    child_process.execSync(cmd);
+  }
 
+/*
+  objectIsEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+  }
+*/
   identityToString(identity){
     return JSON.stringify(identity);
   }
