@@ -7,7 +7,7 @@
 const fs = require('fs');
 const path = require('path');
 const child_process = require('child_process');
-const Identity = require('identity');
+const Identity = require('./identity');
 
 class IdentityShift {
 
@@ -21,19 +21,10 @@ class IdentityShift {
     return identityStore;
   }
 
-/*  createIdentityLow(name, username, email, gpgKey = null) {
-    let identityStore = { [name]: {'username': username, 'email': email} };
-    if(gpgKey) identityStore[name].gpgKey = gpgKey;
-    return identityStore;
-  }
-*/
-
   listIdentities() {
     let identityStore = this.getIdentities();
     return identityStore && !this.objectIsEmpty(identityStore) ? this.identitiesToString(this.getIdentities()) : null;
   }
-
-
 
   newIdentity(identity, file = this.file) {
     let identityStore;
@@ -139,8 +130,8 @@ class IdentityShift {
   identitiesToString(identities) {
     let str;
     for(var i in identities){
-      console.log(identities[i])
-      str += this.identityToString(identities[i]) + "\n";
+      //console.log(identities[i])
+      str += new Identity(i, identities[i].username, identities[i].email, identities[i].gpgKey).toString() + "\n\n";
     }
     return str;
   }
