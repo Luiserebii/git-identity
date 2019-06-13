@@ -26,6 +26,10 @@ class IdentityShift {
 
   }
 
+  listIdentites() {
+    return this.identityToString(this.getIdentities);
+  }
+
   newIdentity(name, username, email, gpgKey = null, file = this.file) {
     let identityStore;
 
@@ -57,5 +61,17 @@ class IdentityShift {
     //Finally, write identityStore to file
     fs.writeFileSync(file, JSON.stringify(identityStore), 'utf8')
   }
+
+  deleteIdentity(name, file = this.file) {
+    let identityStore = this.getIdentities();
+    identityStore[name] ? delete identityStore[name] : console.log("Identity not found!");
+  }
+
+
+
+  identityToString(identity){
+    return JSON.stringify(identity);
+  }
+  
 
 }
