@@ -28,6 +28,7 @@ function setupCLI() {
     .option('-d, --delete <name>', 'delete registered identity')
     .option('-s, --shift <name>', 'shift global identity to registered identity')
     .option('--local <name>', 'set local git identity to registered identity')
+    .option('-c, --current', 'current global git identity')
 
     .option('--user <username>', 'specify username')
     .option('--email <email>', 'specify email')
@@ -55,11 +56,18 @@ function main() {
     let ids = identityShift.listIdentities(); 
     ids ? console.log(identityShift.listIdentities()) : console.log("No identities found!");
   } else if(program.new) {
-    identityShift.newIdentity(program.new, program.user, program.email, program['gpg-key']);
+    identityShift.newIdentity(program.new, program.user, program.email, program.gpgKey);
   } else if(program.update) {
-    identityShift.updateIdentity(program.update, program.user, program.email, program['gpg-key']);
+    identityShift.updateIdentity(program.update, program.user, program.email, program.gpgKey);
   } else if(program.delete) {
     identityShift.deleteIdentity(program.delete);
+  } else if(program.current) {
+    let [ username, email, gpgKey ] = identityShift.getIdentityGlobal();
+    console.log("Current global Git identity:\n");
+    //console.log("============================\n");
+    console.log(username);
+    console.log(email);
+    if(gpgKey) console.log(gpgKey);
   }
   
 

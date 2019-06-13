@@ -6,6 +6,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const child_process = require('child_process');
 
 class IdentityShift {
 
@@ -83,6 +84,13 @@ class IdentityShift {
     identity ? this.setIdentityGlobal(username, email, gpgKey) : console.log("Identity not found!")
   }
 
+  getIdentityGlobal() {
+    let username = child_process.execSync('git config --global user.name', { encoding: 'utf8' }).trim();
+    let email = child_process.execSync('git config --global user.email', { encoding: 'utf8' }).trim();
+    let gpgKey = child_process.execSync('git config --global user.signingkey', { encoding: 'utf8' }).trim();
+    return [username, email, gpgKey];
+  }
+
   //Set identity globally, run git commands to do so
   setIdentityGlobal(username, email, gpgKey = null) {
     const cmd = `git config --global user.name ${username} && ` +
@@ -98,7 +106,6 @@ class IdentityShift {
     if(gpgKey) cmd += ` && git config --local user.signingkey ${gpgKey}`;
     child_process.execSync(cmd);
   }
-
 
   objectIsEmpty(obj) {
     for(var key in obj) {
