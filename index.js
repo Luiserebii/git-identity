@@ -20,7 +20,13 @@ function setupCLI() {
 
   program
     .option('-a, --about', 'about this tool')
-    .option('-m, --meme', 'uguu')
+    .option('-l, --list', 'list all registered identities')
+    .option('-n, --new <name> <username> <email> <gpg-key>', 'add new identity')
+    .option('-u, --update <name> <username> <email> <gpg-key>', 'update registered identity')
+    .option('-d, --delete <name>', 'delete registered identity')
+    .option('-s, --shift <name>', 'shift global identity to registered identity')
+    .option('--local <name>', 'set local git identity to registered identity')
+    .option('-new, --meme', 'uguu')
 
 }
 
@@ -36,6 +42,8 @@ function main() {
   if(program.about && argNum() === 1) { 
     aboutCLI();
   }
+
+  
 
 }
 

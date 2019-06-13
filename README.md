@@ -17,3 +17,10 @@ identityshift -u --update (update an identity)
 identityshift -d --delete [username]
 
 identityshift -s --shift <username> (shift to username)
+
+identityshift -l --list (list all identities)
+
+identityshift --local <username> (set local git identity to username)
+
+[ADD REGEX DOWN THE LINE]
+[IF NO OPTIONS SPECIFIED, PROMPT USER]
