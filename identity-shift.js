@@ -81,8 +81,28 @@ class IdentityShift {
     let identityStore = this.getIdentities();
     //let identity = !this.objectIsEmpty(identities) ? identities.name : null;
     let identity = identityStore[name];
-    identity ? this.setIdentityGlobal(username, email, gpgKey) : console.log("Identity not found!")
+    if(identity) {
+      this.setIdentityGlobal(username, email, gpgKey); 
+      return true;
+    } else {
+      console.log("Identity not found!");
+      return false; 
+    }
   }
+
+  shiftIdentityLocal(name, file = this.file) {
+    let identityStore = this.getIdentities();
+    //let identity = !this.objectIsEmpty(identities) ? identities.name : null;
+    let identity = identityStore[name];
+    if(identity) {
+      this.setIdentityLocal(username, email, gpgKey);
+      return true;
+    } else {
+      console.log("Identity not found!");
+      return false;
+    }
+  }
+
 
   getIdentityGlobal() {
     let username = child_process.execSync('git config --global user.name', { encoding: 'utf8' }).trim();

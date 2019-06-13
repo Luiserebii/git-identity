@@ -61,6 +61,14 @@ function main() {
     identityShift.updateIdentity(program.update, program.user, program.email, program.gpgKey);
   } else if(program.delete) {
     identityShift.deleteIdentity(program.delete);
+  } else if(program.shift) {
+    let name = program.shift;
+    let success = identityShift.shiftIdentity(name);
+    if(success) console.log("Shifted global git identity to: " + name);
+  } else if(program.local) {
+    let name = program.local;
+    let success = identityShift.shiftIdentityLocal(name);
+    if(success) console.log("Shifted local git identity to: " + name)
   } else if(program.current) {
     let [ username, email, gpgKey ] = identityShift.getIdentityGlobal();
     console.log("Current global Git identity:\n");
