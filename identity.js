@@ -14,8 +14,9 @@ class Identity {
   }
 
   toString() {
-    let str = "Name: " + this.name + "\n" +
-              "Username: " + this.username + "\n" +
+    let str = "";
+    if(this.name) { str += "Name: " + this.name + "\n" }
+    str +=    "Username: " + this.username + "\n" +
               "Email: " + this.email;
     if(this.gpgKey) { str += "\nGPG Key: " + this.gpgKey }
     return str;

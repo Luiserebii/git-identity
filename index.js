@@ -59,7 +59,7 @@ function main() {
   } else if(program.list && argNum() === 1) {
 
     let ids = identityShift.listIdentities(); 
-    ids ? console.log("List of identities: \n\n" + identityShift.listIdentities()) : console.log("No identities found!");
+    ids ? console.log("All registered identities: \n\n" + identityShift.listIdentities()) : console.log("No identities found!");
 
   } else if(program.new && argNum() >= 6) {
     identityShift.newIdentity(new Identity(program.new, program.user, program.email, program.gpgKey));
@@ -70,7 +70,7 @@ function main() {
   } else if(program.delete && argNum() === 1) {
     identityShift.deleteIdentity(program.delete);
 
-  } else if(program.shift && (argNum() == 2 || argNum() == 3)) {
+  } else if(program.shift && (argNum() === 2 || argNum() === 3)) {
 
     let name = program.shift;
     if(!program.local) {
@@ -81,11 +81,18 @@ function main() {
       if(success) console.log("Shifted local git identity to: " + name);
     }
 
-  } else if(program.current && argNum() === 1) {
+  } else if(program.current && (argNum() === 1 || argNum() === 2)) {
 
-    let identity = identityShift.getIdentityGlobal();
-    console.log("Current global Git identity:\n");
-    console.log(identity.toString());
+    if(!program.local) {
+      let identity = identityShift.getIdentityGlobal();
+      console.log("Current global git identity:\n");
+      console.log(identity.toString());
+    } else {
+      let identity = identityShift.getIdentityLocal();
+      console.log("Current local Git identity:\n");
+      console.log(identity.toString());
+
+    }
 
   } else {
     console.log("Invalid combination of flags and/or arguments");

@@ -86,7 +86,7 @@ class IdentityShift {
   shiftIdentityLocal(name, file = this.file) {
     let identityStore = this.getIdentities();
     let id = identityStore[name];
-    if(identity) {
+    if(id) {
       this.setIdentityLocal(new Identity(name, id.username, id.email, id.gpgKey));
       return true;
     } else {
@@ -103,6 +103,13 @@ class IdentityShift {
     return new Identity(null, username, email, gpgKey);
   }
 
+  getIdentityLocal(){
+    let username = child_process.execSync('git config --local user.name', { encoding: 'utf8' }).trim();
+    let email = child_process.execSync('git config --local user.email', { encoding: 'utf8' }).trim();
+    let gpgKey = child_process.execSync('git config --local user.signingkey', { encoding: 'utf8' }).trim();
+    return new Identity(null, username, email, gpgKey);
+  }
+
   //Set identity globally, run git commands to do so
   setIdentityGlobal(identity) {
     let cmd = `git config --global user.name ${identity.username} && ` +
@@ -115,7 +122,7 @@ class IdentityShift {
   setIdentityLocal(identity) {
     let cmd = `git config --local user.name ${identity.username} && ` +
                 `git config --local user.email ${identity.email}`;
-    if(gpgKey) cmd += ` && git config --local user.signingkey ${identity.gpgKey}`;
+    if(identity.gpgKey) cmd += ` && git config --local user.signingkey ${identity.gpgKey}`;
     child_process.execSync(cmd);
   }
 
