@@ -100,7 +100,7 @@ class IdentityShift {
     let username = child_process.execSync('git config --global user.name', { encoding: 'utf8' }).trim();
     let email = child_process.execSync('git config --global user.email', { encoding: 'utf8' }).trim();
     let gpgKey = child_process.execSync('git config --global user.signingkey', { encoding: 'utf8' }).trim();
-    return [username, email, gpgKey];
+    return new Identity(null, username, email, gpgKey);
   }
 
   //Set identity globally, run git commands to do so
@@ -128,9 +128,8 @@ class IdentityShift {
   }
 
   identitiesToString(identities) {
-    let str;
+    let str = '';
     for(var i in identities){
-      //console.log(identities[i])
       str += new Identity(i, identities[i].username, identities[i].email, identities[i].gpgKey).toString() + "\n\n";
     }
     return str;
