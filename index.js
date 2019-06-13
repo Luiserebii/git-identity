@@ -26,8 +26,9 @@ function setupCLI() {
     .option('-n, --new <name> *', 'add new identity')
     .option('-u, --update <name> *', 'update registered identity')
     .option('-d, --delete <name>', 'delete registered identity')
-    .option('-s, --shift <name>', 'shift global identity to registered identity')
-    .option('--local <name>', 'set local git identity to registered identity')
+    .option('-s, --shift <name>', 'shift git identity to registered identity (global by default)')
+    .option('--global', 'shift globally (option for -s)')
+    .option('--local', 'shift locally (option for -s)')
     .option('-c, --current', 'current global git identity')
 
     .option('--user <username>', 'specify username')
@@ -52,30 +53,33 @@ function main() {
   //If the about flag has been passed, and only that flag, show the about
   if(program.about && argNum() === 1) { 
     aboutCLI();
-  } else if(program.list) {
+  } else if(program.list && argNum() === 1) {
     let ids = identityShift.listIdentities(); 
     ids ? console.log(identityShift.listIdentities()) : console.log("No identities found!");
-  } else if(program.new) {
+  } else if(program.new && argNum() >= 6) {
     identityShift.newIdentity(program.new, program.user, program.email, program.gpgKey);
-  } else if(program.update) {
+  } else if(program.update && argNum() >= 6) {
     identityShift.updateIdentity(program.update, program.user, program.email, program.gpgKey);
-  } else if(program.delete) {
+  } else if(program.delete && argNum() === 1) {
     identityShift.deleteIdentity(program.delete);
-  } else if(program.shift) {
+  } else if(program.shift && (argNum() == 2 || argNum() == 3)) {
     let name = program.shift;
-    let success = identityShift.shiftIdentity(name);
-    if(success) console.log("Shifted global git identity to: " + name);
-  } else if(program.local) {
-    let name = program.local;
-    let success = identityShift.shiftIdentityLocal(name);
-    if(success) console.log("Shifted local git identity to: " + name)
-  } else if(program.current) {
+    if(!program.local) {
+      let success = identityShift.shiftIdentity(name);
+      if(success) console.log("Shifted global git identity to: " + name);
+    } else {
+      let success = identityShift.shiftIdentityLocal(name);
+      if(success) console.log("Shifted local git identity to: " + name);
+    }
+  } else if(program.current && argNum() === 1) {
     let [ username, email, gpgKey ] = identityShift.getIdentityGlobal();
     console.log("Current global Git identity:\n");
     //console.log("============================\n");
     console.log(username);
     console.log(email);
     if(gpgKey) console.log(gpgKey);
+  } else {
+    console.log("Invalid combination of flags and/or arguments");
   }
   
 
