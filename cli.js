@@ -13,8 +13,8 @@ class GitIdentityCLI {
 
   run() {
 
-    setupCLI();
-    main();
+    this.setupCLI();
+    this.main();
 
   }
 
@@ -48,31 +48,31 @@ class GitIdentityCLI {
   main() {
 
     program.parse(process.argv);
-    if(argNum() === 0) {
-      aboutCLI();
+    if(this.argNum() === 0) {
+      this.aboutCLI();
       program.help();
     }
 
     //If the about flag has been passed, and only that flag, show the about
-    if(program.about && argNum() === 1) { 
+    if(program.about && this.argNum() === 1) { 
 
-      aboutCLI();
+      this.aboutCLI();
 
-    } else if(program.list && argNum() === 1) {
+    } else if(program.list && this.argNum() === 1) {
 
       let ids = identityShift.listIdentities(); 
       ids ? console.log("All registered identities: \n\n" + identityShift.listIdentities()) : console.log("No identities found!");
 
-    } else if(program.new && argNum() >= 6) {
+    } else if(program.new && this.argNum() >= 6) {
       identityShift.newIdentity(new Identity(program.new, program.user, program.email, program.gpgKey));
 
-    } else if(program.update && argNum() >= 6) {
+    } else if(program.update && this.argNum() >= 6) {
       identityShift.updateIdentity(new Identity(program.update, program.user, program.email, program.gpgKey));
 
-    } else if(program.delete && argNum() === 2) {
+    } else if(program.delete && this.argNum() === 2) {
       identityShift.deleteIdentity(program.delete);
 
-    } else if(program.shift && (argNum() === 2 || argNum() === 3)) {
+    } else if(program.shift && (this.argNum() === 2 || this.argNum() === 3)) {
 
       let name = program.shift;
       if(!program.local) {
@@ -83,7 +83,7 @@ class GitIdentityCLI {
         if(success) console.log("Shifted local git identity to: " + name);
       }
 
-    } else if(program.current && (argNum() === 1 || argNum() === 2)) {
+    } else if(program.current && (this.argNum() === 1 || this.argNum() === 2)) {
 
       if(!program.local) {
         let identity = identityShift.getIdentityGlobal();
