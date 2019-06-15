@@ -11,14 +11,14 @@ const Identity = require('./git-identity/identity')
 
 class GitIdentityCLI {
 
-  get run = () => {
+  run() {
 
     setupCLI();
     main();
 
   }
 
-  function setupCLI() {
+  setupCLI() {
 
     program.version(meta.version, '-v, --version');
     if(meta.description) program.description(meta.description);
@@ -45,7 +45,7 @@ class GitIdentityCLI {
       })
   }
 
-  function main() {
+  main() {
 
     program.parse(process.argv);
     if(argNum() === 0) {
@@ -103,7 +103,7 @@ class GitIdentityCLI {
 
   }
 
-  function aboutCLI() {
+  aboutCLI() {
 
     //Title of tool
     console.log(chalk.green(figlet.textSync('Git Identity Shift', { font: 'Ghost' })))
@@ -113,7 +113,7 @@ class GitIdentityCLI {
 
   }
 
-  function argNum() {
+  argNum() {
     return process.argv.slice(2).length;
   }
 
