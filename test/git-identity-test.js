@@ -8,17 +8,24 @@ const fs = require('fs');
 const path = require('path');
 
 const Identity = require('../src/git-identity/identity');
-
+const GitIdentity = require('../src/git-identity/git-identity');
+const Util = require('../src/util/util');
 
 describe('Class Identity', () => {
 
   const id = {};
+  const altid = {}
 
   beforeEach(() => {
     id.name = 'BTC';
     id.username = 'Satoshi Nakamoto';
     id.email = 'satoshin@gmx.com';
     id.gpgKey = 'MQINBF0C';
+
+    altid.name = 'meme';
+    altid.username = 'FloppyFishe';
+    altid.email = 'ff@floppy.io';
+    altid.gpgKey = 'A5G7BBP0';
   })
 
 
@@ -74,19 +81,57 @@ describe('Class GitIdentity', () => {
 
   let folder = '';
   let file = '';
+
+  let gitIdentity;
+  let identity;
  
   beforeEach(() => {
     folder = path.resolve(__dirname, 'data-test');
     file = path.resolve(folder, 'identities');
+
     if(!fs.existsSync(folder)) { fs.mkdirSync(folder); }
+
+    gitIdentity = new GitIdentity(file);
+    identity = new Identity(id.name, id.username, id.email, id.gpgKey);
   })
 
-  it('listIdentities() returns expected object', () => {
-    
-    let identity = new Identity
-    
-    
+  it('newIdentity() passes (no error on running)', () => {
+    gitIdentity.newIdentity(identity);
   })
+
+  it('getIdentities() returns expected object', () => {
+    gitIdentity.newIdentity(identity);
+    let res = gitIdentity.getIdentities();
+    let json = JSON.parse(res);
+
+    assert.ok(json[id.name].username === id.username);
+    assert.ok(json[id.name].email === id.email);
+    assert.ok(json[id.name].gpgKey === id.gpgKey);
+  })
+
+  it('updateIdentity() updates an identity on file', () => {
+
+    //Create expected updated Identity object
+    let updatedIdentity = new Identity(id.name, id.username, id.email, altid.gpgKey);
+
+    //Create new identity
+    gitIdentity.newIdentity(identity);
+
+    //Get identity file as JSON before update
+    let before = JSON.parse(gitIdentity.getIdentities());
+
+    //Update with new one
+    gitIdentity.updateIdentity(updatedIdentity);
+
+    //Check post-update
+    let after = JSON.parse(gitIdentity.getIdentities());
+
+    assert.ok(after[id.name].username === id.username);
+    assert.ok(after[id.name].email === id.email);
+    assert.ok(after[id.name].gpgKey === altid.gpgKey);
+
+  })
+
 
   //Clean up our test data folder
   afterEach(() => {
