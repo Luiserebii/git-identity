@@ -71,7 +71,7 @@ class GitIdentityCLI {
       identityShift.updateIdentity(new Identity(program.update, program.user, program.email, program.gpgKey));
 
     } else if(program.delete && this.argNum() === 2) {
-      identityShift.deleteIdentity(program.delete);
+      identityShift.deleteIdentity(program.delete) ? console.log("Deleted identity \"" + program.delete + "\"") : console.log("Identity not found!");
 
     } else if(program.shift && (this.argNum() === 2 || this.argNum() === 3)) {
 

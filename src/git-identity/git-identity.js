@@ -67,9 +67,9 @@ class GitIdentity {
     if(identityStore[name]) {
       delete identityStore[name]
       fs.writeFileSync(file, JSON.stringify(identityStore), 'utf8')
-      console.log("Deleted identity \"" + name + "\"")
+      return true;
     } else { 
-      console.log("Identity not found!");
+      return false;
     }
   }
 
