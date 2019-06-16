@@ -79,6 +79,9 @@ describe('Class Identity', () => {
 
 describe('Class GitIdentity', () => {
 
+  const id = {};
+  const altid = {}
+
   let folder = '';
   let file = '';
 
@@ -86,6 +89,16 @@ describe('Class GitIdentity', () => {
   let identity;
  
   beforeEach(() => {
+    id.name = 'BTC';
+    id.username = 'Satoshi Nakamoto';
+    id.email = 'satoshin@gmx.com';
+    id.gpgKey = 'MQINBF0C';
+
+    altid.name = 'meme';
+    altid.username = 'FloppyFishe';
+    altid.email = 'ff@floppy.io';
+    altid.gpgKey = 'A5G7BBP0';
+
     folder = path.resolve(__dirname, 'data-test');
     file = path.resolve(folder, 'identities');
 
@@ -97,7 +110,10 @@ describe('Class GitIdentity', () => {
 
   //Clean up our test data folder
   afterEach(() => {
-    if(fs.existsSync(folder)) { fs.rmdirSync(folder); }
+    if(fs.existsSync(folder)) {
+      if(fs.existsSync(file)) { fs.unlinkSync(file); } 
+      fs.rmdirSync(folder); 
+    }
   })
 
 
