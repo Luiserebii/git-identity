@@ -1,3 +1,5 @@
+'use strict';
+
 class Identity {
 
   constructor(name, username, email, gpgKey = null){

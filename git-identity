@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 const GitIdentityCLI = require('./src/cli/cli.js');
 const cli = new GitIdentityCLI();
 
