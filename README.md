@@ -14,7 +14,7 @@
 
 A command line tool allowing for easy shifting between git identities (username, email, and GPG).
 
-<b>Version:</b> 0.1.1<br/>
+<b>Version:</b> 0.2.0-alpha<br/>
 <b>Author:</b> Luiserebii
 
 ## Usage
