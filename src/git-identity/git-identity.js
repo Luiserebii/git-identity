@@ -10,6 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const child_process = require('child_process');
 const Identity = require('./identity');
+const Util = require('../util/util')
 
 class GitIdentity {
 
@@ -25,7 +26,7 @@ class GitIdentity {
 
   listIdentities() {
     let identityStore = this.getIdentities();
-    return identityStore && !ObjUtil.objectIsEmpty(identityStore) ? this.identitiesToString(this.getIdentities()) : null;
+    return identityStore && !Util.objectIsEmpty(identityStore) ? this.identitiesToString(this.getIdentities()) : null;
   }
 
   newIdentity(identity, file = this.file) {
@@ -140,19 +141,6 @@ class GitIdentity {
     return str;
   }
   
-
-}
-
-class ObjUtil {
-
-  static objectIsEmpty(obj) {
-    for(var key in obj) {
-      if(obj.hasOwnProperty(key))
-      return false;
-    }
-    return true;
-  }
-
 
 }
 
