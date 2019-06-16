@@ -19,7 +19,7 @@ A command line tool allowing for easy shifting between git identities (username,
 
 ## Usage
 ```
-Usage: index [options]
+Usage: git-identity [options]
 
 Options:
   -v, --version          output the version number
@@ -48,8 +48,8 @@ To install, simply extract the tool into a preferred directory, and create a sof
 unzip git-identity-0.1.1.zip -d ~/
 cd ~/git-identity-0.1.1
 npm install
-sudo chmod u+x ~/git-identity-0.1.1/Git-Identity
-sudo ln -s ~/git-identity-0.1.1/Git-Identity /usr/local/bin/git-identity
+sudo chmod u+x ~/git-identity-0.1.1/git-identity
+sudo ln -s ~/git-identity-0.1.1/git-identity /usr/local/bin/git-identity
 ```
 
 Doing this should make it globally accessible via `git-identity`. 
