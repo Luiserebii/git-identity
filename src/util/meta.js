@@ -11,7 +11,7 @@ const fs = require('fs');
 class Meta {
 
 
-  readMetadata() {
+  static readMetadata() {
     const packageJSON = fs.readFileSync('./package.json');
     const metadata = JSON.parse(packageJSON); //No need to parse this manually, let's just give it as it is
 

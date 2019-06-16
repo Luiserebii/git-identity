@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const figlet = require('figlet');
 
 const Meta = require('../util/meta');
-const meta = new Meta().readMetadata();
+const meta = Meta.readMetadata();
 const IdentityShift = require('../git-identity/git-identity');
 const identityShift = new IdentityShift();
 const Identity = require('../git-identity/identity')
