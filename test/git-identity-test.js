@@ -95,6 +95,12 @@ describe('Class GitIdentity', () => {
     identity = new Identity(id.name, id.username, id.email, id.gpgKey);
   })
 
+  //Clean up our test data folder
+  afterEach(() => {
+    if(fs.existsSync(folder)) { fs.rmdirSync(folder); }
+  })
+
+
   it('newIdentity() passes (no error on running)', () => {
     gitIdentity.newIdentity(identity);
   })
@@ -132,10 +138,27 @@ describe('Class GitIdentity', () => {
 
   })
 
+  it('deleteIdentity() deletes an identity on file', () => {
 
-  //Clean up our test data folder
-  afterEach(() => {
-    if(fs.existsSync(folder)) { fs.rmdirSync(folder); }
+    
+    //Create new identity
+    gitIdentity.newIdentity(identity);
+
+    //Get identity file as JSON before update
+    let before = JSON.parse(gitIdentity.getIdentities());
+    assert.isOk(before[id.name]);
+    
+    //Delete identity
+    gitidentity.deleteIdentity(id.name);
+
+    //Check post-delete
+    let after = JSON.parse(gitIdentity.getIdentities());
+
+    assert.isNotOk(after[id.name]);
+    assert.isNotOk(after[id.name].username);
+    assert.isNotOk(after[id.name].email);
+    assert.isNotOk(after[id.name].gpgKey);
+
   })
 
 })
