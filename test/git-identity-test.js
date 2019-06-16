@@ -123,8 +123,7 @@ describe('Class GitIdentity', () => {
 
   it('getIdentities() returns expected object', () => {
     gitIdentity.newIdentity(identity);
-    let res = gitIdentity.getIdentities();
-    let json = JSON.parse(res);
+    let json = gitIdentity.getIdentities();
 
     assert.ok(json[id.name].username === id.username);
     assert.ok(json[id.name].email === id.email);
@@ -140,13 +139,13 @@ describe('Class GitIdentity', () => {
     gitIdentity.newIdentity(identity);
 
     //Get identity file as JSON before update
-    let before = JSON.parse(gitIdentity.getIdentities());
+    let before = gitIdentity.getIdentities();
 
     //Update with new one
     gitIdentity.updateIdentity(updatedIdentity);
 
     //Check post-update
-    let after = JSON.parse(gitIdentity.getIdentities());
+    let after = gitIdentity.getIdentities();
 
     assert.ok(after[id.name].username === id.username);
     assert.ok(after[id.name].email === id.email);
@@ -156,24 +155,23 @@ describe('Class GitIdentity', () => {
 
   it('deleteIdentity() deletes an identity on file', () => {
 
-    
     //Create new identity
     gitIdentity.newIdentity(identity);
 
     //Get identity file as JSON before update
-    let before = JSON.parse(gitIdentity.getIdentities());
+    let before = gitIdentity.getIdentities();
     assert.isOk(before[id.name]);
     
     //Delete identity
-    gitidentity.deleteIdentity(id.name);
+    gitIdentity.deleteIdentity(id.name);
 
     //Check post-delete
-    let after = JSON.parse(gitIdentity.getIdentities());
+    let after = gitIdentity.getIdentities();
 
     assert.isNotOk(after[id.name]);
-    assert.isNotOk(after[id.name].username);
-    assert.isNotOk(after[id.name].email);
-    assert.isNotOk(after[id.name].gpgKey);
+    assert.throws(() => { after[id.name].username }, TypeError);
+    assert.throws(() => { after[id.name].email }, TypeError);
+    assert.throws(() => { after[id.name].gpgKey }, TypeError);
 
   })
 
