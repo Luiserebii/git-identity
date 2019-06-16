@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const GitIdentityCLI = require('./cli.js');
+const GitIdentityCLI = require('./src/cli/cli.js');
 const cli = new GitIdentityCLI();
 
 cli.run();

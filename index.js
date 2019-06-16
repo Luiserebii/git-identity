@@ -1,7 +1,7 @@
-const IdentityShift = require('./git-identity/identity-shift');
-const Identity = require('./git-identity/identity')
+const GitIdentity = require('./src/git-identity/git-identity');
+const Identity = require('./src/git-identity/identity')
 
 module.exports = {
-  "IdentityShift": IdentityShift,
+  "GitIdentity": GitIdentity,
   "Identity": Identity
 }
