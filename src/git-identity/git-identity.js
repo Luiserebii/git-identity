@@ -10,11 +10,11 @@ const fs = require('fs');
 const path = require('path');
 const child_process = require('child_process');
 const Identity = require('./identity');
-const Util = require('../util/util')
+const Util = require('../util/util');
 
 class GitIdentity {
 
-  constructor(file = path.resolve(__dirname, '../', 'data', 'identities')){
+  constructor(file = path.resolve(__dirname, '../', '../', 'data', 'identities')){
     this.file = file;
   }
 
@@ -26,6 +26,9 @@ class GitIdentity {
 
   listIdentities() {
     let identityStore = this.getIdentities();
+    console.log(identityStore)
+    console.log('ssss')
+    console.log(Util.objectIsEmpty(identityStore))
     return identityStore && !Util.objectIsEmpty(identityStore) ? this.identitiesToString(this.getIdentities()) : null;
   }
 
