@@ -26,9 +26,6 @@ class GitIdentity {
 
   listIdentities() {
     let identityStore = this.getIdentities();
-    console.log(identityStore)
-    console.log('ssss')
-    console.log(Util.objectIsEmpty(identityStore))
     return identityStore && !Util.objectIsEmpty(identityStore) ? this.identitiesToString(this.getIdentities()) : null;
   }
 
