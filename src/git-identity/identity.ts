@@ -1,22 +1,26 @@
-'use strict';
 
 class Identity {
 
-  constructor(name, username, email, gpgKey = null){
+  name: string;
+  username: string;
+  email: string;
+  gpgKey: string;
+
+  constructor(name: string, username: string, email: string, gpgKey: string = null){
     this.name = name;
     this.username = username;
     this.email = email;
     this.gpgKey = gpgKey;
   }
 
-  toJSON() {
-    let JSON = { [this.name]: {'username': this.username, 'email': this.email} };
+  toJSON(): object {
+    let JSON: object = { [this.name]: {'username': this.username, 'email': this.email} };
     if(this.gpgKey) JSON[this.name].gpgKey = this.gpgKey;
     return JSON;
   }
 
-  toString() {
-    let str = "";
+  toString(): string {
+    let str: string = "";
     if(this.name) { str += "Name: " + this.name + "\n" }
     str +=    "Username: " + this.username + "\n" +
               "Email: " + this.email;
@@ -26,4 +30,4 @@ class Identity {
 
 }
 
-module.exports = Identity;
+export = Identity;
