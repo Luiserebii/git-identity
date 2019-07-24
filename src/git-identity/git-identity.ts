@@ -8,6 +8,7 @@ import fs = require('fs');
 import path = require('path');
 import child_process = require('child_process');
 import Identity = require('./identity');
+import { JSONIdentityDetails } from './jsonIdentityInterface';
 import Util = require('../util/util');
 
 class GitIdentity {
@@ -67,7 +68,7 @@ class GitIdentity {
   }
 
   deleteIdentity(name: string, file: string = this.file): boolean {
-    let identityStore: object = this.getIdentities();
+    let identityStore: object/*Identity[]; attempt typing this later*/ = this.getIdentities();
     if(identityStore[name]) {
       delete identityStore[name]
       fs.writeFileSync(file, JSON.stringify(identityStore), 'utf8');
@@ -80,7 +81,7 @@ class GitIdentity {
   //shift identity function implementation for application flag
   shiftIdentity(name: string, file: string = this.file): boolean {
     let identityStore: object = this.getIdentities();
-    let id: object = identityStore[name];
+    let id: JSONIdentityDetails = identityStore[name];
     if(id) {
       this.setIdentityGlobal(new Identity(name, id.username, id.email, id.gpgKey)); 
       return true;

@@ -10,8 +10,8 @@
  */
 
 
-import GitIdentity = require('./src/git-identity/git-identity');
-import Identity = require('./src/git-identity/identity');
+import GitIdentity = require('./git-identity/git-identity');
+import Identity = require('./git-identity/identity');
 
 export = {
   "GitIdentity": GitIdentity,
