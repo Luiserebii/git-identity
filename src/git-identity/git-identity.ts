@@ -4,33 +4,32 @@
  *
  */
 
-'use strict';
-
-const fs = require('fs');
-const path = require('path');
-const child_process = require('child_process');
-const Identity = require('./identity');
-const Util = require('../util/util');
+import fs = require('fs');
+import path = require('path');
+import child_process = require('child_process');
+import Identity = require('./identity');
+import Util = require('../util/util');
 
 class GitIdentity {
 
-  constructor(file = path.resolve(__dirname, '../', '../', 'data', 'identities')){
+  file: string;
+
+  constructor(file: string = path.resolve(__dirname, '../', '../', 'data', 'identities')){
     this.file = file;
   }
 
-
-  getIdentities(file = this.file) {
-    let identityStore = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file)) : {};
+  getIdentities(file: string = this.file): object {
+    let identityStore: object = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file)) : {};
     return identityStore;
   }
 
-  listIdentities() {
-    let identityStore = this.getIdentities();
+  listIdentities(): string {
+    let identityStore: object = this.getIdentities();
     return identityStore && !Util.objectIsEmpty(identityStore) ? this.identitiesToString(this.getIdentities()) : null;
   }
 
-  newIdentity(identity, file = this.file) {
-    let identityStore;
+  newIdentity(identity: object, file: string = this.file): boolean {
+    let identityStore: object;
 
     //If file exists, let's load it in before writing
     identityStore = this.getIdentities();
@@ -42,15 +41,18 @@ class GitIdentity {
       if(file === this.file && !fs.existsSync(path.resolve(file, '../'))) fs.mkdirSync(path.resolve(file, '../'));
 
       //Finally, write identityStore to file
-      fs.writeFileSync(file, JSON.stringify(identityStore), 'utf8')
+      fs.writeFileSync(file, JSON.stringify(identityStore), 'utf8');
+  
+      return true;
     } else {
-      console.log("Identity already exists!")
+      console.log("Identity already exists!");
+      return false;
     }
 
   }
 
-  updateIdentity(identity, file = this.file) {
-    let identityStore; 
+  updateIdentity(identity: object, file: string = this.file): boolean {
+    let identityStore: object; 
 
     //If file exists, let's load it in before writing
     identityStore = this.getIdentities();
@@ -59,14 +61,16 @@ class GitIdentity {
     identityStore = Object.assign(identityStore, identity.toJSON());
 
     //Finally, write identityStore to file
-    fs.writeFileSync(file, JSON.stringify(identityStore), 'utf8')
+    fs.writeFileSync(file, JSON.stringify(identityStore), 'utf8');
+ 
+    return true;
   }
 
-  deleteIdentity(name, file = this.file) {
-    let identityStore = this.getIdentities();
+  deleteIdentity(name: string, file: string = this.file): boolean {
+    let identityStore: object = this.getIdentities();
     if(identityStore[name]) {
       delete identityStore[name]
-      fs.writeFileSync(file, JSON.stringify(identityStore), 'utf8')
+      fs.writeFileSync(file, JSON.stringify(identityStore), 'utf8');
       return true;
     } else { 
       return false;
@@ -144,4 +148,4 @@ class GitIdentity {
 
 }
 
-module.exports = GitIdentity;
+export = GitIdentity;
