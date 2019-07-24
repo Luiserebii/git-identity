@@ -1,25 +1,27 @@
-'use strict';
+/**
 
-const program = require('commander');
-const chalk = require('chalk');
-const figlet = require('figlet');
+*/
 
-const Meta = require('../util/meta');
-const meta = Meta.readMetadata();
-const IdentityShift = require('../git-identity/git-identity');
+import program = require('commander');
+import chalk = require('chalk');
+import figlet = require('figlet');
+
+import Meta = require('../util/meta');
+import IdentityShift = require('../git-identity/git-identity');
+import Identity = require('../git-identity/identity');
 const identityShift = new IdentityShift();
-const Identity = require('../git-identity/identity')
+const meta = Meta.readMetadata();
 
 class GitIdentityCLI {
 
-  run() {
+  run(): void {
 
     this.setupCLI();
     this.main();
 
   }
 
-  setupCLI() {
+  setupCLI(): void {
 
     program.version(meta.version, '-v, --version');
     if(meta.description) program.description(meta.description);
@@ -46,7 +48,7 @@ class GitIdentityCLI {
       })
   }
 
-  main() {
+  main(): void {
 
     program.parse(process.argv);
     if(this.argNum() === 0) {
@@ -104,7 +106,7 @@ class GitIdentityCLI {
 
   }
 
-  aboutCLI() {
+  aboutCLI(): void {
 
     //Title of tool
     console.log(chalk.green(figlet.textSync('Git Identity Shift', { font: 'Ghost' })))
@@ -114,10 +116,10 @@ class GitIdentityCLI {
 
   }
 
-  argNum() {
+  argNum(): number {
     return process.argv.slice(2).length;
   }
 
 }
 
-module.exports = GitIdentityCLI;
+export = GitIdentityCLI;

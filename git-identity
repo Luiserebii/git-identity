@@ -1,5 +1,16 @@
 #!/usr/bin/env node
 
+/*
+ * ==============
+ *  git-identity
+ * ==============
+ *
+ * MIT License 
+ * Copyright (c) 2019 Luiserebii
+ *
+ *
+ */
+
 'use strict';
 
 const GitIdentityCLI = require('./dist/cli/cli.js');

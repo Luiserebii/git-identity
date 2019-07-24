@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Luiserebii/git-identity#readme",
   "devDependencies": {
+    "@types/node": "^12.6.8",
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
     "typescript": "^3.5.3"
