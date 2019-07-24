@@ -7,9 +7,9 @@ const assert = chai.assert;
 const fs = require('fs');
 const path = require('path');
 
-const Identity = require('../src/git-identity/identity');
-const GitIdentity = require('../src/git-identity/git-identity');
-const Util = require('../src/util/util');
+const Identity = require('../dist/git-identity/identity');
+const GitIdentity = require('../dist/git-identity/git-identity');
+const Util = require('../dist/util/util');
 
 describe('Class Identity', () => {
 

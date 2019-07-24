@@ -2,7 +2,7 @@
 
 'use strict';
 
-const GitIdentityCLI = require('./src/cli/cli.js');
+const GitIdentityCLI = require('./dist/cli/cli.js');
 const cli = new GitIdentityCLI();
 
 cli.run();
