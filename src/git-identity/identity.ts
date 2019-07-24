@@ -1,3 +1,4 @@
+import JSONIdentity = require('./jsonIdentityInterface');
 
 class Identity {
 
@@ -13,8 +14,8 @@ class Identity {
     this.gpgKey = gpgKey;
   }
 
-  toJSON(): object {
-    let JSON: object = { [this.name]: {'username': this.username, 'email': this.email} };
+  toJSON(): JSONIdentity {
+    let JSON: JSONIdentity = { [this.name]: {'username': this.username, 'email': this.email} };
     if(this.gpgKey) JSON[this.name].gpgKey = this.gpgKey;
     return JSON;
   }

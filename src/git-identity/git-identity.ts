@@ -28,7 +28,7 @@ class GitIdentity {
     return identityStore && !Util.objectIsEmpty(identityStore) ? this.identitiesToString(this.getIdentities()) : null;
   }
 
-  newIdentity(identity: object, file: string = this.file): boolean {
+  newIdentity(identity: Identity, file: string = this.file): boolean {
     let identityStore: object;
 
     //If file exists, let's load it in before writing
@@ -51,7 +51,7 @@ class GitIdentity {
 
   }
 
-  updateIdentity(identity: object, file: string = this.file): boolean {
+  updateIdentity(identity: Identity, file: string = this.file): boolean {
     let identityStore: object; 
 
     //If file exists, let's load it in before writing
