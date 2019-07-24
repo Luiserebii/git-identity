@@ -19,7 +19,7 @@ class GitIdentity {
   }
 
   getIdentities(file: string = this.file): object {
-    let identityStore: object = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file)) : {};
+    let identityStore: object = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
     return identityStore;
   }
 
@@ -103,14 +103,14 @@ class GitIdentity {
   }
 
 
-  getIdentityGlobal(): object /*Identity*/ {
+  getIdentityGlobal(): Identity {
     let username: string = child_process.execSync('git config --global user.name', { encoding: 'utf8' }).trim();
     let email: string = child_process.execSync('git config --global user.email', { encoding: 'utf8' }).trim();
     let gpgKey: string = child_process.execSync('git config --global user.signingkey', { encoding: 'utf8' }).trim();
     return new Identity(null, username, email, gpgKey);
   }
 
-  getIdentityLocal(): object /*Identity*/{
+  getIdentityLocal(): Identity {
     let username:string = child_process.execSync('git config --local user.name', { encoding: 'utf8' }).trim();
     let email:string = child_process.execSync('git config --local user.email', { encoding: 'utf8' }).trim();
     let gpgKey:string = child_process.execSync('git config --local user.signingkey', { encoding: 'utf8' }).trim();
@@ -118,7 +118,7 @@ class GitIdentity {
   }
 
   //Set identity globally, run git commands to do so
-  setIdentityGlobal(identity: object /*Identity*/): boolean {
+  setIdentityGlobal(identity: Identity): boolean {
     let cmd: string = `git config --global user.name "${identity.username}" && ` +
                 `git config --global user.email "${identity.email}"`;
     if(identity.gpgKey) cmd += ` && git config --global user.signingkey "${identity.gpgKey}"`;
@@ -127,7 +127,7 @@ class GitIdentity {
   }
 
   //Set identity locally
-  setIdentityLocal(identity: object /*Identity*/): boolean {
+  setIdentityLocal(identity: Identity): boolean {
     let cmd: string = `git config --local user.name "${identity.username}" && ` +
                 `git config --local user.email "${identity.email}"`;
     if(identity.gpgKey) cmd += ` && git config --local user.signingkey "${identity.gpgKey}"`;
