@@ -1,9 +1,8 @@
-'use strict';
 
 class Util {
 
-  static objectIsEmpty(obj) {
-    for(var key in obj) {
+  static objectIsEmpty(obj: object): boolean {
+    for(let key in obj) {
       if(obj.hasOwnProperty(key)) {
         return false;
       }
@@ -13,4 +12,4 @@ class Util {
 
 }
 
-module.exports = Util;
+export = Util;
