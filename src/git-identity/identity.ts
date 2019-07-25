@@ -1,4 +1,4 @@
-import JSONIdentity = require('./jsonIdentityInterface');
+import JSONIdentity = require('./JSONIdentity');
 
 class Identity {
 

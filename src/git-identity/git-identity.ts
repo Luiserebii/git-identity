@@ -8,7 +8,7 @@ import fs = require('fs');
 import path = require('path');
 import child_process = require('child_process');
 import Identity = require('./identity');
-import { JSONIdentityDetails } from './jsonIdentityInterface';
+import JSONIdentityDetails = require('./JSONIdentityDetails');
 import Util = require('../util/util');
 
 class GitIdentity {
@@ -93,7 +93,7 @@ class GitIdentity {
 
   shiftIdentityLocal(name: string, file: string = this.file): boolean {
     let identityStore: object = this.getIdentities();
-    let id: object = identityStore[name];
+    let id: JSONIdentityDetails = identityStore[name];
     if(id) {
       this.setIdentityLocal(new Identity(name, id.username, id.email, id.gpgKey));
       return true;
@@ -138,7 +138,7 @@ class GitIdentity {
 
   identitiesToString(identities: object /*Array of Identity objects*/): string {
     let str: string = '';
-    let keys: object /*specifically, an array*/ = Object.keys(identities);
+    let keys: any[] /*specifically, an array*/ = Object.keys(identities);
 
     str += new Identity(keys[0], identities[keys[0]].username, identities[keys[0]].email, identities[keys[0]].gpgKey).toString();
 

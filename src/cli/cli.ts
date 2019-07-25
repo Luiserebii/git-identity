@@ -7,10 +7,12 @@ import chalk = require('chalk');
 import figlet = require('figlet');
 
 import Meta = require('../util/meta');
+import JSONMetadata = require('../util/JSONMetadata');
 import IdentityShift = require('../git-identity/git-identity');
 import Identity = require('../git-identity/identity');
-const identityShift = new IdentityShift();
-const meta = Meta.readMetadata();
+
+const identityShift: IdentityShift = new IdentityShift();
+const meta: JSONMetadata = Meta.readMetadata();
 
 class GitIdentityCLI {
 
