@@ -4,8 +4,8 @@
   "description": "A command line tool allowing for easy shifting between git identities (username, email, and GPG).",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "test": "npm run build && mocha",
+    "build": "tsc --project ./tsconfig.json",
+    "test": "npm run build && tsc --project ./test/tsconfig.json && mocha",
     "pack": "./scripts/npm-pack-publish.sh --pack",
     "publish": "npm run build && ./scripts/npm-pack-publish.sh --publish",
     "clean": "rm git-identity*.tgz"
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/Luiserebii/git-identity#readme",
   "devDependencies": {
     "@types/figlet": "^1.2.0",
+    "@types/mocha": "^5.2.7",
     "@types/node": "^12.6.8",
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
