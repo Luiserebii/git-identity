@@ -2,4 +2,5 @@ node_modules
 *.swp
 *.swo
 dist
+bin
 data

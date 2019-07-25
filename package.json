@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc --project ./tsconfig.json",
-    "test": "npm run build && tsc --project ./test/tsconfig.json && mocha",
+    "test": "npm run build && tsc --project ./test/tsconfig.json && mocha ./test/bin --recursive",
     "pack": "./scripts/npm-pack-publish.sh --pack",
     "publish": "npm run build && ./scripts/npm-pack-publish.sh --publish",
     "clean": "rm git-identity*.tgz"
