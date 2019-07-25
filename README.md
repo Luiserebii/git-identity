@@ -44,11 +44,12 @@ Options:
 
 ## Installation
 ### Linux
-To install, simply extract the tool into a preferred directory, and create a soft link. For example, if you are looking to place the tool in your home directory:
+To install, simply extract the tool into a preferred directory, compile, and create a soft link. For example, if you are looking to place the tool in your home directory:
 ```
 unzip git-identity-0.4.0-alpha.zip -d ~/
 cd ~/git-identity-0.4.0-alpha
 npm install
+npm run build
 sudo chmod u+x ~/git-identity-0.4.0-alpha/git-identity
 sudo ln -s ~/git-identity-0.4.0-alpha/git-identity /usr/local/bin/git-identity
 ```
