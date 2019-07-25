@@ -20,21 +20,19 @@ interface TestJSONIdentity {
 
 describe('Class Identity', () => {
 
-  const id: TestJSONIdentity = {};
-  const altid: TestJSONIdentity = {}
+  const id: TestJSONIdentity = {
+    name: 'BTC',
+    username: 'Satoshi Nakamoto',
+    email: 'satoshin@gmx.com',
+    gpgKey: 'MQINBF0C'
+  }
 
-  beforeEach(() => {
-    id.name = 'BTC';
-    id.username = 'Satoshi Nakamoto';
-    id.email = 'satoshin@gmx.com';
-    id.gpgKey = 'MQINBF0C';
-
-    altid.name = 'meme';
-    altid.username = 'FloppyFishe';
-    altid.email = 'ff@floppy.io';
-    altid.gpgKey = 'A5G7BBP0';
-  })
-
+  const altid: TestJSONIdentity = {
+    name: 'meme',
+    username: 'FloppyFishe',
+    email: 'ff@floppy.io',
+    gpgKey: 'A5G7BBP0'
+  }
 
   describe('toJSON() returns expected object', () => {
 
@@ -86,8 +84,19 @@ describe('Class Identity', () => {
 
 describe('Class GitIdentity', () => {
 
-  const id: TestJSONIdentity = {};
-  const altid: TestJSONIdentity = {};
+  const id: TestJSONIdentity = {
+    name: 'BTC',
+    username: 'Satoshi Nakamoto',
+    email: 'satoshin@gmx.com',
+    gpgKey: 'MQINBF0C'
+  }
+
+  const altid: TestJSONIdentity = {
+    name: 'meme',
+    username: 'FloppyFishe',
+    email: 'ff@floppy.io',
+    gpgKey: 'A5G7BBP0'
+  }
 
   let folder: string = '';
   let file: string = '';
@@ -96,16 +105,6 @@ describe('Class GitIdentity', () => {
   let identity: Identity;
  
   beforeEach(() => {
-    id.name = 'BTC';
-    id.username = 'Satoshi Nakamoto';
-    id.email = 'satoshin@gmx.com';
-    id.gpgKey = 'MQINBF0C';
-
-    altid.name = 'meme';
-    altid.username = 'FloppyFishe';
-    altid.email = 'ff@floppy.io';
-    altid.gpgKey = 'A5G7BBP0';
-
     folder = path.resolve(__dirname, 'data-test');
     file = path.resolve(folder, 'identities');
 

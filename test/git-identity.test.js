@@ -7,18 +7,18 @@ var path = require("path");
 var Identity = require("../src/git-identity/identity");
 var GitIdentity = require("../src/git-identity/git-identity");
 describe('Class Identity', function () {
-    var id = {};
-    var altid = {};
-    beforeEach(function () {
-        id.name = 'BTC';
-        id.username = 'Satoshi Nakamoto';
-        id.email = 'satoshin@gmx.com';
-        id.gpgKey = 'MQINBF0C';
-        altid.name = 'meme';
-        altid.username = 'FloppyFishe';
-        altid.email = 'ff@floppy.io';
-        altid.gpgKey = 'A5G7BBP0';
-    });
+    var id = {
+        name: 'BTC',
+        username: 'Satoshi Nakamoto',
+        email: 'satoshin@gmx.com',
+        gpgKey: 'MQINBF0C'
+    };
+    var altid = {
+        name: 'meme',
+        username: 'FloppyFishe',
+        email: 'ff@floppy.io',
+        gpgKey: 'A5G7BBP0'
+    };
     describe('toJSON() returns expected object', function () {
         it('with name, username, email, GPG Key', function () {
             var identity = new Identity(id.name, id.username, id.email, id.gpgKey);
@@ -53,21 +53,23 @@ describe('Class Identity', function () {
     });
 });
 describe('Class GitIdentity', function () {
-    var id = {};
-    var altid = {};
+    var id = {
+        name: 'BTC',
+        username: 'Satoshi Nakamoto',
+        email: 'satoshin@gmx.com',
+        gpgKey: 'MQINBF0C'
+    };
+    var altid = {
+        name: 'meme',
+        username: 'FloppyFishe',
+        email: 'ff@floppy.io',
+        gpgKey: 'A5G7BBP0'
+    };
     var folder = '';
     var file = '';
     var gitIdentity;
     var identity;
     beforeEach(function () {
-        id.name = 'BTC';
-        id.username = 'Satoshi Nakamoto';
-        id.email = 'satoshin@gmx.com';
-        id.gpgKey = 'MQINBF0C';
-        altid.name = 'meme';
-        altid.username = 'FloppyFishe';
-        altid.email = 'ff@floppy.io';
-        altid.gpgKey = 'A5G7BBP0';
         folder = path.resolve(__dirname, 'data-test');
         file = path.resolve(folder, 'identities');
         if (!fs.existsSync(folder)) {
