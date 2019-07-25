@@ -111,6 +111,7 @@ class GitIdentityCLI {
   aboutCLI(): void {
 
     //Title of tool
+    // @ts-ignore
     console.log(chalk.green(figlet.textSync('Git Identity', { font: 'Ghost' })))
     console.log("Version: " + meta.version);
     console.log("Author: Luiserebii");
