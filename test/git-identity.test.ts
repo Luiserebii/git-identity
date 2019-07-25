@@ -5,11 +5,11 @@ const assert = chai.assert;
 import fs = require('fs');
 import path = require('path');
 
-import Identity = require('../dist/git-identity/identity');
-import GitIdentity = require('../dist/git-identity/git-identity');
-import Util = require('../dist/util/util');
+import Identity = require('../src/git-identity/identity');
+import GitIdentity = require('../src/git-identity/git-identity');
+import Util = require('../src/util/util');
 
-import JSONIdentity = require('../dist/git-identity/JSONIdentity');
+import JSONIdentity = require('../src/git-identity/JSONIdentity');
 
 interface TestJSONIdentity {
   name: string;
@@ -48,8 +48,8 @@ describe('Class Identity', () => {
     })
 
     it('with name, username, email, no GPG Key', () => {
-      let identity = new Identity(id.name, id.username, id.email);
-      let json = identity.toJSON();
+      let identity: Identity = new Identity(id.name, id.username, id.email);
+      let json: JSONIdentity = identity.toJSON();
 
       assert.ok(json[id.name].username === id.username);
       assert.ok(json[id.name].email === id.email);
@@ -61,8 +61,8 @@ describe('Class Identity', () => {
   describe('toString() returns expected string', () => {
 
     it('with name, username, email, GPG Key', () => {
-      let identity = new Identity(id.name, id.username, id.email, id.gpgKey);
-      let str = identity.toString();
+      let identity: Identity = new Identity(id.name, id.username, id.email, id.gpgKey);
+      let str: string = identity.toString();
 
       assert.ok(str.includes(id.name));
       assert.ok(str.includes(id.email));
@@ -70,8 +70,8 @@ describe('Class Identity', () => {
     })
 
     it('with username, email, no name or GPG Key', () => {
-      let identity = new Identity(id.username, id.email);
-      let str = identity.toString();
+      let identity: Identity = new Identity(id.username, id.email);
+      let str: string = identity.toString();
 
       assert.isNotOk(str.includes(id.name) && str.includes('Name:'));
       assert.ok(str.includes(id.email));
@@ -86,14 +86,14 @@ describe('Class Identity', () => {
 
 describe('Class GitIdentity', () => {
 
-  const id = {};
-  const altid = {}
+  const id: TestJSONIdentity = {};
+  const altid: TestJSONIdentity = {};
 
-  let folder = '';
-  let file = '';
+  let folder: string = '';
+  let file: string = '';
 
-  let gitIdentity;
-  let identity;
+  let gitIdentity: GitIdentity;
+  let identity: Identity;
  
   beforeEach(() => {
     id.name = 'BTC';
@@ -130,7 +130,7 @@ describe('Class GitIdentity', () => {
 
   it('getIdentities() returns expected object', () => {
     gitIdentity.newIdentity(identity);
-    let json = gitIdentity.getIdentities();
+    let json: object = gitIdentity.getIdentities();
 
     assert.ok(json[id.name].username === id.username);
     assert.ok(json[id.name].email === id.email);
@@ -140,19 +140,19 @@ describe('Class GitIdentity', () => {
   it('updateIdentity() updates an identity on file', () => {
 
     //Create expected updated Identity object
-    let updatedIdentity = new Identity(id.name, id.username, id.email, altid.gpgKey);
+    let updatedIdentity: Identity = new Identity(id.name, id.username, id.email, altid.gpgKey);
 
     //Create new identity
     gitIdentity.newIdentity(identity);
 
     //Get identity file as JSON before update
-    let before = gitIdentity.getIdentities();
+    let before: object = gitIdentity.getIdentities();
 
     //Update with new one
     gitIdentity.updateIdentity(updatedIdentity);
 
     //Check post-update
-    let after = gitIdentity.getIdentities();
+    let after: object = gitIdentity.getIdentities();
 
     assert.ok(after[id.name].username === id.username);
     assert.ok(after[id.name].email === id.email);
@@ -166,14 +166,14 @@ describe('Class GitIdentity', () => {
     gitIdentity.newIdentity(identity);
 
     //Get identity file as JSON before update
-    let before = gitIdentity.getIdentities();
+    let before: object = gitIdentity.getIdentities();
     assert.isOk(before[id.name]);
     
     //Delete identity
     gitIdentity.deleteIdentity(id.name);
 
     //Check post-delete
-    let after = gitIdentity.getIdentities();
+    let after: object = gitIdentity.getIdentities();
 
     assert.isNotOk(after[id.name]);
     assert.throws(() => { after[id.name].username }, TypeError);

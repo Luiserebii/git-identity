@@ -4,8 +4,8 @@ var chai = require("chai");
 var assert = chai.assert;
 var fs = require("fs");
 var path = require("path");
-var Identity = require("../dist/git-identity/identity");
-var GitIdentity = require("../dist/git-identity/git-identity");
+var Identity = require("../src/git-identity/identity");
+var GitIdentity = require("../src/git-identity/git-identity");
 describe('Class Identity', function () {
     var id = {};
     var altid = {};
