@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "mocha",
+    "test": "tsc && mocha",
     "pack":"./scripts/npm-pack-publish.sh --pack",
     "publish":"./scripts/npm-pack-publish.sh --publish",
     "clean":"rm git-identity*.tgz"
