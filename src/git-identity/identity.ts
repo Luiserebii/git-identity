@@ -2,12 +2,12 @@ import JSONIdentity = require('./JSONIdentity');
 
 class Identity {
 
-  name: string;
-  username: string | null;
-  email: string | null;
-  gpgKey: string | null;
+  name: string | null;
+  username: string;
+  email: string;
+  gpgKey?: string | null;
 
-  constructor(name: string, username: string, email: string, gpgKey: string | null = null){
+  constructor(name: string | null, username: string, email: string, gpgKey: string | null = null){
     this.name = name;
     this.username = username;
     this.email = email;
@@ -15,8 +15,9 @@ class Identity {
   }
 
   toJSON(): JSONIdentity {
-    let JSON: JSONIdentity = { [this.name]: {'username': this.username, 'email': this.email} };
-    if(this.gpgKey) JSON[this.name].gpgKey = this.gpgKey;
+    let name = this.name || ''; //coerce value to string
+    let JSON: JSONIdentity = { [name]: {'username': this.username, 'email': this.email} };
+    if(this.gpgKey) JSON[name].gpgKey = this.gpgKey;
     return JSON;
   }
 

@@ -1,4 +1,4 @@
-import JSONIdentityDetails = require('./JSONIdentityDetails')
+import JSONIdentityDetails = require('./JSONIdentityDetails');
 
 interface JSONIdentity {
   [ name: string ]: JSONIdentityDetails; 
