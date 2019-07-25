@@ -25,12 +25,11 @@ if [ "$1" == "--pack" ]; then
   # move packed thing
   mv git-identity*.tgz $NPMROOTDIR
 
-  # Cleanup temporary directory
-  rm -rf $TEMPDIR
-
 elif [ "$1" == "--publish" ]; then
   npm publish
 else
   printf "\nHello friend!\nPlease pass one of the following flags:\n\n--pack   npm pack - preview package before publishing, .tgz is moved to project's root directory\n--publish   npm publish - publish the package\n\n\n"
 fi
 
+# Cleanup temporary directory
+rm -rf $TEMPDIR
