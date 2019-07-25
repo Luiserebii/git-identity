@@ -1,7 +1,7 @@
 interface JSONIdentityDetails {
-  username: string;
-  email: string;
-  gpgKey?: string;
+  username: string | null;
+  email: string | null;
+  gpgKey?: string | null;
 }
 
 export = JSONIdentityDetails;

@@ -3,11 +3,11 @@ import JSONIdentity = require('./JSONIdentity');
 class Identity {
 
   name: string;
-  username: string;
-  email: string;
-  gpgKey: string;
+  username: string | null;
+  email: string | null;
+  gpgKey: string | null;
 
-  constructor(name: string, username: string, email: string, gpgKey: string = null){
+  constructor(name: string, username: string, email: string, gpgKey: string | null = null){
     this.name = name;
     this.username = username;
     this.email = email;

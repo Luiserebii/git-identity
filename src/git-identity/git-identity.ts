@@ -24,7 +24,7 @@ class GitIdentity {
     return identityStore;
   }
 
-  listIdentities(): string {
+  listIdentities(): string | null {
     let identityStore: object = this.getIdentities();
     return identityStore && !Util.objectIsEmpty(identityStore) ? this.identitiesToString(this.getIdentities()) : null;
   }
