@@ -111,7 +111,7 @@ class GitIdentityCLI {
   aboutCLI(): void {
 
     //Title of tool
-    console.log(chalk.green(figlet.textSync('Git Identity Shift', { font: 'Ghost' })))
+    console.log(chalk.green(figlet.textSync('Git Identity', { font: 'Ghost' })))
     console.log("Version: " + meta.version);
     console.log("Author: Luiserebii");
     console.log("Check me out on GitHub at: https://github.com/Luiserebii!")
