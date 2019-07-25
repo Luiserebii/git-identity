@@ -1,20 +1,27 @@
 
-'use strict';
-
-const chai = require('chai');
+import chai = require('chai');
 const assert = chai.assert;
 
-const fs = require('fs');
-const path = require('path');
+import fs = require('fs');
+import path = require('path');
 
-const Identity = require('../dist/git-identity/identity');
-const GitIdentity = require('../dist/git-identity/git-identity');
-const Util = require('../dist/util/util');
+import Identity = require('../dist/git-identity/identity');
+import GitIdentity = require('../dist/git-identity/git-identity');
+import Util = require('../dist/util/util');
+
+import JSONIdentity = require('../dist/git-identity/JSONIdentity');
+
+interface TestJSONIdentity {
+  name: string;
+  username: string;
+  email: string;
+  gpgKey: string;
+}
 
 describe('Class Identity', () => {
 
-  const id = {};
-  const altid = {}
+  const id: TestJSONIdentity = {};
+  const altid: TestJSONIdentity = {}
 
   beforeEach(() => {
     id.name = 'BTC';
@@ -32,8 +39,8 @@ describe('Class Identity', () => {
   describe('toJSON() returns expected object', () => {
 
     it('with name, username, email, GPG Key', () => {
-      let identity = new Identity(id.name, id.username, id.email, id.gpgKey);
-      let json = identity.toJSON();
+      let identity: Identity = new Identity(id.name, id.username, id.email, id.gpgKey);
+      let json: JSONIdentity = identity.toJSON();
 
       assert.ok(json[id.name].username === id.username);
       assert.ok(json[id.name].email === id.email);
