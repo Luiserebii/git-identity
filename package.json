@@ -6,10 +6,9 @@
   "scripts": {
     "build": "tsc",
     "test": "tsc && mocha",
-    "pack":"./scripts/npm-pack-publish.sh --pack",
-    "publish":"./scripts/npm-pack-publish.sh --publish",
-    "clean":"rm git-identity*.tgz"
-
+    "pack": "./scripts/npm-pack-publish.sh --pack",
+    "publish": "./scripts/npm-pack-publish.sh --publish",
+    "clean": "rm git-identity*.tgz"
   },
   "repository": {
     "type": "git",
@@ -22,6 +21,7 @@
   },
   "homepage": "https://github.com/Luiserebii/git-identity#readme",
   "devDependencies": {
+    "@types/chalk": "^2.2.0",
     "@types/figlet": "^1.2.0",
     "@types/node": "^12.6.8",
     "chai": "^4.2.0",
