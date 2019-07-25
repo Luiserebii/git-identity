@@ -1,13 +1,13 @@
 {
   "name": "git-identity-shift",
-  "version": "0.4.0-alpha",
+  "version": "0.4.1-alpha",
   "description": "A command line tool allowing for easy shifting between git identities (username, email, and GPG).",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "test": "tsc && mocha",
+    "test": "npm run build && mocha",
     "pack": "./scripts/npm-pack-publish.sh --pack",
-    "publish": "./scripts/npm-pack-publish.sh --publish",
+    "publish": "npm run build && ./scripts/npm-pack-publish.sh --publish",
     "clean": "rm git-identity*.tgz"
   },
   "repository": {
