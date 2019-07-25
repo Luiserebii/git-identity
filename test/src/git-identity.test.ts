@@ -67,8 +67,8 @@ describe('Class Identity', () => {
       assert.ok(str.includes(id.gpgKey));
     })
 
-    it('with username, email, no name or GPG Key', () => {
-      let identity: Identity = new Identity(id.username, id.email);
+    it('with name, username, email, no GPG Key', () => {
+      let identity: Identity = new Identity(id.name, id.username, id.email);
       let str: string = identity.toString();
 
       assert.isNotOk(str.includes(id.name) && str.includes('Name:'));
