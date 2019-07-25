@@ -25,14 +25,14 @@ describe('Class Identity', () => {
     username: 'Satoshi Nakamoto',
     email: 'satoshin@gmx.com',
     gpgKey: 'MQINBF0C'
-  }
+  };
 
   const altid: TestJSONIdentity = {
     name: 'meme',
     username: 'FloppyFishe',
     email: 'ff@floppy.io',
     gpgKey: 'A5G7BBP0'
-  }
+  };
 
   describe('toJSON() returns expected object', () => {
 
@@ -71,7 +71,7 @@ describe('Class Identity', () => {
       let identity: Identity = new Identity(id.name, id.username, id.email);
       let str: string = identity.toString();
 
-      assert.isNotOk(str.includes(id.name) && str.includes('Name:'));
+      assert.ok(str.includes(id.name));
       assert.ok(str.includes(id.email));
       assert.isNotOk(str.includes(id.gpgKey) && str.includes('GPG Key:'));
 
@@ -89,14 +89,14 @@ describe('Class GitIdentity', () => {
     username: 'Satoshi Nakamoto',
     email: 'satoshin@gmx.com',
     gpgKey: 'MQINBF0C'
-  }
+  };
 
   const altid: TestJSONIdentity = {
     name: 'meme',
     username: 'FloppyFishe',
     email: 'ff@floppy.io',
     gpgKey: 'A5G7BBP0'
-  }
+  };
 
   let folder: string = '';
   let file: string = '';
