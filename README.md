@@ -1,5 +1,5 @@
 # git-identity
-[![npm version](https://badge.fury.io/js/git-identity-shift.svg)](https://badge.fury.io/js/git-identity-shift)
+[![npm version](https://badge.fury.io/js/%40luiserebii%2Fgit-identity.svg)](https://badge.fury.io/js/%40luiserebii%2Fgit-identity)
 [![Build Status](https://travis-ci.org/Luiserebii/git-identity.svg?branch=master)](https://travis-ci.org/Luiserebii/git-identity)
 ```
                      .-') _                  _ .-') _     ('-.       .-') _  .-') _           .-') _               

@@ -26,7 +26,7 @@ if [ "$1" == "--pack" ]; then
   mv git-identity*.tgz $NPMROOTDIR
 
 elif [ "$1" == "--publish" ]; then
-  npm publish
+  npm publish --access public
 else
   printf "\nHello friend!\nPlease pass one of the following flags:\n\n--pack   npm pack - preview package before publishing, .tgz is moved to project's root directory\n--publish   npm publish - publish the package\n\n\n"
 fi
