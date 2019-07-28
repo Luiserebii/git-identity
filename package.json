@@ -5,10 +5,24 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc --project ./tsconfig.json",
-    "test": "npm run build && tsc --project ./test/tsconfig.json && mocha ./test/bin --recursive",
+    "test": "npm run build && tsc --project ./test/tsconfig.json && mocha ./test/bin --require ts-node/register --require source-map-support/register --recursive",
+    "coverage": "nyc npm t",
     "pack": "./scripts/npm-pack-publish.sh --pack",
     "publish": "npm run build && ./scripts/npm-pack-publish.sh --publish",
     "clean": "rm git-identity*.tgz"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "reporter": [
+      "html"
+    ],
+    "all": true
   },
   "repository": {
     "type": "git",
@@ -27,6 +41,9 @@
     "@types/node": "^12.6.8",
     "chai": "^4.2.0",
     "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "source-map-support": "^0.5.12",
+    "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
   },
   "dependencies": {

@@ -1,6 +1,8 @@
 # git-identity
 [![npm version](https://badge.fury.io/js/%40luiserebii%2Fgit-identity.svg)](https://badge.fury.io/js/%40luiserebii%2Fgit-identity)
 [![Build Status](https://travis-ci.org/Luiserebii/git-identity.svg?branch=master)](https://travis-ci.org/Luiserebii/git-identity)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/Luiserebii/git-identity.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Luiserebii/git-identity/context:javascript)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/Luiserebii/git-identity.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Luiserebii/git-identity/alerts/)
 ```
                      .-') _                  _ .-') _     ('-.       .-') _  .-') _           .-') _               
                     (  OO) )                ( (  OO) )  _(  OO)     ( OO ) )(  OO) )         (  OO) )              
