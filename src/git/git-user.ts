@@ -1,5 +1,7 @@
-export default interface GitUser {
+interface GitUser {
   name: string;
   email: string;
-  signingKey?: string;
+  signingKey: string | null | undefined;
 }
+
+export = GitUser;
