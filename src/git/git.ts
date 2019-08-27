@@ -4,7 +4,6 @@
 
 */
 
-import child_process = require('child_process');
 import Util = require('../util/util');
 import GitUser = require('./git-user');
 
@@ -41,7 +40,7 @@ class Git {
   static setUserGlobal(gitUser: GitUser): boolean {
     let cmd: string = `git config --global user.name "${gitUser.name}" && ` +
                 `git config --global user.email "${gitUser.email}"`;
-    if(identity.gpgKey) cmd += ` && git config --global user.signingkey "${gitUser.signingKey}"`;
+    if(gitUser.signingKey) cmd += ` && git config --global user.signingkey "${gitUser.signingKey}"`;
     Util.exec(cmd);
     return true;
   }
@@ -53,8 +52,10 @@ class Git {
   static setUserLocal(gitUser: GitUser): boolean {
     let cmd: string = `git config --local user.name "${gitUser.name}" && ` +
                 `git config --local user.email "${gitUser.email}"`;
-    if(identity.gpgKey) cmd += ` && git config --local user.signingkey "${gitUser.signingKey}"`;
+    if(gitUser.signingKey) cmd += ` && git config --local user.signingkey "${gitUser.signingKey}"`;
     Util.exec(cmd);
     return true;
   }
 }
+
+export = Git;
