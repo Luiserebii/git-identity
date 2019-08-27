@@ -39,12 +39,27 @@ age:
 interface GitCloneOpts {
 
   repo: string;
-  vervose
-  local?: boolean;
-  noHardlinks?: boolean;
-  shared?: boolean;
-  reference
-  
+  verbose: boolean;
+  quiet: boolean;
+  progress: boolean;
+  noCheckout: boolean;
+  bare: boolean;
+  mirror: boolean;
+  local: boolean;
+  noHardlinks: boolean;
+  shared: boolean;
+  recursive: boolean;
+  recurseSubmodules: boolean;
+  template: string | null;
+  reference: string | null;
+  dissociate: boolean;
+  origin: string | null;
+  branch: string | null;
+  uploadPack: string | null;
+  depth: string | null;
+  singleBranch: boolean;
+  seperateGitDir: string | null;
+  config: string | null;
   
 }
 
