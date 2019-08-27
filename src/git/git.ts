@@ -6,13 +6,7 @@
 
 import child_process = require('child_process');
 import Util = require('./util');
-
-interface GitUser {
-  name: string;
-  email: string;
-  signingKey?: string;
-
-}
+import GitUser = require('./git-user');
 
 class Git {
 

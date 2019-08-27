@@ -8,7 +8,8 @@ import fs = require('fs');
 import path = require('path');
 import Identity = require('./identity');
 import JSONIdentityDetails = require('./JSONIdentityDetails');
-import Git = require('../util/git');
+import Git = require('../git/git');
+import GitUser = require('../git/git-user');
 import Util = require('../util/util');
 
 class GitIdentity {
