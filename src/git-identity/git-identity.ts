@@ -117,20 +117,14 @@ class GitIdentity {
 
   //Set identity globally, run git commands to do so
   setIdentityGlobal(identity: Identity): boolean {
-    let cmd: string = `git config --global user.name "${identity.username}" && ` +
-                `git config --global user.email "${identity.email}"`;
-    if(identity.gpgKey) cmd += ` && git config --global user.signingkey "${identity.gpgKey}"`;
-    child_process.execSync(cmd);
-    return true;
+    let gitUser: GitUser = { 'name': identity.username, 'email': identity.email, 'signingKey': identity.gpgKey };
+    return Git.setUserGlobal(gitUser);
   }
 
   //Set identity locally
   setIdentityLocal(identity: Identity): boolean {
-    let cmd: string = `git config --local user.name "${identity.username}" && ` +
-                `git config --local user.email "${identity.email}"`;
-    if(identity.gpgKey) cmd += ` && git config --local user.signingkey "${identity.gpgKey}"`;
-    child_process.execSync(cmd);
-    return true;
+    let gitUser: GitUser = { 'name': identity.username, 'email': identity.email, 'signingKey': identity.gpgKey };
+    return Git.setUserGlobal(gitUser);
   }
 
   identitiesToString(identities: object /*Array of Identity objects*/): string {

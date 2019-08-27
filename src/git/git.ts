@@ -35,5 +35,26 @@ class Git {
     return gitUser;
   }
 
+  /**
+   * Set user globally, run git commands to do so
+   */
+  static setUserGlobal(gitUser: GitUser): boolean {
+    let cmd: string = `git config --global user.name "${gitUser.name}" && ` +
+                `git config --global user.email "${gitUser.email}"`;
+    if(identity.gpgKey) cmd += ` && git config --global user.signingkey "${gitUser.signingKey}"`;
+    Util.exec(cmd);
+    return true;
+  }
 
+
+  /**
+   * Set user locally, run git commands to do so
+   */
+  static setUserLocal(gitUser: GitUser): boolean {
+    let cmd: string = `git config --local user.name "${gitUser.name}" && ` +
+                `git config --local user.email "${gitUser.email}"`;
+    if(identity.gpgKey) cmd += ` && git config --local user.signingkey "${gitUser.signingKey}"`;
+    Util.exec(cmd);
+    return true;
+  }
 }
