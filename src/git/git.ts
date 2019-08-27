@@ -5,7 +5,7 @@
 */
 
 import child_process = require('child_process');
-import Util = require('./util');
+import Util = require('../util/util');
 import GitUser = require('./git-user');
 
 class Git {
