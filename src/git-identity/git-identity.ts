@@ -6,9 +6,9 @@
 
 import fs = require('fs');
 import path = require('path');
-import child_process = require('child_process');
 import Identity = require('./identity');
 import JSONIdentityDetails = require('./JSONIdentityDetails');
+import Git = require('../util/git');
 import Util = require('../util/util');
 
 class GitIdentity {
@@ -105,17 +105,13 @@ class GitIdentity {
 
 
   getIdentityGlobal(): Identity {
-    let username: string = child_process.execSync('git config --global user.name', { encoding: 'utf8' }).trim();
-    let email: string = child_process.execSync('git config --global user.email', { encoding: 'utf8' }).trim();
-    let gpgKey: string = child_process.execSync('git config --global user.signingkey', { encoding: 'utf8' }).trim();
-    return new Identity(null, username, email, gpgKey);
+    let gitUser: GitUser = Git.getUserGlobal();
+    return new Identity(null, gitUser.name, gitUser.email, gitUser.signingKey);
   }
 
   getIdentityLocal(): Identity {
-    let username:string = child_process.execSync('git config --local user.name', { encoding: 'utf8' }).trim();
-    let email:string = child_process.execSync('git config --local user.email', { encoding: 'utf8' }).trim();
-    let gpgKey:string = child_process.execSync('git config --local user.signingkey', { encoding: 'utf8' }).trim();
-    return new Identity(null, username, email, gpgKey);
+    let gitUser: GitUser = Git.getUserLocal();
+    return new Identity(null, gitUser.name, gitUser.email, gitUser.signingKey);
   }
 
   //Set identity globally, run git commands to do so

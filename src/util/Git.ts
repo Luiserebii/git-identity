@@ -5,8 +5,9 @@
 */
 
 import child_process = require('child_process');
+import Util = require('./util');
 
-type GitUser {
+interface GitUser {
   name: string;
   email: string;
   signingKey?: string;
@@ -16,24 +17,29 @@ type GitUser {
 class Git {
 
   /**
-   *  Executes a command, returns string (trimmed by default)
+   *  
    */
-  static exec(cmd: string, encoding = 'utf8', noTrim: = false): string {
-    let res: string = child_process.execSync(cmd, { 'encoding': encoding });
-    if(!noTrim) { res = res.trim(); }
-
-    return res;
-  }
-
   static getUserGlobal(): GitUser {
-    let name: string = child_process.execSync('git config --global user.name', { encoding: 'utf8' }).trim();
-    let email: string = child_process.execSync('git config --global user.email', { encoding: 'utf8' }).trim();
-    let signingKey: string = child_process.execSync('git config --global user.signingkey', { encoding: 'utf8' }).trim();
+    let name: string = Util.exec('git config --global user.name');
+    let email: string = Util.exec('git config --global user.email');
+    let signingKey: string = Util.exec('git config --global user.signingkey');
+
     const gitUser: GitUser = { 'name': name, 'email': email, 'signingKey': signingKey }; 
     return gitUser;
   }
 
 
+  /**
+   *  
+   */
+  static getUserLocal(): GitUser {
+    let name: string = Util.exec('git config --local user.name');
+    let email: string = Util.exec('git config --local user.email');
+    let signingKey: string = Util.exec('git config --local user.signingkey');
+
+    const gitUser: GitUser = { 'name': name, 'email': email, 'signingKey': signingKey }; 
+    return gitUser;
+  }
 
 
 }
