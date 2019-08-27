@@ -7,7 +7,7 @@ import chalk = require('chalk');
 import figlet = require('figlet');
 
 import Meta = require('../util/meta');
-import JSONMetadata = require('../util/JSONMetadata');
+import JSONMetadata = require('../util/interfaces/json-metadata');
 import IdentityShift = require('../git-identity/git-identity');
 import Identity = require('../git-identity/identity');
 

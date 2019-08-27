@@ -5,7 +5,7 @@
 */
 
 import Util = require('../util/util');
-import GitUser = require('./git-user');
+import GitUser = require('./interfaces/git-user');
 
 class Git {
 

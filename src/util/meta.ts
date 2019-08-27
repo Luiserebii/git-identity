@@ -6,7 +6,7 @@
 import fs = require('fs');
 import path = require('path');
 
-import JSONMetadata = require('./JSONMetadata');
+import JSONMetadata = require('./interfaces/json-metadata');
 
 class Meta {
 
