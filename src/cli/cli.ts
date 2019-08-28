@@ -18,11 +18,23 @@ class GitIdentityCLI {
 
   run(): void {
 
+    //Setup our CLI via defining commander
     this.setupCLI();
+    
+    //Check to see that none of our sub-commands are being called
+    let isMain: boolean = true;
+    for(let i = 0; i < process.argv.length; i++){
+      if(this.isCommand(process.argv[i])) {
+        isMain = false;
+        break;
+      }
+    }
 
-    this.main();
+    //Finally, execute main() if we're on main:
+    if(isMain){
+      this.main();
+    }
 
-    program.parse(process.argv);
   }
 
   setupCLI(): void {
@@ -44,30 +56,29 @@ class GitIdentityCLI {
       .option('--user <username>', 'specify username')
       .option('--email <email>', 'specify email')
       .option('--gpg-key <gpg-key>', 'specify GPG key (key-id format: LONG)')
- 
       .on('--help', () => {
         console.log('');
         console.log('* uses additional flags below: ');
         console.log('--user, --email, --gpg-key');
       })
     ;
-
     program 
       //Setup clone command
       .command('clone <repo>')
-  //      .description('clone a repository and set the identity locally within')
+        .description('clone a repository and set the identity locally within')
         .option('-r, --recursive', 'ttt')
         .action((repo, flags) => {
           console.log('fuck me')
           console.log(repo)
-          console.log(flags.recursive)
         })
     ;
+
+    program.parse(process.argv);
   }
 
-  main(): void {
 
-    console.log(program.clone);
+
+  main(): void {
 
     if(this.argNum() === 0) {
       this.aboutCLI();
@@ -138,6 +149,12 @@ class GitIdentityCLI {
 
   argNum(): number {
     return process.argv.slice(2).length;
+  }
+
+  isCommand(str: string): boolean {
+    let bool: boolean = false;
+    if(str === "clone") bool = true;
+    return bool;
   }
 
 }
