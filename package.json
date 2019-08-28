@@ -1,6 +1,6 @@
 {
   "name": "@luiserebii/git-identity",
-  "version": "0.4.3-alpha",
+  "version": "0.5.0-alpha",
   "description": "A command line tool allowing for easy shifting between git identities (username, email, and GPG).",
   "main": "index.js",
   "scripts": {

@@ -9,7 +9,7 @@
 
 A command line tool allowing for easy shifting between git identities (username, email, and GPG).
 
-<b>Version:</b> 0.4.3-alpha<br/>
+<b>Version:</b> 0.5.0-alpha<br/>
 <b>Author:</b> Luiserebii
 
 ## Usage
@@ -40,12 +40,12 @@ Options:
 ### Linux
 To install, simply extract the tool into a preferred directory, compile, and create a soft link. For example, if you are looking to place the tool in your home directory:
 ```
-unzip git-identity-0.4.3-alpha.zip -d ~/
-cd ~/git-identity-0.4.3-alpha
+unzip git-identity-0.5.0-alpha.zip -d ~/
+cd ~/git-identity-0.5.0-alpha
 npm install
 npm run build
-sudo chmod u+x ~/git-identity-0.4.3-alpha/git-identity
-sudo ln -s ~/git-identity-0.4.3-alpha/git-identity /usr/local/bin/git-identity
+sudo chmod u+x ~/git-identity-0.5.0-alpha/git-identity
+sudo ln -s ~/git-identity-0.5.0-alpha/git-identity /usr/local/bin/git-identity
 ```
 
 Doing this should make it globally accessible via `git-identity`. 
