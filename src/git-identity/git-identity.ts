@@ -82,11 +82,11 @@ class GitIdentity {
   }
 
   //shift identity function implementation for application flag
-  shiftIdentity(name: string, file: string = this.file): boolean {
+  shiftIdentity(name: string, file: string = this.file, prefixCmd: string | null = null): boolean {
     let identityStore: object = this.getIdentities();
     let id: JSONIdentityDetails = identityStore[name];
     if(id) {
-      this.setIdentityGlobal(new Identity(name, id.username, id.email, id.gpgKey)); 
+      this.setIdentityGlobal(new Identity(name, id.username, id.email, id.gpgKey), prefixCmd); 
       return true;
     } else {
       console.log("Identity not found!");
@@ -94,11 +94,11 @@ class GitIdentity {
     }
   }
 
-  shiftIdentityLocal(name: string, file: string = this.file): boolean {
+  shiftIdentityLocal(name: string, file: string = this.file, prefixCmd: string | null = null): boolean {
     let identityStore: object = this.getIdentities();
     let id: JSONIdentityDetails = identityStore[name];
     if(id) {
-      this.setIdentityLocal(new Identity(name, id.username, id.email, id.gpgKey));
+      this.setIdentityLocal(new Identity(name, id.username, id.email, id.gpgKey), prefixCmd);
       return true;
     } else {
       console.log("Identity not found!");
@@ -145,8 +145,8 @@ class GitIdentity {
 
     //Clone and set identity
     let runClone = Git.clone(gitCloneOpts);
-    let setIdentity = this.setIdentityLocal(opts.identity, `cd ${dir}`);
-    return runClone && setIdentity;
+    let shiftIdentity = this.shiftIdentityLocal(opts.identity, `cd ${dir}`);
+    return runClone && shiftIdentity;
   }
 
   identitiesToString(identities: object /*Array of Identity objects*/): string {

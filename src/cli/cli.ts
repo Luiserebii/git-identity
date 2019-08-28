@@ -8,10 +8,12 @@ import figlet = require('figlet');
 
 import Meta = require('../util/meta');
 import JSONMetadata = require('../util/interfaces/json-metadata');
-import IdentityShift = require('../git-identity/git-identity');
+import GitIdentity = require('../git-identity/git-identity');
 import Identity = require('../git-identity/identity');
 
-const identityShift: IdentityShift = new IdentityShift();
+import GitIdentityCloneOpts = require('./interfaces/git-identity-clone-opts');
+
+const gitIdentity: GitIdentity = new GitIdentity();
 const meta: JSONMetadata = Meta.readMetadata();
 
 class GitIdentityCLI {
@@ -62,14 +64,24 @@ class GitIdentityCLI {
         console.log('--user, --email, --gpg-key');
       })
     ;
+
     program 
-      //Setup clone command
-      .command('clone <repo>')
+      .command('clone [repo]')
         .description('clone a repository and set the identity locally within')
         .option('-r, --recursive', 'ttt')
         .action((repo, flags) => {
-          console.log('fuck me')
-          console.log(repo)
+    
+          //If we've been passed nothing, just print the help
+          if(this.argNum() === 1) {
+            console.log(this.getCommand("clone").help());
+          } else {
+            let opts: GitIdentityCloneOpts = {
+
+
+            }
+            gitIdentity.clone(opts);
+          }
+
         })
     ;
 
@@ -92,37 +104,37 @@ class GitIdentityCLI {
 
     } else if(program.list && this.argNum() === 1) {
 
-      let ids = identityShift.listIdentities(); 
-      ids ? console.log("All registered identities: \n\n" + identityShift.listIdentities()) : console.log("No identities found!");
+      let ids = gitIdentity.listIdentities(); 
+      ids ? console.log("All registered identities: \n\n" + gitIdentity.listIdentities()) : console.log("No identities found!");
 
     } else if(program.new && this.argNum() >= 6) {
-      identityShift.newIdentity(new Identity(program.new, program.user, program.email, program.gpgKey));
+      gitIdentity.newIdentity(new Identity(program.new, program.user, program.email, program.gpgKey));
 
     } else if(program.update && this.argNum() >= 6) {
-      identityShift.updateIdentity(new Identity(program.update, program.user, program.email, program.gpgKey));
+      gitIdentity.updateIdentity(new Identity(program.update, program.user, program.email, program.gpgKey));
 
     } else if(program.delete && this.argNum() === 2) {
-      identityShift.deleteIdentity(program.delete) ? console.log("Deleted identity \"" + program.delete + "\"") : console.log("Identity not found!");
+      gitIdentity.deleteIdentity(program.delete) ? console.log("Deleted identity \"" + program.delete + "\"") : console.log("Identity not found!");
 
     } else if(program.shift && (this.argNum() === 2 || this.argNum() === 3)) {
 
       let name = program.shift;
       if(!program.local) {
-        let success = identityShift.shiftIdentity(name);
+        let success = gitIdentity.shiftIdentity(name);
         if(success) console.log("Shifted global git identity to: " + name);
       } else {
-        let success = identityShift.shiftIdentityLocal(name);
+        let success = gitIdentity.shiftIdentityLocal(name);
         if(success) console.log("Shifted local git identity to: " + name);
       }
 
     } else if(program.current && (this.argNum() === 1 || this.argNum() === 2)) {
 
       if(!program.local) {
-        let identity = identityShift.getIdentityGlobal();
+        let identity = gitIdentity.getIdentityGlobal();
         console.log("Current global git identity:\n");
         console.log(identity.toString());
       } else {
-        let identity = identityShift.getIdentityLocal();
+        let identity = gitIdentity.getIdentityLocal();
         console.log("Current local Git identity:\n");
         console.log(identity.toString());
 
@@ -140,7 +152,7 @@ class GitIdentityCLI {
 
     //Title of tool
     // @ts-ignore
-    console.log(chalk.green(figlet.textSync('Git Identity', { font: 'Ghost' })))
+    console.log(chalk.green(figlet.textSync('Git Identity', { font: 'Ghost' })));
     console.log("Version: " + meta.version);
     console.log("Author: Luiserebii");
     console.log("Check me out on GitHub at: https://github.com/Luiserebii!")
@@ -151,9 +163,18 @@ class GitIdentityCLI {
     return process.argv.slice(2).length;
   }
 
+  getCommand(str: string): any {
+    for(let c of program.commands){
+      if(str === c._name) return c;
+    }
+  }
+
   isCommand(str: string): boolean {
     let bool: boolean = false;
-    if(str === "clone") bool = true;
+    for(let c of program.commands) { 
+      if(str === c._name) bool = true;
+    }
+    
     return bool;
   }
 
