@@ -42,7 +42,7 @@ class Git {
     let cmd: string = `git config --global user.name "${gitUser.name}" && ` +
                 `git config --global user.email "${gitUser.email}"`;
     if(gitUser.signingKey) cmd += ` && git config --global user.signingkey "${gitUser.signingKey}"`;
-    if(prefixCmd) cmd = prefixCmd + " " + cmd;
+    if(prefixCmd) cmd = prefixCmd + " && " + cmd;
     Util.exec(cmd);
     return true;
   }
@@ -55,7 +55,7 @@ class Git {
     let cmd: string = `git config --local user.name "${gitUser.name}" && ` +
                 `git config --local user.email "${gitUser.email}"`;
     if(gitUser.signingKey) cmd += ` && git config --local user.signingkey "${gitUser.signingKey}"`;
-    if(prefixCmd) cmd = prefixCmd + " " + cmd;
+    if(prefixCmd) cmd = prefixCmd + " && " + cmd;
     Util.exec(cmd);
     return true;
   }

@@ -141,12 +141,11 @@ class GitIdentity {
     let gitCloneOpts: GitCloneOpts = (GitCloneOpts) tempOpts;
 
     //Find dir that will be produced by clone
-    let dir = opts.repo
-
+    let dir = opts.repo.substring(opts.repo.lastIndexOf("/") + 1, opts.repo.lastindexOf(".git") - 1);
 
     //Clone and set identity
     let runClone = Git.clone(gitCloneOpts);
-    let setIdentity = this.setIdentityLocal()
+    let setIdentity = this.setIdentityLocal(opts.identity, `cd ${dir}`);
   }
 
   identitiesToString(identities: object /*Array of Identity objects*/): string {
