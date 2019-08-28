@@ -8,8 +8,10 @@ import fs = require('fs');
 import path = require('path');
 import Identity = require('./identity');
 import JSONIdentityDetails = require('./interfaces/json-identity-details');
+import GitIdentityCloneOpts = require('./interfaces/git-identity-clone-opts');
 import Git = require('../git/git');
 import GitUser = require('../git/interfaces/git-user');
+import GitCloneOpts = require('../git/interfaces/git-clone-opts');
 import Util = require('../util/util');
 
 class GitIdentity {
@@ -116,15 +118,35 @@ class GitIdentity {
   }
 
   //Set identity globally, run git commands to do so
-  setIdentityGlobal(identity: Identity): boolean {
+  setIdentityGlobal(identity: Identity, prefixCmd: string | null = null): boolean {
     let gitUser: GitUser = { 'name': identity.username, 'email': identity.email, 'signingKey': identity.gpgKey };
-    return Git.setUserGlobal(gitUser);
+    return Git.setUserGlobal(gitUser, prefixCmd);
   }
 
   //Set identity locally
-  setIdentityLocal(identity: Identity): boolean {
+  setIdentityLocal(identity: Identity, prefixCmd: string | null = null): boolean {
     let gitUser: GitUser = { 'name': identity.username, 'email': identity.email, 'signingKey': identity.gpgKey };
-    return Git.setUserGlobal(gitUser);
+    return Git.setUserGlobal(gitUser, prefixCmd);
+  }
+
+  clone(opts: GitIdentityCloneOpts): boolean {
+    //Build opts to pass to Git.clone()
+    let tempOpts: any = {};
+    let keys: any[] = Object.keys(opts);
+    for(int i = 0; i < keys.length; i++) {
+      if(key !== "identity") {
+        tempOpts[keys[i]] = opts[keys[i]];
+      }
+    }
+    let gitCloneOpts: GitCloneOpts = (GitCloneOpts) tempOpts;
+
+    //Find dir that will be produced by clone
+    let dir = opts.repo
+
+
+    //Clone and set identity
+    let runClone = Git.clone(gitCloneOpts);
+    let setIdentity = this.setIdentityLocal()
   }
 
   identitiesToString(identities: object /*Array of Identity objects*/): string {
