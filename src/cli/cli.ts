@@ -91,7 +91,7 @@ class GitIdentityCLI {
         .option('--separate-git-dir <gitdir>', 'separate git dir from working tree')
         .option('-c, --config <key=value>', 'set config inside the new repository')
 
-        .action((repo, flags) => {
+        .action((repository, flags) => {
     
           //If we've been passed nothing, just print the help
           if(this.argNum() === 1) {
@@ -99,7 +99,28 @@ class GitIdentityCLI {
           } else {
             let opts: GitIdentityCloneOpts = {
               identity: flags.identity,
-
+              repo: repository;
+              verbose: flags.verbose ? true : false;
+              quiet: flags.quiet ? true : false;
+              progress: flags.progress ? true : false;
+              noCheckout: flags.noCheckout ? true : false;
+              bare: flags.bare ? true : false;
+              mirror: flags.mirror ? true : false;
+              local: flags.local ? true : false;
+              noHardlinks: flags.noHardlinks ? true : false;
+              shared: flags.shared ? true : false;
+              recursive: flags.recursive ? true : false;
+              recurseSubmodules: flags.recurseSubmodules ? true : false;
+              template: flags.template ? flags.template : null;
+              reference: flags.reference ? flags.reference : null;
+              dissociate: flags.dissociate ? true : false;
+              origin: flags.origin ? flags.origin : null;
+              branch: flags.branch ? flags.branch : null;
+              uploadPack: flags.uploadPack ? flags.uploadPack : null;
+              depth: flags.depth ? flags.depth : null;
+              singleBranch: flags.singleBranch ? true : false;
+              seperateGitDir: flags.seperateGitDir ? flags.seperateGitDir : null;
+              config: flags.config ? flags.config : null;
             }
             gitIdentity.clone(opts);
           }
