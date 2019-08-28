@@ -9,7 +9,7 @@ import Identity = require('../../src/git-identity/identity');
 import GitIdentity = require('../../src/git-identity/git-identity');
 import Util = require('../../src/util/util');
 
-import JSONIdentity = require('../../src/git-identity/JSONIdentity');
+import JSONIdentity = require('../../src/git-identity/interfaces/json-identity');
 
 interface TestJSONIdentity {
   name: string;
