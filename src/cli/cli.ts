@@ -68,7 +68,7 @@ class GitIdentityCLI {
     program 
       .command('clone [repo]')
         .description('Clone a repository and set the identity locally within. All flags accepted by git clone can also be used with this tool, and more information on their usage can be found within the git-scm documentation.')
-        .option('-i, --identity', 'name of the git-identity to use')
+        .option('-i, --identity <name>', 'name of the git-identity to use')
         .option('-v, --verbose', 'be more verbose')
         .option('-q, --quiet', 'be more quiet')
         .option('--progress', 'force progress reporting')
@@ -96,7 +96,11 @@ class GitIdentityCLI {
           //If we've been passed nothing, just print the help
           if(this.argNum() === 1) {
             console.log(this.getCommand("clone").help());
+          } else if (!repository) {
+            console.log("You must specify a repository to clone.");
           } else {
+            console.log(`nice repo mayne:  ${repository}`)
+            console.log('cool flags tooi  ' + flags.identity)
             let opts: GitIdentityCloneOpts = {
               identity: flags.identity,
               repo: repository,
