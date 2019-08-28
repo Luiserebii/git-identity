@@ -136,6 +136,7 @@ class GitIdentityCLI {
     program 
       .command('revise')
         .description('Revise the current git repository\'s history.')
+        .option('--debug', 'debug mode - print the command that will be run')
         .option('--old-email <email>', 'email to change')
         .option('--old-name <name>', 'name to change')
         .option('--new-email <email>', 'new email to change to')
@@ -148,10 +149,12 @@ class GitIdentityCLI {
             newEmail: flags.newEmail,
             newName: flags.newName
           }
-
-          let cmd: string = Git.buildReviseCmd(opts);
-          console.log(cmd);
-
+          if (!flags.debug) {
+            Git.revise(opts);
+          } else {
+            let cmd: string = Git.buildReviseCmd(opts);
+            console.log(cmd);
+          }
         })
     ;
 
