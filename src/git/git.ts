@@ -116,6 +116,9 @@ class Git {
     if(opts.toName) cmd += `NEW_NAME="${opts.toName}"${newLine}`;
 
     if(opts.fromEmail && ops.fromName) {
+
+      //Idea; seperate these raw strings into vars (like firstIf) and use it to construct everything at the end,
+      //thus making logic checks if opts exist only once
       cmd +=
        `if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ] && [ "$GIT_COMMITTER_NAME" = "$OLD_NAME" ]
         then${newLine}`;
