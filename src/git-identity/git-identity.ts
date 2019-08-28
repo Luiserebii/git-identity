@@ -133,19 +133,20 @@ class GitIdentity {
     //Build opts to pass to Git.clone()
     let tempOpts: any = {};
     let keys: any[] = Object.keys(opts);
-    for(int i = 0; i < keys.length; i++) {
-      if(key !== "identity") {
+    for(let i = 0; i < keys.length; i++) {
+      if(keys[i] !== "identity") {
         tempOpts[keys[i]] = opts[keys[i]];
       }
     }
-    let gitCloneOpts: GitCloneOpts = (GitCloneOpts) tempOpts;
+    let gitCloneOpts: GitCloneOpts = tempOpts;
 
     //Find dir that will be produced by clone
-    let dir = opts.repo.substring(opts.repo.lastIndexOf("/") + 1, opts.repo.lastindexOf(".git") - 1);
+    let dir = opts.repo.substring(opts.repo.lastIndexOf("/") + 1, opts.repo.lastIndexOf(".git") - 1);
 
     //Clone and set identity
     let runClone = Git.clone(gitCloneOpts);
     let setIdentity = this.setIdentityLocal(opts.identity, `cd ${dir}`);
+    return runClone && setIdentity;
   }
 
   identitiesToString(identities: object /*Array of Identity objects*/): string {
