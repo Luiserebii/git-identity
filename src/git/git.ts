@@ -121,14 +121,14 @@ class Git {
     let newLine: string = this.newLine;
     let cmd: string = `git filter-branch --force --env-filter '${newLine}`;
 
-    if(!opts.fromEmail && !opts.fromName) throw new NoFromEmailFromNameError();
-    if(!opts.toEmail && !opts.toName) throw new NoToEmailToNameError();
+    if(!opts.oldEmail && !opts.oldName) throw new NoFromEmailFromNameError();
+    if(!opts.newEmail && !opts.newName) throw new NoToEmailToNameError();
 
     //Add in vars where necessary
-    if(opts.fromEmail) cmd += `OLD_EMAIL="${opts.fromEmail}"${newLine}`;
-    if(opts.fromName) cmd += `OLD_NAME="${opts.fromName}"${newLine}`;
-    if(opts.toEmail) cmd += `NEW_EMAIL="${opts.toEmail}"${newLine}`;
-    if(opts.toName) cmd += `NEW_NAME="${opts.toName}"${newLine}`;
+    if(opts.oldEmail) cmd += `OLD_EMAIL="${opts.oldEmail}"${newLine}`;
+    if(opts.oldName) cmd += `OLD_NAME="${opts.oldName}"${newLine}`;
+    if(opts.newEmail) cmd += `NEW_EMAIL="${opts.newEmail}"${newLine}`;
+    if(opts.newName) cmd += `NEW_NAME="${opts.newName}"${newLine}`;
 
     let firstIf: string = "";
     let secondIf: string = "";
@@ -136,7 +136,7 @@ class Git {
     let firstThen: string = "";
     let secondThen: string = "";
 
-    if(opts.fromEmail && opts.fromName) {
+    if(opts.oldEmail && opts.oldName) {
 
       //Idea; seperate these raw strings into vars (like firstIf) and use it to construct everything at the end,
       //thus making logic checks if opts exist only once
@@ -147,7 +147,7 @@ class Git {
        `if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ] && [ "$GIT_AUTHOR_NAME" = "$OLD_NAME" ]
         then${newLine}`;
 
-    } else if(opts.fromEmail) {
+    } else if(opts.oldEmail) {
 
       firstIf +=
        `if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
@@ -156,7 +156,7 @@ class Git {
        `if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
         then${newLine}`;
 
-    } else if(opts.fromName) {
+    } else if(opts.oldName) {
 
       firstIf +=
        `if [ "$GIT_COMMITTER_NAME" = "$OLD_EMAIL" ]
@@ -167,14 +167,14 @@ class Git {
 
     }
 
-    if(opts.toEmail) {
+    if(opts.newEmail) {
       firstThen += 
         `   export GIT_COMMITTER_NAME="$NEW_EMAIL"${newLine}`;
       secondThen +=
         `   export GIT_AUTHOR_NAME="$NEW_NAME"${newLine}`;
     }
 
-    if(opts.toName) {
+    if(opts.newName) {
       firstThen += 
         `   export GIT_COMMITTER_NAME="$NEW_NAME"${newLine}`;
       secondThen +=
