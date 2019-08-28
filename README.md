@@ -36,6 +36,38 @@ Options:
 --user, --email, --gpg-key
 ```
 
+```
+Usage: clone [options] [repo]
+
+Clone a repository and set the identity locally within. All flags accepted by git clone can also be used with this tool, and more information on their usage can be found within the git-scm documentation.
+
+Options:
+  -i, --identity <name>            name of the git-identity to use
+  -v, --verbose                    be more verbose
+  -q, --quiet                      be more quiet
+  --progress                       force progress reporting
+  -n, --no-checkout                don't create a checkout
+  --bare                           create a bare repository
+  --mirror                         create a mirror repository (implies bare)
+  -l, --local                      to clone from a local repository
+  --no-hardlinks                   don't use local hardlinks, always copy
+  -s, --shared                     setup as shared repository
+  --recursive                      initialize submodules in the clone
+  --recurse-submodules             initialize submodules in the clone
+  --template <template-directory>  directory from which templates will be used
+  --reference <repo>               reference repository
+  --dissociate                     use --reference only while cloning
+  -o, --origin <name>              use <name> instead of 'origin' to track upstream
+  -b, --branch <branch>            checkout <branch> instead of the remote's HEAD
+  -u, --upload-pack <path>         path to git-upload-pack on the remote
+  --depth <depth>                  create a shallow clone of that depth
+  --single-branch                  clone only one branch, HEAD or --branch
+  --separate-git-dir <gitdir>      separate git dir from working tree
+  -c, --config <key=value>         set config inside the new repository
+  -h, --help                       output usage information
+```
+
+
 ## Installation
 ### Linux
 To install, simply extract the tool into a preferred directory, compile, and create a soft link. For example, if you are looking to place the tool in your home directory:
@@ -49,6 +81,8 @@ sudo ln -s ~/git-identity-0.5.0-alpha/git-identity /usr/local/bin/git-identity
 ```
 
 Doing this should make it globally accessible via `git-identity`. 
+
+Alternatively, there is an `INSTALL` and `UPDATE` script, the latter of which should take any registered identities you had in the previous install and copy them over. **NOTE: These are still untested and could break easily; until test cases are released for these, tread with caution.**
 
 ## Mirror
 A mirror of this repository is available at: <https://serebii.io:2501/Luiserebii/git-identity>
