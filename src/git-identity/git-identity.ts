@@ -22,6 +22,21 @@ class GitIdentity {
     this.file = file;
   }
 
+  getIdentity(name: string, file: string = this.file): object | null {
+    let identityStore: object = this.getIdentities(file);
+    let identity: object | null = null;
+    
+    let keys = Object.keys(identityStore);
+    for(let i = 0; i < keys.length; i++) {
+      if(keys[i] === name) {
+        identity = identityStore[name];
+        return identity;
+      }
+    }
+    return identity;
+
+  }
+
   getIdentities(file: string = this.file): object {
     let identityStore: object = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {};
     return identityStore;
@@ -156,6 +171,12 @@ class GitIdentity {
     let shiftIdentity = this.shiftIdentityLocal(opts.identity, undefined, `cd ${dir}`);
     return runClone && shiftIdentity;
   }
+
+/*  revise(opts: GitIdentityReviseOpts): boolean {
+    
+    
+
+  }*/ 
 
   identitiesToString(identities: object /*Array of Identity objects*/): string {
     let str: string = '';
