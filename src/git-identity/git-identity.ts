@@ -141,7 +141,12 @@ class GitIdentity {
     let gitCloneOpts: GitCloneOpts = tempOpts;
 
     //Find dir that will be produced by clone
-    let dir = opts.repo.substring(opts.repo.lastIndexOf("/") + 1, opts.repo.lastIndexOf(".git") - 1);
+    let dir: string = "";
+    if(!opts.repo.includes(".git")) {
+      dir = opts.repo.substring(opts.repo.substring(0, opts.repo.lastIndexOf("/") - 1).lastIndexOf("/") + 1, opts.repo.lastIndexOf("/") - 1)
+    } else {
+      dir = opts.repo.substring(opts.repo.lastIndexOf("/") + 1, opts.repo.lastIndexOf(".git") - 1);
+    }
 
     //Clone and set identity
     let runClone = Git.clone(gitCloneOpts);
