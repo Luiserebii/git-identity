@@ -129,6 +129,7 @@ class Git {
     if(opts.oldName) cmd += `OLD_NAME="${opts.oldName}"${newLine}`;
     if(opts.newEmail) cmd += `NEW_EMAIL="${opts.newEmail}"${newLine}`;
     if(opts.newName) cmd += `NEW_NAME="${opts.newName}"${newLine}`;
+    cmd += `${newLine}`;
 
     let firstIf: string = "";
     let secondIf: string = "";
@@ -150,22 +151,23 @@ class Git {
     } else if(opts.oldEmail) {
 
       firstIf +=
-       `if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]` + 
+       `if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]${newLine}` + 
        `then${newLine}`;
       secondIf +=
-       `if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]` + 
+       `if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]${newLine}` + 
        `then${newLine}`;
 
     } else if(opts.oldName) {
 
       firstIf +=
-       `if [ "$GIT_COMMITTER_NAME" = "$OLD_EMAIL" ]` + 
+       `if [ "$GIT_COMMITTER_NAME" = "$OLD_EMAIL" ]${newLine}` + 
        `then${newLine}`;
       secondIf +=
-       `if [ "$GIT_AUTHOR_NAME" = "$OLD_EMAIL" ]` +
+       `if [ "$GIT_AUTHOR_NAME" = "$OLD_EMAIL" ]${newLine}` +
        `then${newLine}`;
 
     }
+
 
     if(opts.newEmail) {
       firstThen += 
@@ -182,16 +184,14 @@ class Git {
     }
    
     //Close then(s)
-    firstThen += `fi${newLine}`;
-    secondThen += `fi${newLine}`;
+    firstThen += `fi${newLine}${newLine}`;
+    secondThen += `fi${newLine}${newLine}`;
 
     //Construct our conditional body
     cmd += firstIf + firstThen + secondIf + secondThen;
 
     //Finally, close our command
-    cmd += `
-      ' --tag-name-filter cat -- --branches --tags
-    `;
+    cmd += `' --tag-name-filter cat -- --branches --tags`;
 
     return cmd;
   }
