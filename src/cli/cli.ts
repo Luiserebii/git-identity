@@ -67,8 +67,8 @@ class GitIdentityCLI {
 
     program 
       .command('clone [repo]')
-        .description('clone a repository and set the identity locally within')
-        .option('-r, --recursive', 'ttt')
+        .description('Clone a repository and set the identity locally within. All flags accepted by git clone can also be used with this tool, and more information on their usage can be found within the git-scm documentation.')
+        .option('-i, --identity', 'name of the git-identity to use')
         .action((repo, flags) => {
     
           //If we've been passed nothing, just print the help
@@ -76,7 +76,7 @@ class GitIdentityCLI {
             console.log(this.getCommand("clone").help());
           } else {
             let opts: GitIdentityCloneOpts = {
-
+              identity: flags.identity,
 
             }
             gitIdentity.clone(opts);

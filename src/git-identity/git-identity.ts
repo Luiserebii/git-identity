@@ -145,7 +145,7 @@ class GitIdentity {
 
     //Clone and set identity
     let runClone = Git.clone(gitCloneOpts);
-    let shiftIdentity = this.shiftIdentityLocal(opts.identity, `cd ${dir}`);
+    let shiftIdentity = this.shiftIdentityLocal(opts.identity, undefined, `cd ${dir}`);
     return runClone && shiftIdentity;
   }
 
