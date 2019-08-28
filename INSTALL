@@ -1,0 +1,8 @@
+#!/bin/bash
+
+INSTALL_PATH="/usr/local/bin/git-identity"
+
+npm install
+npm run build
+sudo chmod u+x ./git-identity
+sudo ln -s ./git-identity $INSTALL_PATH
