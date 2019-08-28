@@ -147,7 +147,6 @@ class GitIdentity {
         dir = opts.repo.substring(0, opts.repo.lastIndexOf("/"));
       }
       dir = dir.substring(dir.lastIndexOf("/") + 1);
-      console.log("DIRNAME:   " + dir);
     } else {
       dir = opts.repo.substring(opts.repo.lastIndexOf("/") + 1, opts.repo.lastIndexOf(".git") - 1);
     }
