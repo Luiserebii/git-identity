@@ -97,6 +97,39 @@ class Git {
     return true;
   }
 
+  static revise(opts: GitReviseOpts): boolean {
+
+    let cmd: string = `
+      git filter-branch --force --env-filter '
+    `;
+
+    let newLine = '
+    ';
+
+    if(!opts.fromEmail && !opts.fromName) throw "Error: No from email nor from name specified";
+    if(!opts.toEmail && !opts.toName) throw "Error: No to email nor to name specified";
+
+    //Add in vars where necessary
+    if(opts.fromEmail) cmd += `OLD_EMAIL="${opts.fromEmail}"${newLine}`;
+    if(opts.fromName) cmd += `OLD_NAME="${opts.fromName}"${newLine}`;
+    if(opts.toEmail) cmd += `NEW_EMAIL="${opts.toEmail}"${newLine}`;
+    if(opts.toName) cmd += `NEW_NAME="${opts.toName}"${newLine}`;
+
+      `if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
+      then
+         export GIT_COMMITTER_NAME="$NEW_NAME"
+         export GIT_COMMITTER_EMAIL="$NEW_EMAIL"
+      fi`
+      if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
+      then
+         export GIT_AUTHOR_NAME="$NEW_NAME"
+         export GIT_AUTHOR_EMAIL="$NEW_EMAIL"
+      fi
+      ' --tag-name-filter cat -- --branches --tags
+    `;
+
+  }
+
 }
 
 export = Git;
