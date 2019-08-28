@@ -4,4 +4,4 @@ class NoToEmailToNameError extends Error {
   }
 }
 
-export = NoFromEmailFromNameError;
+export = NoToEmailToNameError;
