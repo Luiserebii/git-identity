@@ -5,5 +5,27 @@ INSTALL_PATH="/usr/local/bin/git-identity"
 npm install
 npm run build
 sudo chmod u+x ./git-identity
-rm 
+
+# Create temporary directory to hold current identities
+TEMP_DIR="$(mktemp -d)"
+
+# Grab real path, so we can...
+TRUE_PATH="$(readlink -f $INSTALL_PATH)"
+
+# Save copy of user's data
+cp -r $TRUE_PATH/data $TEMP_DIR
+
+# Remove previous soft-link
+sudo rm $INSTALL_PATH
+
+# Copy over
+cp -r $TEMP_DIR/data .
+
+# Finally, finish by linking... 
 sudo ln -s ./git-identity $INSTALL_PATH
+
+# And, cleanup:
+rm -rf $TEMP_DIR
+
+# Set up a trap on EXIT
+trap "rm -rf $TEMP_DIR" EXIT
