@@ -103,7 +103,7 @@ class Git {
       git filter-branch --force --env-filter '
     `;
 
-    let newLine = '
+    let newLine: string = '
     ';
 
     if(!opts.fromEmail && !opts.fromName) throw "Error: No from email nor from name specified";
@@ -115,11 +115,25 @@ class Git {
     if(opts.toEmail) cmd += `NEW_EMAIL="${opts.toEmail}"${newLine}`;
     if(opts.toName) cmd += `NEW_NAME="${opts.toName}"${newLine}`;
 
-      `if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
-      then
-         export GIT_COMMITTER_NAME="$NEW_NAME"
-         export GIT_COMMITTER_EMAIL="$NEW_EMAIL"
-      fi`
+    if(opts.fromEmail && ops.fromName) {
+      cmd +=
+       `if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ] && [ "$GIT_COMMITTER_NAME" = "$OLD_NAME" ]
+        then${newLine}`;
+
+      if(opts.toEmail) {
+        cmd += 
+            `export GIT_COMMITTER_NAME="$NEW_EMAIL"${newLine}`;
+
+
+      if(opts.toName) {
+        cmd += 
+            `export GIT_COMMITTER_NAME="$NEW_NAME"${newLine}`;
+
+       //Close command
+
+       cmd += `fi`;
+    }
+
       if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
       then
          export GIT_AUTHOR_NAME="$NEW_NAME"
