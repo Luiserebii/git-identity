@@ -1,7 +1,7 @@
-class NoToEmailToNameError extends Error {
+class NoNewEmailNewName extends Error {
   constructor() {
     super("Error: No to email nor to name specified");
   }
 }
 
-export = NoToEmailToNameError;
+export = NoNewEmailNewName;

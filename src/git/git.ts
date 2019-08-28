@@ -9,8 +9,8 @@ import GitUser = require('./interfaces/git-user');
 import GitCloneOpts = require('./interfaces/git-clone-opts');
 import GitReviseOpts = require('./interfaces/git-revise-opts');
 
-import NoFromEmailFromNameError = require('./errors/no-from-email-from-name-error');
-import NoToEmailToNameError = require('./errors/no-to-email-to-name-error');
+import NoOldEmailOldNameError = require('./errors/no-old-email-old-name-error');
+import NoNewEmailNewNameError = require('./errors/no-new-email-new-name-error');
 
 class Git {
 

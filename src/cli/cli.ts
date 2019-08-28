@@ -11,6 +11,10 @@ import JSONMetadata = require('../util/interfaces/json-metadata');
 import GitIdentity = require('../git-identity/git-identity');
 import Identity = require('../git-identity/identity');
 
+import Git = require('../git/git');
+import GitReviseOpts = require('../git/interfaces/git-revise-opts');
+
+
 import GitIdentityCloneOpts = require('../git-identity/interfaces/git-identity-clone-opts');
 
 const gitIdentity: GitIdentity = new GitIdentity();
