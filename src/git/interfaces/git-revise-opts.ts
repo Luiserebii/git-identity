@@ -3,10 +3,10 @@
  */
 
 interface GitReviseOpts {
-  fromEmail: string | null;
-  fromName: string | null;
-  toEmail: string | null;
-  toName: string | null;
+  oldEmail: string | null;
+  oldName: string | null;
+  newEmail: string | null;
+  newName: string | null;
 }
 
 export = GitReviseOpts;

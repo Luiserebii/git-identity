@@ -121,8 +121,8 @@ class Git {
     let newLine: string = this.newLine;
     let cmd: string = `git filter-branch --force --env-filter '${newLine}`;
 
-    if(!opts.oldEmail && !opts.oldName) throw new NoFromEmailFromNameError();
-    if(!opts.newEmail && !opts.newName) throw new NoToEmailToNameError();
+    if(!opts.oldEmail && !opts.oldName) throw new NoOldEmailOldNameError();
+    if(!opts.newEmail && !opts.newName) throw new NoNewEmailNewNameError();
 
     //Add in vars where necessary
     if(opts.oldEmail) cmd += `OLD_EMAIL="${opts.oldEmail}"${newLine}`;

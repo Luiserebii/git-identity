@@ -14,7 +14,6 @@ import Identity = require('../git-identity/identity');
 import Git = require('../git/git');
 import GitReviseOpts = require('../git/interfaces/git-revise-opts');
 
-
 import GitIdentityCloneOpts = require('../git-identity/interfaces/git-identity-clone-opts');
 
 const gitIdentity: GitIdentity = new GitIdentity();
@@ -130,6 +129,20 @@ class GitIdentityCLI {
             }
             gitIdentity.clone(opts);
           }
+
+        })
+    ;
+
+    program 
+      .command('revise')
+        .description('Revise the current git repository\'s history.')
+        .option('--old-email <email>', 'email to change')
+        .option('--old-name <name>', 'name to change')
+        .option('--new-email <email>', 'new email to change to')
+        .option('--new-name <name>', 'new name to change to')
+        .action((flags) => {
+          console.log(flags.oldEmail);
+          console.log(flags.oldName);
 
         })
     ;
