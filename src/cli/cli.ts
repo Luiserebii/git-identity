@@ -19,8 +19,10 @@ class GitIdentityCLI {
   run(): void {
 
     this.setupCLI();
+
     this.main();
 
+    program.parse(process.argv);
   }
 
   setupCLI(): void {
@@ -48,11 +50,25 @@ class GitIdentityCLI {
         console.log('* uses additional flags below: ');
         console.log('--user, --email, --gpg-key');
       })
+    ;
+
+    program 
+      //Setup clone command
+      .command('clone <repo>')
+  //      .description('clone a repository and set the identity locally within')
+        .option('-r, --recursive', 'ttt')
+        .action((repo, flags) => {
+          console.log('fuck me')
+          console.log(repo)
+          console.log(flags.recursive)
+        })
+    ;
   }
 
   main(): void {
 
-    program.parse(process.argv);
+    console.log(program.clone);
+
     if(this.argNum() === 0) {
       this.aboutCLI();
       program.help();
@@ -102,6 +118,7 @@ class GitIdentityCLI {
       }
 
     } else {
+      console.log(program.clone);
       console.log("Invalid combination of flags and/or arguments");
     }
   
