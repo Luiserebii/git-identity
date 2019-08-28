@@ -11,7 +11,7 @@ import JSONMetadata = require('../util/interfaces/json-metadata');
 import GitIdentity = require('../git-identity/git-identity');
 import Identity = require('../git-identity/identity');
 
-import GitIdentityCloneOpts = require('./interfaces/git-identity-clone-opts');
+import GitIdentityCloneOpts = require('../git-identity/interfaces/git-identity-clone-opts');
 
 const gitIdentity: GitIdentity = new GitIdentity();
 const meta: JSONMetadata = Meta.readMetadata();
@@ -99,28 +99,28 @@ class GitIdentityCLI {
           } else {
             let opts: GitIdentityCloneOpts = {
               identity: flags.identity,
-              repo: repository;
-              verbose: flags.verbose ? true : false;
-              quiet: flags.quiet ? true : false;
-              progress: flags.progress ? true : false;
-              noCheckout: flags.noCheckout ? true : false;
-              bare: flags.bare ? true : false;
-              mirror: flags.mirror ? true : false;
-              local: flags.local ? true : false;
-              noHardlinks: flags.noHardlinks ? true : false;
-              shared: flags.shared ? true : false;
-              recursive: flags.recursive ? true : false;
-              recurseSubmodules: flags.recurseSubmodules ? true : false;
-              template: flags.template ? flags.template : null;
-              reference: flags.reference ? flags.reference : null;
-              dissociate: flags.dissociate ? true : false;
-              origin: flags.origin ? flags.origin : null;
-              branch: flags.branch ? flags.branch : null;
-              uploadPack: flags.uploadPack ? flags.uploadPack : null;
-              depth: flags.depth ? flags.depth : null;
-              singleBranch: flags.singleBranch ? true : false;
-              seperateGitDir: flags.seperateGitDir ? flags.seperateGitDir : null;
-              config: flags.config ? flags.config : null;
+              repo: repository,
+              verbose: flags.verbose ? true : false,
+              quiet: flags.quiet ? true : false,
+              progress: flags.progress ? true : false,
+              noCheckout: flags.noCheckout ? true : false,
+              bare: flags.bare ? true : false,
+              mirror: flags.mirror ? true : false,
+              local: flags.local ? true : false,
+              noHardlinks: flags.noHardlinks ? true : false,
+              shared: flags.shared ? true : false,
+              recursive: flags.recursive ? true : false,
+              recurseSubmodules: flags.recurseSubmodules ? true : false,
+              template: flags.template ? flags.template : null,
+              reference: flags.reference ? flags.reference : null,
+              dissociate: flags.dissociate ? true : false,
+              origin: flags.origin ? flags.origin : null,
+              branch: flags.branch ? flags.branch : null,
+              uploadPack: flags.uploadPack ? flags.uploadPack : null,
+              depth: flags.depth ? flags.depth : null,
+              singleBranch: flags.singleBranch ? true : false,
+              seperateGitDir: flags.seperateGitDir ? flags.seperateGitDir : null,
+              config: flags.config ? flags.config : null
             }
             gitIdentity.clone(opts);
           }
