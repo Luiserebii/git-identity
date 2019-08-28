@@ -6,6 +6,7 @@
 
 import Util = require('../util/util');
 import GitUser = require('./interfaces/git-user');
+import GitCloneOpts = require('./interfaces/git-clone-opts');
 
 class Git {
 
@@ -116,7 +117,6 @@ class Git {
     if(opts.dissociate) cmd += " --dissociate";
     if(opts.origin) cmd += ` -o ${opts.origin}`;
     if(opts.branch) cmd += ` -b ${opts.branch}`;
-    if(opts.checkout) cmd += ` checkout ${opts.checkout}`;
     if(opts.uploadPack) cmd += ` -u ${opts.uploadPack}`;
     if(opts.depth) cmd += ` --depth ${opts.depth}`;
     if(opts.singleBranch) cmd += " --single-branch";
