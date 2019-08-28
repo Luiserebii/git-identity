@@ -143,7 +143,11 @@ class GitIdentity {
     //Find dir that will be produced by clone
     let dir: string = "";
     if(!opts.repo.includes(".git")) {
-      dir = opts.repo.substring(opts.repo.substring(0, opts.repo.lastIndexOf("/") - 1).lastIndexOf("/") + 1, opts.repo.lastIndexOf("/") - 1)
+      if(opts.repo.lastIndexOf("/") + 1 === opts.repo.length) {
+        dir = opts.repo.substring(0, opts.repo.lastIndexOf("/"));
+      }
+      dir = dir.substring(dir.lastIndexOf("/") + 1);
+      console.log("DIRNAME:   " + dir);
     } else {
       dir = opts.repo.substring(opts.repo.lastIndexOf("/") + 1, opts.repo.lastIndexOf(".git") - 1);
     }
