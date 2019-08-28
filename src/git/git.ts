@@ -9,6 +9,9 @@ import GitUser = require('./interfaces/git-user');
 import GitCloneOpts = require('./interfaces/git-clone-opts');
 import GitReviseOpts = require('./interfaces/git-revise-opts');
 
+import NoFromEmailFromNameError = require('./errors/no-from-email-from-name-error');
+import NoToEmailToNameError = require('./errors/no-to-email-to-name-error');
+
 class Git {
 
   /**
@@ -105,8 +108,8 @@ class Git {
     let newLine: string = `
     `;
 
-    if(!opts.fromEmail && !opts.fromName) throw "Error: No from email nor from name specified";
-    if(!opts.toEmail && !opts.toName) throw "Error: No to email nor to name specified";
+    if(!opts.fromEmail && !opts.fromName) throw new NoFromEmailFromNameError();
+    if(!opts.toEmail && !opts.toName) throw new NoToEmailToNameError();
 
     //Add in vars where necessary
     if(opts.fromEmail) cmd += `OLD_EMAIL="${opts.fromEmail}"${newLine}`;
@@ -186,5 +189,6 @@ class Git {
   }
 
 }
+
 
 export = Git;

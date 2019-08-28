@@ -1,6 +1,6 @@
 class NoFromEmailFromNameError extends Error {
-  constructor(message) {
-    super(message);
+  constructor() {
+    super("Error: No from email nor from name specified");
   }
 }
 
