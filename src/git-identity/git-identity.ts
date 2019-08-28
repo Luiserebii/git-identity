@@ -9,7 +9,7 @@ import path = require('path');
 import Identity = require('./identity');
 import JSONIdentityDetails = require('./interfaces/json-identity-details');
 import Git = require('../git/git');
-import GitUser = require('../git/git-user');
+import GitUser = require('../git/interfaces/git-user');
 import Util = require('../util/util');
 
 class GitIdentity {
