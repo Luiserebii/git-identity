@@ -115,48 +115,63 @@ class Git {
     if(opts.toEmail) cmd += `NEW_EMAIL="${opts.toEmail}"${newLine}`;
     if(opts.toName) cmd += `NEW_NAME="${opts.toName}"${newLine}`;
 
+    let firstIf: string = "";
+    let secondIf: string = "";
+
+    let firstThen: string = "";
+    let secondThen: string = "";
+
     if(opts.fromEmail && ops.fromName) {
 
       //Idea; seperate these raw strings into vars (like firstIf) and use it to construct everything at the end,
       //thus making logic checks if opts exist only once
-      cmd +=
+      firstIf +=
        `if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ] && [ "$GIT_COMMITTER_NAME" = "$OLD_NAME" ]
         then${newLine}`;
-
-      if(opts.toEmail) {
-        cmd += 
-            `export GIT_COMMITTER_NAME="$NEW_EMAIL"${newLine}`;
-
-
-      if(opts.toName) {
-        cmd += 
-            `export GIT_COMMITTER_NAME="$NEW_NAME"${newLine}`;
-
-       //Close command
-       cmd += `fi${newLine}`;
-
-      cmd +=
+      secondIf +=
        `if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ] && [ "$GIT_AUTHOR_NAME" = "$OLD_NAME" ]
         then${newLine}`;
 
-      if(opts.toEmail) {
-        cmd += 
-            `export GIT_AUTHOR_NAME="$NEW_EMAIL"${newLine}`;
+    } else if(opts.fromEmail) {
 
+      firstIf +=
+       `if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
+        then${newLine}`;
+      secondIf +=
+       `if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
+        then${newLine}`;
 
-      if(opts.toName) {
-        cmd += 
-            `export GIT_AUTHOR_NAME="$NEW_NAME"${newLine}`;
+    } else if(opts.fromName) {
 
-       //Close command
-       cmd += `fi`;
+      firstIf +=
+       `if [ "$GIT_COMMITTER_NAME" = "$OLD_EMAIL" ]
+        then${newLine}`;
+      secondIf +=
+       `if [ "$GIT_AUTHOR_NAME" = "$OLD_EMAIL" ]
+        then${newLine}`;
+
     }
 
-      if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
-      then
-         export GIT_AUTHOR_NAME="$NEW_NAME"
-         export GIT_AUTHOR_EMAIL="$NEW_EMAIL"
-      fi
+    if(opts.toEmail) {
+      firstThen += 
+        `   export GIT_COMMITTER_NAME="$NEW_EMAIL"${newLine}`;
+      secondThen +=
+        `   export GIT_AUTHOR_NAME="$NEW_NAME"${newLine}`;
+    }
+
+    if(opts.toName) {
+      firstThen += 
+        `   export GIT_COMMITTER_NAME="$NEW_NAME"${newLine}`;
+      secondThen +=
+        `   export GIT_AUTHOR_NAME="$NEW_EMAIL"${newLine}`;
+    }
+   
+    //Close then(s)
+    firstThen += `fi{$newLine}`;
+    secondThen += `fi{$newLine}`;
+
+    //Construct our conditional body
+    cmd += firstIf + firstThen + secondIf + secondThen;
 
     //Finally, close our command
     cmd += `
