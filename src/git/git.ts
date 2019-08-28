@@ -7,6 +7,7 @@
 import Util = require('../util/util');
 import GitUser = require('./interfaces/git-user');
 import GitCloneOpts = require('./interfaces/git-clone-opts');
+import GitReviseOpts = require('./interfaces/git-revise-opts');
 
 class Git {
 
@@ -99,12 +100,10 @@ class Git {
 
   static revise(opts: GitReviseOpts): boolean {
 
-    let cmd: string = `
-      git filter-branch --force --env-filter '
-    `;
+    let cmd: string = `git filter-branch --force --env-filter '`;
 
-    let newLine: string = '
-    ';
+    let newLine: string = `
+    `;
 
     if(!opts.fromEmail && !opts.fromName) throw "Error: No from email nor from name specified";
     if(!opts.toEmail && !opts.toName) throw "Error: No to email nor to name specified";
@@ -121,7 +120,7 @@ class Git {
     let firstThen: string = "";
     let secondThen: string = "";
 
-    if(opts.fromEmail && ops.fromName) {
+    if(opts.fromEmail && opts.fromName) {
 
       //Idea; seperate these raw strings into vars (like firstIf) and use it to construct everything at the end,
       //thus making logic checks if opts exist only once
