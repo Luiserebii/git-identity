@@ -119,7 +119,7 @@ class Git {
   static buildReviseCmd(opts: GitReviseOpts): string {
 
     let newLine: string = this.newLine;
-    let cmd: string = `git filter-branch --force --env-filter '${newLine}`;
+    let cmd: string = `git filter-branch --force --env-filter '${newLine}${newLine}`;
 
     if(!opts.oldEmail && !opts.oldName) throw new NoOldEmailOldNameError();
     if(!opts.newEmail && !opts.newName) throw new NoNewEmailNewNameError();
@@ -141,29 +141,29 @@ class Git {
       //Idea; seperate these raw strings into vars (like firstIf) and use it to construct everything at the end,
       //thus making logic checks if opts exist only once
       firstIf +=
-       `if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ] && [ "$GIT_COMMITTER_NAME" = "$OLD_NAME" ]
-        then${newLine}`;
+       `if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ] && [ "$GIT_COMMITTER_NAME" = "$OLD_NAME" ]` +
+       `then${newLine}`;
       secondIf +=
-       `if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ] && [ "$GIT_AUTHOR_NAME" = "$OLD_NAME" ]
-        then${newLine}`;
+       `if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ] && [ "$GIT_AUTHOR_NAME" = "$OLD_NAME" ]` +
+       `then${newLine}`;
 
     } else if(opts.oldEmail) {
 
       firstIf +=
-       `if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
-        then${newLine}`;
+       `if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]` + 
+       `then${newLine}`;
       secondIf +=
-       `if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
-        then${newLine}`;
+       `if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]` + 
+       `then${newLine}`;
 
     } else if(opts.oldName) {
 
       firstIf +=
-       `if [ "$GIT_COMMITTER_NAME" = "$OLD_EMAIL" ]
-        then${newLine}`;
+       `if [ "$GIT_COMMITTER_NAME" = "$OLD_EMAIL" ]` + 
+       `then${newLine}`;
       secondIf +=
-       `if [ "$GIT_AUTHOR_NAME" = "$OLD_EMAIL" ]
-        then${newLine}`;
+       `if [ "$GIT_AUTHOR_NAME" = "$OLD_EMAIL" ]` +
+       `then${newLine}`;
 
     }
 
@@ -182,8 +182,8 @@ class Git {
     }
    
     //Close then(s)
-    firstThen += `fi{$newLine}`;
-    secondThen += `fi{$newLine}`;
+    firstThen += `fi${newLine}`;
+    secondThen += `fi${newLine}`;
 
     //Construct our conditional body
     cmd += firstIf + firstThen + secondIf + secondThen;

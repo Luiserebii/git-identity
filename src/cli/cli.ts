@@ -141,8 +141,16 @@ class GitIdentityCLI {
         .option('--new-email <email>', 'new email to change to')
         .option('--new-name <name>', 'new name to change to')
         .action((flags) => {
-          console.log(flags.oldEmail);
-          console.log(flags.oldName);
+
+          let opts: GitReviseOpts = {
+            oldEmail: flags.oldEmail,
+            oldName: flags.oldName,
+            newEmail: flags.newEmail,
+            newName: flags.newName
+          }
+
+          let cmd: string = Git.buildReviseCmd(opts);
+          console.log(cmd);
 
         })
     ;
