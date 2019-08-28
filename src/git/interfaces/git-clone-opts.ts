@@ -38,7 +38,7 @@ age:
 
 interface GitCloneOpts {
 
-  repo: string;
+  repo: string | null;
   verbose: boolean;
   quiet: boolean;
   progress: boolean;
