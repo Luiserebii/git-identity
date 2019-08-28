@@ -69,6 +69,28 @@ class GitIdentityCLI {
       .command('clone [repo]')
         .description('Clone a repository and set the identity locally within. All flags accepted by git clone can also be used with this tool, and more information on their usage can be found within the git-scm documentation.')
         .option('-i, --identity', 'name of the git-identity to use')
+        .option('-v, --verbose', 'be more verbose')
+        .option('-q, --quiet', 'be more quiet')
+        .option('--progress', 'force progress reporting')
+        .option('-n, --no-checkout', 'don\'t create a checkout')
+        .option('--bare', 'create a bare repository')
+        .option('--mirror', 'create a mirror repository (implies bare)')
+        .option('-l, --local', 'to clone from a local repository')
+        .option('--no-hardlinks', 'don\'t use local hardlinks, always copy')
+        .option('-s, --shared', 'setup as shared repository')
+        .option('--recursive', 'initialize submodules in the clone')
+        .option('--recurse-submodules', 'initialize submodules in the clone')
+        .option('--template <template-directory>', 'directory from which templates will be used')
+        .option('--reference <repo>', 'reference repository')
+        .option('--dissociate', 'use --reference only while cloning')
+        .option('-o, --origin <name>', 'use <name> instead of \'origin\' to track upstream')
+        .option('-b, --branch <branch>', 'checkout <branch> instead of the remote\'s HEAD')
+        .option('-u, --upload-pack <path>', 'path to git-upload-pack on the remote')
+        .option('--depth <depth>', 'create a shallow clone of that depth')
+        .option('--single-branch', 'clone only one branch, HEAD or --branch')
+        .option('--separate-git-dir <gitdir>', 'separate git dir from working tree')
+        .option('-c, --config <key=value>', 'set config inside the new repository')
+
         .action((repo, flags) => {
     
           //If we've been passed nothing, just print the help
