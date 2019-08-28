@@ -14,6 +14,11 @@ import NoToEmailToNameError = require('./errors/no-to-email-to-name-error');
 
 class Git {
 
+  static get newLine(): string {
+    return `
+    `;
+  }
+
   /**
    *  
    */
@@ -103,10 +108,18 @@ class Git {
 
   static revise(opts: GitReviseOpts): boolean {
 
-    let cmd: string = `git filter-branch --force --env-filter '`;
+    let cmd = this.buildReviseCmd(opts);
 
-    let newLine: string = `
-    `;
+    //Execute
+    Util.exec(cmd);
+
+    return true;
+  } 
+
+  static buildReviseCmd(opts: GitReviseOpts): string {
+
+    let newLine: string = this.newLine;
+    let cmd: string = `git filter-branch --force --env-filter '${newLine}`;
 
     if(!opts.fromEmail && !opts.fromName) throw new NoFromEmailFromNameError();
     if(!opts.toEmail && !opts.toName) throw new NoToEmailToNameError();
@@ -180,12 +193,7 @@ class Git {
       ' --tag-name-filter cat -- --branches --tags
     `;
 
-    //Execute
-    Util.exec(cmd);
-
-    return true;
-
-
+    return cmd;
   }
 
 }
