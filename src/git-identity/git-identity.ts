@@ -126,7 +126,7 @@ class GitIdentity {
   //Set identity locally
   setIdentityLocal(identity: Identity, prefixCmd: string | null = null): boolean {
     let gitUser: GitUser = { 'name': identity.username, 'email': identity.email, 'signingKey': identity.gpgKey };
-    return Git.setUserGlobal(gitUser, prefixCmd);
+    return Git.setUserLocal(gitUser, prefixCmd);
   }
 
   clone(opts: GitIdentityCloneOpts): boolean {

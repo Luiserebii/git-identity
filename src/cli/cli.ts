@@ -99,8 +99,6 @@ class GitIdentityCLI {
           } else if (!repository) {
             console.log("You must specify a repository to clone.");
           } else {
-            console.log(`nice repo mayne:  ${repository}`)
-            console.log('cool flags tooi  ' + flags.identity)
             let opts: GitIdentityCloneOpts = {
               identity: flags.identity,
               repo: repository,
