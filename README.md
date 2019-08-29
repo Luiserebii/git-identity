@@ -66,7 +66,21 @@ Options:
   -c, --config <key=value>         set config inside the new repository
   -h, --help                       output usage information
 ```
+```
+Usage: revise [options]
 
+Revise the current git repository's history.
+
+Options:
+  --debug              debug mode - print the command that will be run
+  --old-identity <id>  identity to change (no need to specify --old-email/--old-name if using)
+  --new-identity <id>  identity to change to (no need to specify --new-email/--new-name if using)
+  --old-email <email>  email to change
+  --old-name <name>    name to change
+  --new-email <email>  new email to change to
+  --new-name <name>    new name to change to
+  -h, --help           output usage information
+```
 
 ## Installation
 ### Linux
