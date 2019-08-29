@@ -15,6 +15,7 @@ import Git = require('../git/git');
 import GitReviseOpts = require('../git/interfaces/git-revise-opts');
 
 import GitIdentityCloneOpts = require('../git-identity/interfaces/git-identity-clone-opts');
+import GitIdentityReviseOpts = require('../git-identity/interfaces/git-identity-revise-opts');
 
 const gitIdentity: GitIdentity = new GitIdentity();
 const meta: JSONMetadata = Meta.readMetadata();
@@ -137,24 +138,45 @@ class GitIdentityCLI {
       .command('revise')
         .description('Revise the current git repository\'s history.')
         .option('--debug', 'debug mode - print the command that will be run')
+        .option('--old-identity <id>', 'identity to change (no need to specify --old-email/--old-name if using)')
+        .option('--new-identity <id>', 'identity to change to (no need to specify --new-email/--new-name if using)')
         .option('--old-email <email>', 'email to change')
         .option('--old-name <name>', 'name to change')
         .option('--new-email <email>', 'new email to change to')
         .option('--new-name <name>', 'new name to change to')
         .action((flags) => {
 
-          let opts: GitReviseOpts = {
-            oldEmail: flags.oldEmail,
-            oldName: flags.oldName,
-            newEmail: flags.newEmail,
-            newName: flags.newName
-          }
-          if (!flags.debug) {
-            Git.revise(opts);
+          if(!flags.oldIdentity && !flags.newIdentity) {
+            let opts: GitReviseOpts = {
+              oldEmail: flags.oldEmail,
+              oldName: flags.oldName,
+              newEmail: flags.newEmail,
+              newName: flags.newName
+            }
+            if(!flags.debug) {
+              Git.revise(opts);
+            } else {
+              let cmd: string = Git.buildReviseCmd(opts);
+              console.log(cmd);
+            } 
           } else {
-            let cmd: string = Git.buildReviseCmd(opts);
-            console.log(cmd);
+            let opts: GitIdentityReviseOpts = {
+              oldIdentity: flags.oldIdentity,
+              newIdentity: flags.newIdentity,
+              oldEmail: flags.oldEmail,
+              oldName: flags.oldName,
+              newEmail: flags.newEmail,
+              newName: flags.newName
+            }
+            if(!flags.debug) {
+              gitIdentity.revise(opts);
+            } else {
+              console.log('Debug not implemented for passing identities yet, sorry :(');
+            }
+
           }
+          
+
         })
     ;
 
