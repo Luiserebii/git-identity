@@ -10,11 +10,10 @@ import Identity = require('./identity');
 import JSONIdentityDetails = require('./interfaces/json-identity-details');
 import GitIdentityCloneOpts = require('./interfaces/git-identity-clone-opts');
 import GitIdentityReviseOpts = require('./interfaces/git-identity-revise-opts');
-
-
 import Git = require('../git/git');
 import GitUser = require('../git/interfaces/git-user');
 import GitCloneOpts = require('../git/interfaces/git-clone-opts');
+import GitReviseOpts = require('../git/interfaces/git-revise-opts');
 import Util = require('../util/util');
 
 class GitIdentity {
@@ -176,9 +175,39 @@ class GitIdentity {
   }
 
   revise(opts: GitIdentityReviseOpts): boolean {
-    
-    
-    return true;
+
+    //Construct GitReviseOpts
+    let oldEmail: string | null = null;
+    let oldName: string | null = null;
+    let newEmail: string | null = null; 
+    let newName: string | null = null;
+
+    //If we have one of these identities passed, let's load it in~
+    if(opts.oldIdentity) { 
+      let oldIdentity: any = this.getIdentity(opts.oldIdentity);
+      if(oldIdentity) {
+        oldEmail = oldIdentity.email;
+        oldName = oldIdentity.username;
+      }
+    }
+    if(opts.newIdentity) { 
+      let newIdentity: any = this.getIdentity(opts.newIdentity);
+      if(newIdentity) {
+        newEmail = newIdentity.email;
+        newName = newIdentity.username;
+      }
+    }
+
+    let gitReviseOpts: GitReviseOpts = {
+      oldEmail: opts.oldEmail || oldEmail,
+      oldName: opts.oldName || oldName, 
+      newEmail: opts.newEmail || newEmail,
+      newName: opts.newName || newName
+    };
+
+    //Revise
+    let runRevise = Git.revise(gitReviseOpts);
+    return runRevise;
   } 
 
   identitiesToString(identities: object /*Array of Identity objects*/): string {
