@@ -22,11 +22,11 @@ class Identity {
   }
 
   toString(): string {
-    let str: string = "";
-    if(this.name) { str += "Name: " + this.name + "\n" }
-    str +=    "Username: " + this.username + "\n" +
-              "Email: " + this.email;
-    if(this.gpgKey) { str += "\nGPG Key: " + this.gpgKey }
+    let str: string = '';
+    if(this.name) { str += 'Name: ' + this.name + '\n' }
+    str +=    'Username: ' + this.username + '\n' +
+              'Email: ' + this.email;
+    if(this.gpgKey) { str += '\nGPG Key: ' + this.gpgKey }
     return str;
   }
 

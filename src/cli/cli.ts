@@ -66,12 +66,12 @@ class GitIdentityCLI {
         console.log('');
         console.log('* uses additional flags below: ');
         console.log('--user, --email, --gpg-key');
-      })
-    ;
-
-    program 
+      });
+program 
       .command('clone [repo]')
-        .description('Clone a repository and set the identity locally within. All flags accepted by git clone can also be used with this tool, and more information on their usage can be found within the git-scm documentation.')
+        .description('Clone a repository and set the identity locally within. All flags accepted by git clone'
+                  + ' can also be used with this tool, and more information on their usage can be found within'
+                  + ' the git-scm')
         .option('-i, --identity <name>', 'name of the git-identity to use')
         .option('-v, --verbose', 'be more verbose')
         .option('-q, --quiet', 'be more quiet')
@@ -99,9 +99,9 @@ class GitIdentityCLI {
     
           //If we've been passed nothing, just print the help
           if(this.argNum() === 1) {
-            console.log(this.getCommand("clone").help());
+            console.log(this.getCommand('clone').help());
           } else if (!repository) {
-            console.log("You must specify a repository to clone.");
+            console.log('You must specify a repository to clone.');
           } else {
             let opts: GitIdentityCloneOpts = {
               identity: flags.identity,
@@ -131,10 +131,8 @@ class GitIdentityCLI {
             gitIdentity.clone(opts);
           }
 
-        })
-    ;
-
-    program 
+        });
+program 
       .command('revise')
         .description('Revise the current git repository\'s history.')
         .option('--debug', 'debug mode - print the command that will be run')
@@ -147,7 +145,7 @@ class GitIdentityCLI {
         .action((flags) => {
 
           if(this.argNum() === 1) {
-            console.log(this.getCommand("revise").help());
+            console.log(this.getCommand('revise').help());
           } else if(!flags.oldIdentity && !flags.newIdentity) {
             let opts: GitReviseOpts = {
               oldEmail: flags.oldEmail,
@@ -179,12 +177,9 @@ class GitIdentityCLI {
           }
           
 
-        })
-    ;
-
-    program.parse(process.argv);
+        });
+program.parse(process.argv);
   }
-
 
 
   main(): void {
@@ -202,7 +197,9 @@ class GitIdentityCLI {
     } else if(program.list && this.argNum() === 1) {
 
       let ids = gitIdentity.listIdentities(); 
-      ids ? console.log("All registered identities: \n\n" + gitIdentity.listIdentities()) : console.log("No identities found!");
+      ids ? 
+        console.log('All registered identities: \n\n' + gitIdentity.listIdentities()) :
+        console.log('No identities found!');
 
     } else if(program.new && this.argNum() >= 6) {
       gitIdentity.newIdentity(new Identity(program.new, program.user, program.email, program.gpgKey));
@@ -211,35 +208,37 @@ class GitIdentityCLI {
       gitIdentity.updateIdentity(new Identity(program.update, program.user, program.email, program.gpgKey));
 
     } else if(program.delete && this.argNum() === 2) {
-      gitIdentity.deleteIdentity(program.delete) ? console.log("Deleted identity \"" + program.delete + "\"") : console.log("Identity not found!");
+      gitIdentity.deleteIdentity(program.delete) ? 
+        console.log('Deleted identity "' + program.delete + '"') :
+        console.log('Identity not found!');
 
     } else if(program.shift && (this.argNum() === 2 || this.argNum() === 3)) {
 
       let name = program.shift;
       if(!program.local) {
         let success = gitIdentity.shiftIdentity(name);
-        if(success) console.log("Shifted global git identity to: " + name);
+        if(success) console.log('Shifted global git identity to: ' + name);
       } else {
         let success = gitIdentity.shiftIdentityLocal(name);
-        if(success) console.log("Shifted local git identity to: " + name);
+        if(success) console.log('Shifted local git identity to: ' + name);
       }
 
     } else if(program.current && (this.argNum() === 1 || this.argNum() === 2)) {
 
       if(!program.local) {
         let identity = gitIdentity.getIdentityGlobal();
-        console.log("Current global git identity:\n");
+        console.log('Current global git identity:\n');
         console.log(identity.toString());
       } else {
         let identity = gitIdentity.getIdentityLocal();
-        console.log("Current local Git identity:\n");
+        console.log('Current local Git identity:\n');
         console.log(identity.toString());
 
       }
 
     } else {
       console.log(program.clone);
-      console.log("Invalid combination of flags and/or arguments");
+      console.log('Invalid combination of flags and/or arguments');
     }
   
 
@@ -250,9 +249,9 @@ class GitIdentityCLI {
     //Title of tool
     // @ts-ignore
     console.log(chalk.green(figlet.textSync('Git Identity', { font: 'Ghost' })));
-    console.log("Version: " + meta.version);
-    console.log("Author: Luiserebii");
-    console.log("Check me out on GitHub at: https://github.com/Luiserebii!")
+    console.log('Version: ' + meta.version);
+    console.log('Author: Luiserebii');
+    console.log('Check me out on GitHub at: https://github.com/Luiserebii!')
 
   }
 

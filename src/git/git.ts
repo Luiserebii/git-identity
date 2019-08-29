@@ -51,7 +51,7 @@ class Git {
     let cmd: string = `git config --global user.name "${gitUser.name}" && ` +
                 `git config --global user.email "${gitUser.email}"`;
     if(gitUser.signingKey) cmd += ` && git config --global user.signingkey "${gitUser.signingKey}"`;
-    if(prefixCmd) cmd = prefixCmd + " && " + cmd;
+    if(prefixCmd) cmd = prefixCmd + ' && ' + cmd;
     Util.exec(cmd);
     return true;
   }
@@ -64,7 +64,7 @@ class Git {
     let cmd: string = `git config --local user.name "${gitUser.name}" && ` +
                 `git config --local user.email "${gitUser.email}"`;
     if(gitUser.signingKey) cmd += ` && git config --local user.signingkey "${gitUser.signingKey}"`;
-    if(prefixCmd) cmd = prefixCmd + " && " + cmd;
+    if(prefixCmd) cmd = prefixCmd + ' && ' + cmd;
     Util.exec(cmd);
     return true;
   }
@@ -74,29 +74,29 @@ class Git {
    * Simple function encompassing git clone command
    */
   static clone(opts: GitCloneOpts): boolean {
-    let cmd: string = "git clone"; //Define the base comand here
+    let cmd: string = 'git clone'; //Define the base comand here
 
     //Check all of the possible options for git clone
     if(opts.repo) cmd += ` ${opts.repo}`;
-    if(opts.verbose) cmd += " -v";
-    if(opts.quiet) cmd += " -q";
-    if(opts.progress) cmd += " --progress";
-    if(opts.noCheckout) cmd += " --no-checkout";
-    if(opts.bare) cmd += " --bare";
-    if(opts.mirror) cmd += " --mirror";
-    if(opts.local) cmd += " -l";
-    if(opts.noHardlinks) cmd += " --no-hardlinks";
-    if(opts.shared) cmd += " -s";
-    if(opts.recursive) cmd += " --recursive";
-    if(opts.recurseSubmodules) cmd += " --recurse-submodules";
+    if(opts.verbose) cmd += ' -v';
+    if(opts.quiet) cmd += ' -q';
+    if(opts.progress) cmd += ' --progress';
+    if(opts.noCheckout) cmd += ' --no-checkout';
+    if(opts.bare) cmd += ' --bare';
+    if(opts.mirror) cmd += ' --mirror';
+    if(opts.local) cmd += ' -l';
+    if(opts.noHardlinks) cmd += ' --no-hardlinks';
+    if(opts.shared) cmd += ' -s';
+    if(opts.recursive) cmd += ' --recursive';
+    if(opts.recurseSubmodules) cmd += ' --recurse-submodules';
     if(opts.template) cmd += ` --template ${opts.template}`;
     if(opts.reference) cmd += ` --reference ${opts.reference}`;
-    if(opts.dissociate) cmd += " --dissociate";
+    if(opts.dissociate) cmd += ' --dissociate';
     if(opts.origin) cmd += ` -o ${opts.origin}`;
     if(opts.branch) cmd += ` -b ${opts.branch}`;
     if(opts.uploadPack) cmd += ` -u ${opts.uploadPack}`;
     if(opts.depth) cmd += ` --depth ${opts.depth}`;
-    if(opts.singleBranch) cmd += " --single-branch";
+    if(opts.singleBranch) cmd += ' --single-branch';
     if(opts.seperateGitDir) cmd += ` --seperate-git-dir ${opts.seperateGitDir}`;
     if(opts.config) cmd += ` -c ${opts.config}`;
 
@@ -131,11 +131,11 @@ class Git {
     if(opts.newName) cmd += `NEW_NAME="${opts.newName}"${newLine}`;
     cmd += `${newLine}`;
 
-    let firstIf: string = "";
-    let secondIf: string = "";
+    let firstIf: string = '';
+    let secondIf: string = '';
 
-    let firstThen: string = "";
-    let secondThen: string = "";
+    let firstThen: string = '';
+    let secondThen: string = '';
 
     if(opts.oldEmail && opts.oldName) {
 

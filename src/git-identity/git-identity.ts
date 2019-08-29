@@ -66,7 +66,7 @@ class GitIdentity {
   
       return true;
     } else {
-      console.log("Identity already exists!");
+      console.log('Identity already exists!');
       return false;
     }
 
@@ -106,7 +106,7 @@ class GitIdentity {
       this.setIdentityGlobal(new Identity(name, id.username, id.email, id.gpgKey), prefixCmd); 
       return true;
     } else {
-      console.log("Identity not found!");
+      console.log('Identity not found!');
       return false; 
     }
   }
@@ -118,7 +118,7 @@ class GitIdentity {
       this.setIdentityLocal(new Identity(name, id.username, id.email, id.gpgKey), prefixCmd);
       return true;
     } else {
-      console.log("Identity not found!");
+      console.log('Identity not found!');
       return false;
     }
   }
@@ -151,21 +151,21 @@ class GitIdentity {
     let tempOpts: any = {};
     let keys: any[] = Object.keys(opts);
     for(let i = 0; i < keys.length; i++) {
-      if(keys[i] !== "identity") {
+      if(keys[i] !== 'identity') {
         tempOpts[keys[i]] = opts[keys[i]];
       }
     }
     let gitCloneOpts: GitCloneOpts = tempOpts;
 
     //Find dir that will be produced by clone
-    let dir: string = "";
-    if(!opts.repo.includes(".git")) {
-      if(opts.repo.lastIndexOf("/") + 1 === opts.repo.length) {
-        dir = opts.repo.substring(0, opts.repo.lastIndexOf("/"));
+    let dir: string = '';
+    if(!opts.repo.includes('.git')) {
+      if(opts.repo.lastIndexOf('/') + 1 === opts.repo.length) {
+        dir = opts.repo.substring(0, opts.repo.lastIndexOf('/'));
       }
-      dir = dir.substring(dir.lastIndexOf("/") + 1);
+      dir = dir.substring(dir.lastIndexOf('/') + 1);
     } else {
-      dir = opts.repo.substring(opts.repo.lastIndexOf("/") + 1, opts.repo.lastIndexOf(".git") - 1);
+      dir = opts.repo.substring(opts.repo.lastIndexOf('/') + 1, opts.repo.lastIndexOf('.git') - 1);
     }
 
     //Clone and set identity
@@ -221,7 +221,7 @@ class GitIdentity {
     str += new Identity(keys[0], identities[keys[0]].username, identities[keys[0]].email, identities[keys[0]].gpgKey).toString();
 
     for(var i = 1; i < keys.length; i++){
-      str += "\n\n" + new Identity(keys[i], identities[keys[i]].username, identities[keys[i]].email, identities[keys[i]].gpgKey).toString();
+      str += '\n\n' + new Identity(keys[i], identities[keys[i]].username, identities[keys[i]].email, identities[keys[i]].gpgKey).toString();
     }
     return str;
   }

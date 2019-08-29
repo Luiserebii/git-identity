@@ -18,7 +18,7 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
     "no-multiple-empty-lines": ['error', { "max": 2 }],
     "semi-style": ["error", "last"],
-    "quotes": ["error", "double", { "allowTemplateLiterals": true }]
+    "quotes": ["error", "single", { "allowTemplateLiterals": true }]
   }, 
   "plugins": [
     "@typescript-eslint"
