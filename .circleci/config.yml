@@ -72,7 +72,7 @@ jobs:
           command: sudo npm install -g codecov
       - run:
           name: Unit tests with coverage report
-          command: npm run coverage
+          command: npm run coverage && npx nyc report --reporter=text-lcov > coverage.lcov
       - run: 
           name: Run Codecov
           command: codecov
