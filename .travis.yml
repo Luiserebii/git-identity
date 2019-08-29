@@ -8,5 +8,12 @@ node_js:
 install:
   - npm install
 
-script: 
-  - npm test
+jobs:
+  include:
+    - stage: tests
+      name: "lint"
+      script: npm run lint
+
+    - stage: tests
+      name: "test"
+      script: npm run test
