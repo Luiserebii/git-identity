@@ -100,7 +100,7 @@ class GitIdentity {
 
   //shift identity function implementation for application flag
   shiftIdentity(name: string, file: string = this.file, prefixCmd: string | null = null): boolean {
-    let identityStore: object = this.getIdentities();
+    let identityStore: object = this.getIdentities(file);
     let id: JSONIdentityDetails = identityStore[name];
     if(id) {
       this.setIdentityGlobal(new Identity(name, id.username, id.email, id.gpgKey), prefixCmd); 
@@ -112,7 +112,7 @@ class GitIdentity {
   }
 
   shiftIdentityLocal(name: string, file: string = this.file, prefixCmd: string | null = null): boolean {
-    let identityStore: object = this.getIdentities();
+    let identityStore: object = this.getIdentities(file);
     let id: JSONIdentityDetails = identityStore[name];
     if(id) {
       this.setIdentityLocal(new Identity(name, id.username, id.email, id.gpgKey), prefixCmd);
@@ -218,10 +218,12 @@ class GitIdentity {
     let str: string = '';
     let keys: any[] /*specifically, an array*/ = Object.keys(identities);
 
-    str += new Identity(keys[0], identities[keys[0]].username, identities[keys[0]].email, identities[keys[0]].gpgKey).toString();
+    str += new Identity(keys[0], identities[keys[0]].username,
+                        identities[keys[0]].email, identities[keys[0]].gpgKey).toString();
 
     for(var i = 1; i < keys.length; i++){
-      str += '\n\n' + new Identity(keys[i], identities[keys[i]].username, identities[keys[i]].email, identities[keys[i]].gpgKey).toString();
+      str += '\n\n' + new Identity(keys[i], identities[keys[i]].username,
+                                   identities[keys[i]].email, identities[keys[i]].gpgKey).toString();
     }
     return str;
   }

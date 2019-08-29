@@ -13,7 +13,7 @@ class Meta {
 
   static readMetadata(file: string = path.resolve(__dirname, '../', '../', 'package.json')): JSONMetadata {
     const packageJSON: string = fs.readFileSync(file, 'utf8');
-    const metadata: JSONMetadata = JSON.parse(packageJSON); //No need to parse this manually, let's just give it as it is
+    const metadata: JSONMetadata = JSON.parse(packageJSON); //No need to parse this manually, let's just give it as is
 
     return metadata;
   }
