@@ -4,9 +4,7 @@ module.exports = {
     "node": true,
     "mocha": true,
   },
-  'extends': [
-    'google',
-  ],
+  'extends': 'eslint:recommended',
   'globals': {
     'Atomics': 'readonly',
     'SharedArrayBuffer': 'readonly',
@@ -16,10 +14,11 @@ module.exports = {
     'ecmaVersion': 2018
   },
   'rules': {
-    'max-len': ['error', 120, 2],
-    "no-unused-vars": "off",
+    "max-len": ["error", 120, 2],
     "@typescript-eslint/no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }],
-    "no-multiple-empty-lines": ['error', { "max": 2 }]
+    "no-multiple-empty-lines": ['error', { "max": 2 }],
+    "semi-style": ["error", "last"],
+    "quotes": ["error", "double", { "allowTemplateLiterals": true }]
   }, 
   "plugins": [
     "@typescript-eslint"
