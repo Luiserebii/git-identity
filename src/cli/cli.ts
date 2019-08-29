@@ -146,7 +146,9 @@ class GitIdentityCLI {
         .option('--new-name <name>', 'new name to change to')
         .action((flags) => {
 
-          if(!flags.oldIdentity && !flags.newIdentity) {
+          if(this.argNum() === 1) {
+            console.log(this.getCommand("revise").help());
+          } else if(!flags.oldIdentity && !flags.newIdentity) {
             let opts: GitReviseOpts = {
               oldEmail: flags.oldEmail,
               oldName: flags.oldName,
