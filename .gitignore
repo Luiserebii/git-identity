@@ -1,6 +1,7 @@
 node_modules
 *.swp
 *.swo
+.nyc_output
 coverage
 dist
 bin
