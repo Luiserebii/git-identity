@@ -9,6 +9,9 @@ import path = require('path');
 import Identity = require('./identity');
 import JSONIdentityDetails = require('./interfaces/json-identity-details');
 import GitIdentityCloneOpts = require('./interfaces/git-identity-clone-opts');
+import GitIdentityReviseOpts = require('./interfaces/git-identity-revise-opts');
+
+
 import Git = require('../git/git');
 import GitUser = require('../git/interfaces/git-user');
 import GitCloneOpts = require('../git/interfaces/git-clone-opts');
@@ -172,11 +175,11 @@ class GitIdentity {
     return runClone && shiftIdentity;
   }
 
-/*  revise(opts: GitIdentityReviseOpts): boolean {
+  revise(opts: GitIdentityReviseOpts): boolean {
     
     
-
-  }*/ 
+    return true;
+  } 
 
   identitiesToString(identities: object /*Array of Identity objects*/): string {
     let str: string = '';
