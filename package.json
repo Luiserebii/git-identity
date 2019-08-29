@@ -8,7 +8,7 @@
     "test": "npm run build && tsc --project ./test/tsconfig.json && mocha ./test/bin --require ts-node/register --require source-map-support/register --recursive",
     "lint": "eslint ./src/**/*.ts",
     "lint:fix": "eslint --fix ./src/**/*.ts",
-    "coverage": "npm run build && tsc --project ./test/tsconfig.json && nyc mocha ./test/bin --require ts-node/register --require source-map-support/register --recursive",
+    "coverage": "npm run build && tsc --project ./test/tsconfig.json && npx nyc --reporter=lcov mocha ./test/bin --require ts-node/register --require source-map-support/register --recursive",
     "pack": "./scripts/npm-pack-publish.sh --pack",
     "publish": "npm run build && ./scripts/npm-pack-publish.sh --publish",
     "clean": "rm git-identity*.tgz"
