@@ -4,7 +4,7 @@ class Util {
 
   static objectIsEmpty(obj: object): boolean {
     for(let key in obj) {
-      if(obj.hasOwnProperty(key)) {
+      if(Object.prototype.hasOwnProperty.call(obj, key)) {
         return false;
       }
     }
