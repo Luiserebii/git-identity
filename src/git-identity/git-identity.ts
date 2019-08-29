@@ -188,6 +188,8 @@ class GitIdentity {
       if(oldIdentity) {
         oldEmail = oldIdentity.email;
         oldName = oldIdentity.username;
+      } else {
+        throw 'No Identity found for old identity';
       }
     }
     if(opts.newIdentity) { 
@@ -195,6 +197,8 @@ class GitIdentity {
       if(newIdentity) {
         newEmail = newIdentity.email;
         newName = newIdentity.username;
+      } else {
+        throw 'No Identity found for new identity';
       }
     }
 
