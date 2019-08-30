@@ -101,6 +101,9 @@ Alternatively, there is an `INSTALL` and `UPDATE` script, the latter of which sh
 ## Mirror
 A mirror of this repository is available at: <https://serebii.io:2501/Luiserebii/git-identity>
 
+## Developer Documentation
+Documentation for developers may be found at: [https://luiserebii.github.io/git-identity](https://luiserebii.github.io/git-identity)
+
 ## Contact
 Questions? Comments? Suggestions? <br/>
 Open an issue, make a pull request!
