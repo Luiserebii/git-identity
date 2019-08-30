@@ -1,0 +1,301 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>@luiserebii/git-identity</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">@luiserebii/git-identity</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> @luiserebii/git-identity</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#git-identity" id="git-identity" style="color: inherit; text-decoration: none;">
+					<h1>git-identity</h1>
+				</a>
+				<p><img src="https://serebii.io/projects/img/git-identity-padded-rounded.png" alt="git-identity-logo"></p>
+				<p><a href="https://badge.fury.io/js/%40luiserebii%2Fgit-identity"><img src="https://badge.fury.io/js/%40luiserebii%2Fgit-identity.svg" alt="npm version"></a>
+					<img src="https://img.shields.io/github/license/Luiserebii/git-identity?color=g" alt="GitHub">
+					<a href="https://circleci.com/gh/Luiserebii/git-identity"><img src="https://circleci.com/gh/Luiserebii/git-identity.svg?style=svg" alt="CircleCI"></a>
+					<a href="https://lgtm.com/projects/g/Luiserebii/git-identity/context:javascript"><img src="https://img.shields.io/lgtm/grade/javascript/g/Luiserebii/git-identity.svg?logo=lgtm&logoWidth=18" alt="Language grade: JavaScript"></a>
+				<a href="https://lgtm.com/projects/g/Luiserebii/git-identity/alerts/"><img src="https://img.shields.io/lgtm/alerts/g/Luiserebii/git-identity.svg?logo=lgtm&logoWidth=18" alt="Total alerts"></a></p>
+				<p>A command line tool allowing for easy shifting between git identities (username, email, and GPG).</p>
+				<p><b>Version:</b> 0.5.1-alpha<br/>
+				<b>Author:</b> Luiserebii</p>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<pre><code><span class="hljs-attribute">Usage</span>: git-identity [options]
+
+<span class="routeros">Options:
+  -v, --version          output the version number
+  -a, --about            about this<span class="hljs-built_in"> tool
+</span>  -l, --list             list all registered identities
+  -n, --new &lt;name&gt; *     <span class="hljs-builtin-name">add</span> new<span class="hljs-built_in"> identity
+</span>  -u, --update &lt;name&gt; *  update registered<span class="hljs-built_in"> identity
+</span>  -d, --delete &lt;name&gt;    delete registered<span class="hljs-built_in"> identity
+</span>  -s, --shift &lt;name&gt;     shift git<span class="hljs-built_in"> identity </span><span class="hljs-keyword">to</span> registered<span class="hljs-built_in"> identity </span>(global by default)
+  -c, --current          current global git<span class="hljs-built_in"> identity
+</span>  --global               global (option <span class="hljs-keyword">for</span> -s <span class="hljs-keyword">and</span> -c)
+  --local                local (option <span class="hljs-keyword">for</span> -s <span class="hljs-keyword">and</span> -c)
+  --user &lt;username&gt;      specify username
+  --email &lt;email&gt;        specify email
+  --gpg-key &lt;gpg-key&gt;    specify GPG key (key-id format: LONG)
+  -h, --help             output usage information
+
+* uses additional flags below: 
+--user, --email, --gpg-key</span></code></pre><pre><code><span class="hljs-attribute">Usage</span>: clone [options] [repo]
+
+<span class="sql">Clone a repository and <span class="hljs-keyword">set</span> the <span class="hljs-keyword">identity</span> locally within. <span class="hljs-keyword">All</span> flags accepted <span class="hljs-keyword">by</span> git <span class="hljs-keyword">clone</span> can also be used <span class="hljs-keyword">with</span> this tool, <span class="hljs-keyword">and</span> more information <span class="hljs-keyword">on</span> their <span class="hljs-keyword">usage</span> can be <span class="hljs-keyword">found</span> <span class="hljs-keyword">within</span> the git-scm documentation.
+
+Options:
+  -i, <span class="hljs-comment">--identity &lt;name&gt;            name of the git-identity to use</span>
+  -v, <span class="hljs-comment">--verbose                    be more verbose</span>
+  -q, <span class="hljs-comment">--quiet                      be more quiet</span>
+  <span class="hljs-comment">--progress                       force progress reporting</span>
+  -n, <span class="hljs-comment">--no-checkout                don't create a checkout</span>
+  <span class="hljs-comment">--bare                           create a bare repository</span>
+  <span class="hljs-comment">--mirror                         create a mirror repository (implies bare)</span>
+  -l, <span class="hljs-comment">--local                      to clone from a local repository</span>
+  <span class="hljs-comment">--no-hardlinks                   don't use local hardlinks, always copy</span>
+  -s, <span class="hljs-comment">--shared                     setup as shared repository</span>
+  <span class="hljs-comment">--recursive                      initialize submodules in the clone</span>
+  <span class="hljs-comment">--recurse-submodules             initialize submodules in the clone</span>
+  <span class="hljs-comment">--template &lt;template-directory&gt;  directory from which templates will be used</span>
+  <span class="hljs-comment">--reference &lt;repo&gt;               reference repository</span>
+  <span class="hljs-comment">--dissociate                     use --reference only while cloning</span>
+  -o, <span class="hljs-comment">--origin &lt;name&gt;              use &lt;name&gt; instead of 'origin' to track upstream</span>
+  -b, <span class="hljs-comment">--branch &lt;branch&gt;            checkout &lt;branch&gt; instead of the remote's HEAD</span>
+  -u, <span class="hljs-comment">--upload-pack &lt;path&gt;         path to git-upload-pack on the remote</span>
+  <span class="hljs-comment">--depth &lt;depth&gt;                  create a shallow clone of that depth</span>
+  <span class="hljs-comment">--single-branch                  clone only one branch, HEAD or --branch</span>
+  <span class="hljs-comment">--separate-git-dir &lt;gitdir&gt;      separate git dir from working tree</span>
+  -c, <span class="hljs-comment">--config &lt;key=value&gt;         set config inside the new repository</span>
+  -h, <span class="hljs-comment">--help                       output usage information</span></span></code></pre><pre><code><span class="hljs-attribute">Usage</span>: revise [options]
+
+<span class="vbnet">Revise the current git repository<span class="hljs-comment">'s history.</span>
+
+Options:
+  --debug              debug mode - print the command that will be run
+  --old-identity &lt;id&gt;  identity <span class="hljs-keyword">to</span> change (no need <span class="hljs-keyword">to</span> specify --old-email/--old-name <span class="hljs-keyword">if</span> <span class="hljs-keyword">using</span>)
+  --<span class="hljs-keyword">new</span>-identity &lt;id&gt;  identity <span class="hljs-keyword">to</span> change <span class="hljs-keyword">to</span> (no need <span class="hljs-keyword">to</span> specify --<span class="hljs-keyword">new</span>-email/--<span class="hljs-keyword">new</span>-name <span class="hljs-keyword">if</span> <span class="hljs-keyword">using</span>)
+  --old-email &lt;email&gt;  email <span class="hljs-keyword">to</span> change
+  --old-name &lt;name&gt;    name <span class="hljs-keyword">to</span> change
+  --<span class="hljs-keyword">new</span>-email &lt;email&gt;  <span class="hljs-keyword">new</span> email <span class="hljs-keyword">to</span> change <span class="hljs-keyword">to</span>
+  --<span class="hljs-keyword">new</span>-name &lt;name&gt;    <span class="hljs-keyword">new</span> name <span class="hljs-keyword">to</span> change <span class="hljs-keyword">to</span>
+  -h, --help           output usage information</span></code></pre>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<a href="#linux" id="linux" style="color: inherit; text-decoration: none;">
+					<h3>Linux</h3>
+				</a>
+				<p>To install, simply extract the tool into a preferred directory, compile, and create a soft link. For example, if you are looking to place the tool in your home directory:</p>
+				<pre><code>unzip git-identity-0.5.1-alpha.zip -d ~/
+cd ~/git-identity-0.5.1-alpha
+npm <span class="hljs-keyword">install</span>
+npm run <span class="hljs-keyword">build</span>
+sudo chmod u+x ~/git-<span class="hljs-keyword">identity</span><span class="hljs-number">-0.5</span><span class="hljs-number">.1</span>-alpha/git-<span class="hljs-keyword">identity</span>
+sudo <span class="hljs-keyword">ln</span> -s ~/git-<span class="hljs-keyword">identity</span><span class="hljs-number">-0.5</span><span class="hljs-number">.1</span>-alpha/git-<span class="hljs-keyword">identity</span> /usr/<span class="hljs-keyword">local</span>/<span class="hljs-keyword">bin</span>/git-<span class="hljs-keyword">identity</span></code></pre><p>Doing this should make it globally accessible via <code>git-identity</code>. </p>
+				<p>Alternatively, there is an <code>INSTALL</code> and <code>UPDATE</code> script, the latter of which should take any registered identities you had in the previous install and copy them over. <strong>NOTE: These are still untested and could break easily; until test cases are released for these, tread with caution.</strong></p>
+				<a href="#mirror" id="mirror" style="color: inherit; text-decoration: none;">
+					<h2>Mirror</h2>
+				</a>
+				<p>A mirror of this repository is available at: <a href="https://serebii.io:2501/Luiserebii/git-identity">https://serebii.io:2501/Luiserebii/git-identity</a></p>
+				<a href="#contact" id="contact" style="color: inherit; text-decoration: none;">
+					<h2>Contact</h2>
+				</a>
+				<p>Questions? Comments? Suggestions? <br/>
+					Open an issue, make a pull request!
+					<br/><br/>
+				Or, you can email me at: <a href="mailto:luis@serebii.io">luis@serebii.io</a></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_cli_cli_.html">"cli/cli"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_git_identity_git_identity_.html">"git-<wbr>identity/git-<wbr>identity"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_git_identity_identity_.html">"git-<wbr>identity/identity"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_git_identity_interfaces_git_identity_clone_opts_.html">"git-<wbr>identity/interfaces/git-<wbr>identity-<wbr>clone-<wbr>opts"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_git_identity_interfaces_git_identity_revise_opts_.html">"git-<wbr>identity/interfaces/git-<wbr>identity-<wbr>revise-<wbr>opts"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_git_identity_interfaces_json_identity_.html">"git-<wbr>identity/interfaces/json-<wbr>identity"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_git_identity_interfaces_json_identity_details_.html">"git-<wbr>identity/interfaces/json-<wbr>identity-<wbr>details"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_git_errors_no_new_email_new_name_error_.html">"git/errors/no-<wbr>new-<wbr>email-<wbr>new-<wbr>name-<wbr>error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_git_errors_no_old_email_old_name_error_.html">"git/errors/no-<wbr>old-<wbr>email-<wbr>old-<wbr>name-<wbr>error"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_git_git_.html">"git/git"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_git_interfaces_git_clone_opts_.html">"git/interfaces/git-<wbr>clone-<wbr>opts"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_git_interfaces_git_revise_opts_.html">"git/interfaces/git-<wbr>revise-<wbr>opts"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_git_interfaces_git_user_.html">"git/interfaces/git-<wbr>user"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">"index"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_util_interfaces_json_metadata_.html">"util/interfaces/json-<wbr>metadata"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_util_meta_.html">"util/meta"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_util_util_.html">"util/util"</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

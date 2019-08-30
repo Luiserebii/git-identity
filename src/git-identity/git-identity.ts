@@ -1,9 +1,3 @@
-/**
- *
- * GitIdentity class
- *
- */
-
 import fs = require('fs');
 import path = require('path');
 import Identity = require('./identity');
@@ -16,6 +10,12 @@ import GitCloneOpts = require('../git/interfaces/git-clone-opts');
 import GitReviseOpts = require('../git/interfaces/git-revise-opts');
 import Util = require('../util/util');
 
+/**
+ * GitIdentity class
+ *
+ * @author Luiserebii <luis@serebii.io>
+ * @description
+ */
 class GitIdentity {
 
   file: string;
