@@ -1,4 +1,4 @@
-# File for ensuring GitHub does not process the doc pages as Jekyll; for more info, see this path of breadcrumbs:
+#  File for ensuring GitHub does not process the doc pages as Jekyll; for more info, see this path of breadcrumbs:
 #
 #  * https://github.com/TypeStrong/typedoc/issues/620
 #  * https://github.com/TypeStrong/typedoc/issues/149
